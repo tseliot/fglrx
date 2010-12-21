@@ -21,10 +21,6 @@ BLACKLIST_FILE=/etc/modprobe.d/blacklist-fglrx.conf
 
 case "$1" in
     remove|purge)
-        dpkg-divert --remove --rename --package $PKGNAME --divert /usr/lib/fglrx/libGL.so.1.2.xlibmesa /usr/lib/libGL.so.1.2 > /dev/null
-        dpkg-divert --remove --rename --package $PKGNAME --divert /usr/lib32/fglrx/libGL.so.1.2.xlibmesa /usr/lib32/libGL.so.1.2 > /dev/null
-        dpkg-divert --remove --rename --package $PKGNAME --divert /usr/lib/fglrx/libglx.so.xlibmesa /usr/lib/xorg/modules/extensions/libglx.so > /dev/null
-
         # Remove blacklist file
         rm -f $BLACKLIST_FILE
 

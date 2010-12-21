@@ -49,6 +49,8 @@ fix_diversions()
     #been cleaned up in earlier releases
     for i in /usr/lib/libGL.so.1 \
              /usr/lib32/libGL.so.1 \
+             /usr/lib/libGL.so.1.2 \
+             /usr/lib32/libGL.so.1.2 \
              /usr/X11R6/lib/libGL.so.1 \
              /usr/X11R6/lib/libGL.so.1.2 \
              /usr/X11R6/lib32/libGL.so.1 \
