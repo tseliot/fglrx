@@ -18,6 +18,9 @@ debian/10fglrx                                  #DRIDIR#
 etc/ati/*                                       #DRIDIR#/etc/ati
 debian/replacements/authatieventsd.sh           #DRIDIR#/etc/ati
 
+#Blacklist some card ids from GRUB gfxpayload=keep
+debian/fglrx.grub-gfxpayload                    usr/share/fglrx
+
 #binaries
 arch/#ARCH#/usr/sbin/*                          #DRIDIR#/bin
 arch/#ARCH#/usr/X11R6/bin/ati*                  #DRIDIR#/bin

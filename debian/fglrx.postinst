@@ -120,6 +120,7 @@ if [ "$1" = "configure" ]; then
         --slave /usr/lib32/libaticalcl.so libaticalcl.so_lib32 /usr/lib32/fglrx/libaticalcl.so \
         --slave /usr/lib/libaticalrt.so libaticalrt.so /usr/lib/fglrx/libaticalrt.so \
         --slave /usr/lib32/libaticalrt.so libaticalrt.so_lib32 /usr/lib32/fglrx/libaticalrt.so \
+        --slave /usr/share/grub-gfxpayload-lists/blacklist/10_$PACKAGE_NAME grub_fb_blacklist /usr/share/fglrx/fglrx.grub-gfxpayload
     # ldconfig needs to be run immediately as we're changing /etc/ld.so.conf.d/ with
     # alternatives.
     LDCONFIG_NOTRIGGER=y ldconfig
@@ -170,6 +171,11 @@ EOF
 
     #Update the initramfs as radeon might get loaded from it normally
     /usr/sbin/update-initramfs -u
+
+    # Update the grub gfxpayload blacklist
+    if which update-grub-gfxpayload >/dev/null 2>&1; then
+        update-grub-gfxpayload
+    fi
 fi
 
 #DEBHELPER#
