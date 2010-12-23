@@ -1,0 +1,7 @@
+debian/overrides/fglrx-amdcccle usr/share/lintian/overrides
+usr/share/icons/*.xpm usr/share/pixmaps
+usr/share/ati usr/share
+usr/share/applications/*.desktop usr/share/fglrx
+usr/X11R6/bin/* #DRIDIR#/bin
+arch/#ARCH#/usr/X11R6/bin/amdcccle #DRIDIR#/bin
+

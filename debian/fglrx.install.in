@@ -1,0 +1,41 @@
+#Lintian overrides
+debian/overrides/fglrx                          usr/share/lintian/overrides
+
+#Actual kernel modules
+lib/modules/fglrx/build_mod/*                   usr/src/fglrx-#CVERSION#
+debian/dkms/*                                   usr/src/fglrx-#CVERSION#
+arch/#ARCH#/lib/modules/fglrx/build_mod/lib*    usr/src/fglrx-#CVERSION#
+debian/dkms.conf                                usr/src/fglrx-#CVERSION#
+
+#DRI stuff
+arch/#ARCH#/usr/X11R6/#LIBDIR#/libAMD*          #DRIDIR#
+
+#debian integration
+debian/overrides/fglrx                          usr/share/lintian/overrides
+debian/acpi/fglrx-*-aticonfig                   etc/acpi/events
+debian/acpi/fglrx-powermode.sh                  etc/acpi
+debian/10fglrx                                  #DRIDIR#
+etc/ati/*                                       #DRIDIR#/etc/ati
+debian/replacements/authatieventsd.sh           #DRIDIR#/etc/ati
+
+#binaries
+arch/#ARCH#/usr/sbin/*                          #DRIDIR#/bin
+arch/#ARCH#/usr/X11R6/bin/ati*                  #DRIDIR#/bin
+arch/#ARCH#/usr/X11R6/bin/fgl*                  #DRIDIR#/bin
+usr/sbin/*sh                                    usr/share/fglrx
+
+#DRI stuff
+arch/#ARCH#/usr/X11R6/#LIBDIR#/liba*.so*        #DRIDIR#
+arch/#ARCH#/usr/X11R6/#LIBDIR#/libf*.so*        #DRIDIR#
+arch/#ARCH#/usr/X11R6/#LIBDIR#/libX*.so*        #DRIDIR#
+arch/#ARCH#/usr/X11R6/#LIBDIR#/libG*.so*        #DRIDIR#
+arch/#ARCH#/usr/X11R6/#LIBDIR#/modules/dri      #DRIDIR#
+
+#Xorg stuff
+#XARCH#/usr/X11R6/#LIBDIR#/modules/*.so         #XMODDIR#
+#XARCH#/usr/X11R6/#LIBDIR#/modules/drivers      #XMODDIR#
+#XARCH#/usr/X11R6/#LIBDIR#/modules/linux        #XMODDIR#
+#XARCH#/usr/X11R6/#LIBDIR#/modules/extensions   #XMODDIR#
+
+#CAL stuff
+arch/#ARCH#/usr/#LIBDIR#/*                      #DRIDIR#

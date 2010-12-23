@@ -1,0 +1,174 @@
+#!/usr/bin/make -f
+# Copyright (C) 2002-2005 Flavio Stanchina
+# Copyright (C) 2005-2006 Aric Cyr
+# Copyright (C) 2007-2010 Mario Limonciello
+
+# Figure out some magic versioning
+CVERSION := $(shell dpkg-parsechangelog | grep '^Version:' | cut -d' ' -f2 | cut -d- -f1 | cut -d\: -f2)
+DVERSION := $(shell dpkg-parsechangelog | grep '^Version:' | cut -d' ' -f2 | cut -d\: -f2)
+DISTRO   := $(shell dpkg-parsechangelog | grep '^Distribution:' | cut -d' ' -f2 | cut -d\: -f2)
+
+VIDEODEP = $(shell cat /usr/share/xserver-xorg/videodrvdep 2>/dev/null)
+INPUTDEP = $(shell cat /usr/share/xserver-xorg/xinputdep 2>/dev/null)
+
+VIDEOABI = $(shell cat /usr/share/xserver-xorg/videoabiver 2>/dev/null)
+INPUTABI = $(shell cat /usr/share/xserver-xorg/inputabiver 2>/dev/null)
+VIDDRIVER_PROVIDES = xserver-xorg-video-$(VIDEOABI), xorg-driver-video
+INPDRIVER_PROVIDES = xserver-xorg-input-$(INPUTABI), xorg-driver-input
+
+# Package names
+PKG_driver      := fglrx
+PKG_driver_dev  := fglrx-dev
+PKG_control     := fglrx-amdcccle
+
+#Directory naming schemes
+DRIDIR   := usr/lib/$(PKG_driver)
+DRIDIR32 := usr/lib32/$(PKG_driver)
+XMODDIR  := $(DRIDIR)/xorg/modules
+LIBDIR   := lib
+ARCH     := x86
+XARCH    := x760
+
+# This is a hack to make sure that
+# the blacklist file is available
+# early in the boot process when
+# /usr is on a separate partition.
+# See LP: #538071.
+PKG_LIBDIR := lib/fglrx
+
+ifeq ($(DEB_HOST_ARCH),amd64)
+	LIBDIR  := lib64
+	ARCH    := x86_64
+	XARCH   := $(XARCH)_64a
+endif
+
+# DEB_DH_SHLIBDEPS_ARGS_ALL="-Xlib32"
+
+clean:
+	dh clean
+
+
+build:
+	#Create important strings
+	for i in 10fglrx \
+			 dkms.conf \
+			 $(PKG_driver).install \
+			 $(PKG_driver_dev).install \
+			 $(PKG_control).install \
+			 overrides/$(PKG_driver); do \
+		sed -e "s|#XMODDIR#|$(XMODDIR)|"     \
+			-e "s|#XMODDIR32#|$(XMODDIR32)|" \
+			-e "s|#DRIDIR32#|$(DRIDIR32)|"   \
+			-e "s|#LIBDIR#|$(LIBDIR)|"       \
+			-e "s|#DRIDIR#|$(DRIDIR)|"       \
+			-e "s|#CVERSION#|$(CVERSION)|"   \
+			-e "s|#XARCH#|$(XARCH)|"   \
+			-e "s|#ARCH#|$(ARCH)|"   \
+			debian/$$i.in > debian/$$i;      \
+	done
+
+	# remove exec bit on everything
+	find arch \
+		etc \
+		lib \
+		module \
+		usr \
+		$(XARCH)     -type f | xargs chmod -x
+
+	# set executable on user apps
+	find arch/$(ARCH)/usr/sbin \
+		arch/$(ARCH)/usr/X11R6/bin \
+		usr/sbin/ -type f | xargs chmod a+x
+
+	# set exec bit on scripts
+	find lib etc debian -name "*.sh" -type f | xargs chmod +x
+
+	dh build
+
+
+# This makes sure that the xserver ABI is bumped to match the current one when the
+# packages are built
+.PHONY: serverabi
+serverabi:
+ifeq ($(VIDEODEP),)
+	@echo 'error: xserver-xorg-dev >= 1.7.6.901 needs to be installed'
+	@exit 1
+else
+	echo "xviddriver:Depends=$(VIDEODEP)" >> debian/$(PKG_driver).substvars
+	echo "xinpdriver:Depends=$(INPUTDEP)" >> debian/$(PKG_driver).substvars
+	# the following is there for compatibility...
+	echo "xviddriver:Provides=$(VIDDRIVER_PROVIDES)" >> debian/$(PKG_driver).substvars
+	echo "xinpdriver:Provides=$(INPDRIVER_PROVIDES)" >> debian/$(PKG_driver).substvars
+	echo "xserver:Depends=$(VIDEODEP), $(INPUTDEP)" >> debian/$(PKG_driver).substvars
+endif
+
+
+binary-arch:
+	#Steps that we can't easily represent in debhelper files or .in files yet
+ifeq ($(DEB_HOST_ARCH),amd64)
+	dh_install -p$(PKG_driver)    "arch/x86/usr/X11R6/lib/libAMD*.so*"           "$(DRIDIR32)"
+	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/*.so*"           "$(DRIDIR32)"
+	dh_installdirs -p$(PKG_driver) "$(DRIDIR32)"
+	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/modules/dri"     "$(DRIDIR32)"
+	dh_install -p$(PKG_driver) "arch/x86/usr/lib/*"                     "$(DRIDIR32)"
+
+	for i in \
+			debian/$(PKG_driver)/$(DRIDIR32)/dri/fglrx_dri.so \
+			debian/$(PKG_driver)/$(DRIDIR32)/libGL.so.* \
+			; do execstack -q $$i; execstack -c $$i; done
+
+	#they don't provide the symlink for us (starting at 8.699)
+	dh_link -p$(PKG_driver) $(DRIDIR32)/libatiuki.so.1.0 $(DRIDIR32)/libatiuki.so.1
+else
+	dh_installdirs -p$(PKG_driver)
+endif
+	dh_installdocs -p$(PKG_driver) usr/share/doc/fglrx/* --exclude ATI_LICENSE.TXT
+	dh_installinit -p$(PKG_driver) --name="atieventsd" --no-start --update-rcd-params="defaults 31"
+
+	#remove executable bits from stack
+	dh_install -p$(PKG_control)
+	execstack -c debian/$(PKG_control)/$(DRIDIR)/bin/amdcccle
+	dh_install -p$(PKG_driver)
+	for i in \
+			debian/$(PKG_driver)/$(DRIDIR)/bin/atiode \
+			debian/$(PKG_driver)/$(DRIDIR)/bin/amdnotifyui \
+			debian/$(PKG_driver)/$(DRIDIR)/dri/fglrx_dri.so \
+			debian/$(PKG_driver)/$(DRIDIR)/libGL.so.* \
+			; do execstack -q $$i; execstack -c $$i; done
+
+	# Make some additional scripts executable
+	find debian/$(PKG_control)/$(DRIDIR)/bin/ \
+		-type f | xargs chmod a+x
+
+	# Blacklist any other driver that udev may want to load instead of fglrx
+	printf "blacklist radeon\n" > $(CURDIR)/debian/$(PKG_driver)/$(PKG_LIBDIR)/modprobe.conf
+
+	#ld.so.conf
+	echo "/$(DRIDIR)" >	"$(CURDIR)/debian/$(PKG_driver)/$(DRIDIR)/ld.so.conf"
+ifeq ($(DEB_HOST_ARCH),amd64)
+	echo "/$(DRIDIR32)" >>	"$(CURDIR)/debian/$(PKG_driver)/$(DRIDIR)/ld.so.conf"
+endif
+
+	# Generate modaliases
+	sh -e debian/modaliases/fglrx_supported \
+		lib/modules/fglrx/build_mod/fglrxko_pci_ids.h > \
+		debian/fglrx.modaliases
+	dh_modaliases
+	rm debian/fglrx.modaliases
+
+	#Run the normal stuff
+	dh binary-arch
+
+binary: serverabi binary-arch binary-indep ;
+	#Run the normal stuff
+	dh binary
+
+override_dh_shlibdeps:
+ifeq ($(DEB_HOST_ARCH),amd64)
+	dh_shlibdeps -l$(CURDIR)/debian/fglrx/usr/lib/fglrx:$(CURDIR)/debian/fglrx/usr/lib32/fglrx -Xlib32
+else
+	dh_shlibdeps -l$(CURDIR)/debian/fglrx/usr/lib/fglrx
+endif
+
+%:
+	dh $@
