@@ -21,6 +21,8 @@ Build-Depends: debhelper (>= 7),
                execstack
 Standards-Version: 3.8.3
 Homepage: http://ati.amd.com/support/driver.html
+Vcs-Git: git://github.com/tseliot/fglrx.git
+Vcs-Browser: http://github.com/tseliot/fglrx
 
 Package: fglrx
 Architecture: amd64 i386
