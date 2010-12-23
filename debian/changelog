@@ -1,3 +1,9 @@
+fglrx-installer (2:8.780-0ubuntu5) UNRELEASED; urgency=low
+
+  * 
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Thu, 23 Dec 2010 15:01:41 +0100
+
 fglrx-installer (2:8.780-0ubuntu4) natty; urgency=low
 
   * Move from separate modalias file package to using a package header:
