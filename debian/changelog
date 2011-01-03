@@ -1,5 +1,6 @@
-fglrx-installer (2:8.780-0ubuntu5) UNRELEASED; urgency=low
+fglrx-installer (2:8.801-0ubuntu1) UNRELEASED; urgency=low
 
+  * New upstream release 8.801 (10-12).
   * debian/control:
     - Add Vcs-Git and Vcs-Browser.
   * debian/fglrx.postrm:
@@ -19,7 +20,7 @@ fglrx-installer (2:8.780-0ubuntu5) UNRELEASED; urgency=low
       In practice this means that you can replace any part of the ID string
       with .* to match anything.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Fri, 24 Dec 2010 13:36:57 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Mon, 03 Jan 2011 13:27:50 +0100
 
 fglrx-installer (2:8.780-0ubuntu4) natty; urgency=low
 
