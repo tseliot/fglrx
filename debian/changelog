@@ -1,9 +1,9 @@
-fglrx-installer (2:8.801-0ubuntu2) UNRELEASED; urgency=low
+fglrx-installer (2:8.801-0ubuntu2) natty; urgency=low
 
   * debian/fglrx.grub-gfxpayload:
     - Add a commented out line in the file so as to fix FTBFS.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Mon, 03 Jan 2011 18:10:31 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Mon, 03 Jan 2011 18:19:13 +0100
 
 fglrx-installer (2:8.801-0ubuntu1) natty; urgency=low
 
