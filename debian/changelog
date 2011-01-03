@@ -1,4 +1,4 @@
-fglrx-installer (2:8.801-0ubuntu1) UNRELEASED; urgency=low
+fglrx-installer (2:8.801-0ubuntu1) natty; urgency=low
 
   * New upstream release 8.801 (10-12).
   * debian/control:
@@ -20,7 +20,7 @@ fglrx-installer (2:8.801-0ubuntu1) UNRELEASED; urgency=low
       In practice this means that you can replace any part of the ID string
       with .* to match anything.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Mon, 03 Jan 2011 13:27:50 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Mon, 03 Jan 2011 14:00:56 +0100
 
 fglrx-installer (2:8.780-0ubuntu4) natty; urgency=low
 
