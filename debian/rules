@@ -111,6 +111,16 @@ endif
 
 binary-arch:
 	#Steps that we can't easily represent in debhelper files or .in files yet
+
+	# Rename libraries which have fglrx- as a prefix
+	for lib in arch/x86/usr/X11R6/lib/fglrx/fglrx-libGL.so.1.2 \
+			arch/x86_64/usr/X11R6/lib64/fglrx/fglrx-libGL.so.1.2 \
+			xpic/usr/X11R6/lib/modules/extensions/fglrx/fglrx-libglx.so \
+			xpic_64a/usr/X11R6/lib64/modules/extensions/fglrx-libglx.so; do \
+		new_name=`echo $$lib | sed -e "s|\/fglrx\-|\/|"`; \
+		mv $$lib $$new_name; \
+	done
+
 ifeq ($(DEB_HOST_ARCH),amd64)
 	dh_install -p$(PKG_driver)    "arch/x86/usr/X11R6/lib/libAMD*.so*"           "$(DRIDIR32)"
 	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/*.so*"           "$(DRIDIR32)"
