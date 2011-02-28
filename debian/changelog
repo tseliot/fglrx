@@ -1,3 +1,9 @@
+fglrx-installer (2:8.801-0ubuntu3) UNRELEASED; urgency=low
+
+  * 
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Mon, 28 Feb 2011 16:19:09 +0100
+
 fglrx-installer (2:8.801-0ubuntu2) natty; urgency=low
 
   * debian/fglrx.grub-gfxpayload:
