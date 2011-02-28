@@ -1,8 +1,12 @@
-fglrx-installer (2:8.801-0ubuntu3) UNRELEASED; urgency=low
+fglrx-installer (2:8.801-0ubuntu3) natty; urgency=low
 
-  * 
+  * debian/control:
+    - Depend on ${xviddriver:Depends}.
+  * debian/rules:
+    - Manually set video ABI compatibility to 8 so that the driver is not
+      installable in applications such as Jockey or manually.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Mon, 28 Feb 2011 16:19:09 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Mon, 28 Feb 2011 16:29:26 +0100
 
 fglrx-installer (2:8.801-0ubuntu2) natty; urgency=low
 
