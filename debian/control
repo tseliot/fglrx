@@ -27,7 +27,8 @@ Vcs-Browser: http://github.com/tseliot/fglrx
 Package: fglrx
 Architecture: amd64 i386
 Recommends: fglrx-amdcccle
-Depends: ${shlibs:Depends}, xserver-xorg-core, lib32gcc1 [amd64], libc6-i386 [amd64], dkms, make, linux-libc-dev, linux-headers-generic | linux-headers
+Depends: ${shlibs:Depends}, xserver-xorg-core, lib32gcc1 [amd64], libc6-i386 [amd64], dkms, make, linux-libc-dev,
+ linux-headers-generic | linux-headers, ${xviddriver:Depends}
 Conflicts: fglrx-driver, xfree86-driver-fglrx, xorg-driver-fglrx, fglrx-kernel-source, libamdxvba1, fglrx-modaliases
 Replaces: fglrx-driver, xfree86-driver-fglrx, xorg-driver-fglrx, fglrx-kernel-source, libamdxvba1, fglrx-modaliases
 Provides: ${xviddriver:Provides}
