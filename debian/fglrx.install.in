@@ -31,7 +31,7 @@ usr/sbin/*sh                                    usr/share/fglrx
 arch/#ARCH#/usr/X11R6/#LIBDIR#/liba*.so*        #DRIDIR#
 arch/#ARCH#/usr/X11R6/#LIBDIR#/libf*.so*        #DRIDIR#
 arch/#ARCH#/usr/X11R6/#LIBDIR#/libX*.so*        #DRIDIR#
-arch/#ARCH#/usr/X11R6/#LIBDIR#/libG*.so*        #DRIDIR#
+arch/#ARCH#/usr/X11R6/#LIBDIR#/libGL.so*        #DRIDIR#
 arch/#ARCH#/usr/X11R6/#LIBDIR#/modules/dri      #DRIDIR#
 
 #Xorg stuff

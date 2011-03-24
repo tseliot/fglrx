@@ -121,6 +121,10 @@ binary-arch:
 		mv $$lib $$new_name; \
 	done
 
+	# Remove any libraries that may be caught by shell expansion
+	find . -name libGLE* | xargs rm -f
+	find . -name libEGL* | xargs rm -f
+
 ifeq ($(DEB_HOST_ARCH),amd64)
 	dh_install -p$(PKG_driver)    "arch/x86/usr/X11R6/lib/libAMD*.so*"           "$(DRIDIR32)"
 	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/*.so*"           "$(DRIDIR32)"
