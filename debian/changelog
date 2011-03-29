@@ -1,8 +1,14 @@
 fglrx-installer (2:8.840-0ubuntu1) UNRELEASED; urgency=low
 
-  * 
+  * New upstream release 8.84.6 (LP: #709505).
+  * debian/control:
+    - Bump build-dep on xserver-xorg-dev to >= 2:1.10.0.
+  * debian/fglrx.postinst:
+    - Add missing slave link to amdupdaterandrconfig. 
+  * debian/rules:
+    - Switch back to automatic ABI dependency generation.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Tue, 29 Mar 2011 18:02:26 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Tue, 29 Mar 2011 18:21:10 +0200
 
 fglrx-installer (2:8.801-0ubuntu3) natty; urgency=low
 
