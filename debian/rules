@@ -33,7 +33,7 @@ DRIDIR32 := usr/lib32/$(PKG_driver)
 XMODDIR  := $(DRIDIR)/xorg/modules
 LIBDIR   := lib
 ARCH     := x86
-XARCH    := x760
+XARCH    := xpic
 
 # This is a hack to make sure that
 # the blacklist file is available
