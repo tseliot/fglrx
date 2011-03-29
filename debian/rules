@@ -50,7 +50,52 @@ endif
 
 # DEB_DH_SHLIBDEPS_ARGS_ALL="-Xlib32"
 
-clean:
+.PHONY: remove-fglrx-prefix
+remove-fglrx-prefix:
+	# Rename libraries which have fglrx- as a prefix
+	for lib in arch/x86/usr/X11R6/lib/fglrx/fglrx-libGL.so.1.2 \
+			arch/x86/usr/X11R6/lib/fglrx-libGL.so.1.2 \
+			arch/x86_64/usr/X11R6/lib64/fglrx/fglrx-libGL.so.1.2 \
+			arch/x86_64/usr/X11R6/lib64/fglrx-libGL.so.1.2 \
+			xpic/usr/X11R6/lib/modules/extensions/fglrx/fglrx-libglx.so \
+			xpic/usr/X11R6/lib/modules/extensions/fglrx-libglx.so \
+			xpic_64a/usr/X11R6/lib64/modules/extensions/fglrx/fglrx-libglx.so \
+			xpic_64a/usr/X11R6/lib64/modules/extensions/fglrx-libglx.so; do \
+		if [ -e $$lib ]; then \
+			file_name=`echo $$lib | awk -F/ '{print $$NF}'`; \
+			path=`echo $$lib | sed -e "s|\/$$file_name|\/|"`; \
+			# Remove fglrx prefix \
+			new_name=`echo $$file_name | sed -e "s|fglrx\-||"`; \
+			full_path=`echo "$$path$$new_name"`; \
+			mv -f $$lib $$full_path; \
+		fi \
+	done
+
+
+
+
+.PHONY: add-fglrx-prefix
+add-fglrx-prefix:
+	# Rename libraries which are supposed to have fglrx- as a prefix
+	for lib in arch/x86/usr/X11R6/lib/fglrx/libGL.so.1.2 \
+			arch/x86/usr/X11R6/lib/libGL.so.1.2 \
+			arch/x86_64/usr/X11R6/lib64/fglrx/libGL.so.1.2 \
+			arch/x86_64/usr/X11R6/lib64/libGL.so.1.2 \
+			xpic/usr/X11R6/lib/modules/extensions/fglrx/libglx.so \
+			xpic/usr/X11R6/lib/modules/extensions/libglx.so \
+			xpic_64a/usr/X11R6/lib64/modules/extensions/fglrx/libglx.so \
+			xpic_64a/usr/X11R6/lib64/modules/extensions/libglx.so; do \
+		if [ -e $$lib ]; then \
+			file_name=`echo $$lib | awk -F/ '{print $$NF}'`; \
+			path=`echo $$lib | sed -e "s|\/$$file_name|\/|"`; \
+			# Add fglrx prefix \
+			new_name=`echo "fglrx-$$file_name"`; \
+			full_path=`echo "$$path$$new_name"`; \
+			mv -f $$lib $$full_path; \
+		fi \
+	done
+
+clean: add-fglrx-prefix ;
 	dh clean
 
 
@@ -109,17 +154,8 @@ else
 endif
 
 
-binary-arch:
+binary-arch: remove-fglrx-prefix ;
 	#Steps that we can't easily represent in debhelper files or .in files yet
-
-	# Rename libraries which have fglrx- as a prefix
-	for lib in arch/x86/usr/X11R6/lib/fglrx/fglrx-libGL.so.1.2 \
-			arch/x86_64/usr/X11R6/lib64/fglrx/fglrx-libGL.so.1.2 \
-			xpic/usr/X11R6/lib/modules/extensions/fglrx/fglrx-libglx.so \
-			xpic_64a/usr/X11R6/lib64/modules/extensions/fglrx-libglx.so; do \
-		new_name=`echo $$lib | sed -e "s|\/fglrx\-|\/|"`; \
-		mv $$lib $$new_name; \
-	done
 
 	# Remove any libraries that may be caught by shell expansion
 	find . -name libGLE* | xargs rm -f
