@@ -47,8 +47,7 @@ Replaces: fglrx-driver-dev, xfree86-driver-fglrx-dev, xorg-driver-fglrx-dev
 Description: Video driver for the ATI graphics accelerators (devel files)
  Video driver for the ATI Radeon and FireGL graphics accelerators.
  .
- This package provides definitions for the GL and GLX extensions
- and the FGLRXGAMMA extension interface library.
+ This package provides definitions for the GL and GLX extensions.
 
 Package: fglrx-amdcccle
 Architecture: amd64 i386

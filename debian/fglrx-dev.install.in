@@ -1,6 +1,5 @@
 debian/overrides/fglrx-dev                  usr/share/lintian/overrides
 
 usr/include/*                               usr/include
-usr/X11R6/include/*                         usr/include
 
 arch/#ARCH#/usr/X11R6/#LIBDIR#/*.a          usr/lib
