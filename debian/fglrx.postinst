@@ -103,6 +103,7 @@ if [ "$1" = "configure" ]; then
         --slave /usr/bin/amdnotifyui amdnotifyui /usr/lib/fglrx/bin/amdnotifyui \
         --slave /usr/bin/amdcccle amdcccle /usr/lib/fglrx/bin/amdcccle \
         --slave /usr/bin/amdxdg-su amdxdg_su /usr/lib/fglrx/bin/amdxdg-su \
+        --slave /usr/bin/amdupdaterandrconfig amdupdaterandrconfig /usr/lib/fglrx/bin/amdupdaterandrconfig \
         --slave /usr/share/applications/ubuntu-amdcccle.desktop amdcccle_desktop /usr/share/fglrx/amdcccle.desktop \
         --slave /usr/share/applications/ubuntu-amdccclesu.desktop amdccclesu_desktop /usr/share/fglrx/amdccclesu.desktop \
         --slave /usr/bin/fgl_glxgears fgl_glxgears /usr/lib/fglrx/bin/fgl_glxgears \
