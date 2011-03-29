@@ -72,8 +72,6 @@ remove-fglrx-prefix:
 	done
 
 
-
-
 .PHONY: add-fglrx-prefix
 add-fglrx-prefix:
 	# Rename libraries which are supposed to have fglrx- as a prefix
@@ -94,6 +92,18 @@ add-fglrx-prefix:
 			mv -f $$lib $$full_path; \
 		fi \
 	done
+
+	# Move libglx.so up by a level
+	if [ -d xpic/usr/X11R6/lib/modules/extensions/fglrx ]; then \
+		mv -f xpic/usr/X11R6/lib/modules/extensions/fglrx/fglrx-libglx.so \
+			xpic/usr/X11R6/lib/modules/extensions/fglrx-libglx.so || true; \
+		rmdir xpic/usr/X11R6/lib/modules/extensions/fglrx; \
+	fi
+	if [ -d xpic_64a/usr/X11R6/lib64/modules/extensions/fglrx ]; then \
+		mv -f xpic_64a/usr/X11R6/lib64/modules/extensions/fglrx/fglrx-libglx.so \
+			xpic_64a/usr/X11R6/lib64/modules/extensions/fglrx-libglx.so || true; \
+		rmdir xpic_64a/usr/X11R6/lib64/modules/extensions/fglrx; \
+	fi
 
 clean: add-fglrx-prefix ;
 	dh clean
@@ -164,6 +174,7 @@ binary-arch: remove-fglrx-prefix ;
 ifeq ($(DEB_HOST_ARCH),amd64)
 	dh_install -p$(PKG_driver)    "arch/x86/usr/X11R6/lib/libAMD*.so*"           "$(DRIDIR32)"
 	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/*.so*"           "$(DRIDIR32)"
+	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/fglrx/*.so*"     "$(DRIDIR32)"
 	dh_installdirs -p$(PKG_driver) "$(DRIDIR32)"
 	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/modules/dri"     "$(DRIDIR32)"
 	dh_install -p$(PKG_driver) "arch/x86/usr/lib/*"                     "$(DRIDIR32)"
