@@ -41,4 +41,4 @@ arch/#ARCH#/usr/X11R6/#LIBDIR#/modules/dri      #DRIDIR#
 #XARCH#/usr/X11R6/#LIBDIR#/modules/extensions   #XMODDIR#
 
 #CAL stuff
-arch/#ARCH#/usr/#LIBDIR#/*                      #DRIDIR#
+arch/#ARCH#/usr/#LIBDIR#/*.so*                  #DRIDIR#

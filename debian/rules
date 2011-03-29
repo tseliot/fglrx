@@ -177,7 +177,7 @@ ifeq ($(DEB_HOST_ARCH),amd64)
 	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/fglrx/*.so*"     "$(DRIDIR32)"
 	dh_installdirs -p$(PKG_driver) "$(DRIDIR32)"
 	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/modules/dri"     "$(DRIDIR32)"
-	dh_install -p$(PKG_driver) "arch/x86/usr/lib/*"                     "$(DRIDIR32)"
+	dh_install -p$(PKG_driver) "arch/x86/usr/lib/*.so*"                 "$(DRIDIR32)"
 
 	for i in \
 			debian/$(PKG_driver)/$(DRIDIR32)/dri/fglrx_dri.so \
