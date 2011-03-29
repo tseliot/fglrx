@@ -3,12 +3,21 @@ fglrx-installer (2:8.840-0ubuntu1) UNRELEASED; urgency=low
   * New upstream release 8.84.6 (LP: #709505).
   * debian/control:
     - Bump build-dep on xserver-xorg-dev to >= 2:1.10.0.
+  * debian/dkms.conf.in:
+    - Do not use add-compatibility-with-2.6.36-kernels.patch and
+      fglrx-2.6.37.patch use-cflags_module-together-with-modflags.patch
+      any more.
+  * fglrx.install.in:
+    - Look for libglx.so and libGL.so in their new location.
+    - Make sure to install only libGL.so*.
   * debian/fglrx.postinst:
     - Add missing slave link to amdupdaterandrconfig. 
   * debian/rules:
     - Switch back to automatic ABI dependency generation.
+    - Avoid accidentally copying the whole fglrx directory.
+    - Rename fglrx-libGL.so and fglrx-libglx.so.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Tue, 29 Mar 2011 18:21:10 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Tue, 29 Mar 2011 19:46:35 +0200
 
 fglrx-installer (2:8.801-0ubuntu3) natty; urgency=low
 
