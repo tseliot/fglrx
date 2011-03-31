@@ -1,4 +1,4 @@
-fglrx-installer (2:8.840-0ubuntu1) UNRELEASED; urgency=low
+fglrx-installer (2:8.840-0ubuntu1) natty; urgency=low
 
   * New upstream release 8.84.6 (LP: #709505).
   * debian/control:
@@ -17,7 +17,7 @@ fglrx-installer (2:8.840-0ubuntu1) UNRELEASED; urgency=low
     - Avoid accidentally copying the whole fglrx directory.
     - Rename fglrx-libGL.so and fglrx-libglx.so.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Tue, 29 Mar 2011 19:46:35 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Tue, 29 Mar 2011 20:16:39 +0200
 
 fglrx-installer (2:8.801-0ubuntu3) natty; urgency=low
 
