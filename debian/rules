@@ -50,62 +50,7 @@ endif
 
 # DEB_DH_SHLIBDEPS_ARGS_ALL="-Xlib32"
 
-.PHONY: remove-fglrx-prefix
-remove-fglrx-prefix:
-	# Rename libraries which have fglrx- as a prefix
-	for lib in arch/x86/usr/X11R6/lib/fglrx/fglrx-libGL.so.1.2 \
-			arch/x86/usr/X11R6/lib/fglrx-libGL.so.1.2 \
-			arch/x86_64/usr/X11R6/lib64/fglrx/fglrx-libGL.so.1.2 \
-			arch/x86_64/usr/X11R6/lib64/fglrx-libGL.so.1.2 \
-			xpic/usr/X11R6/lib/modules/extensions/fglrx/fglrx-libglx.so \
-			xpic/usr/X11R6/lib/modules/extensions/fglrx-libglx.so \
-			xpic_64a/usr/X11R6/lib64/modules/extensions/fglrx/fglrx-libglx.so \
-			xpic_64a/usr/X11R6/lib64/modules/extensions/fglrx-libglx.so; do \
-		if [ -e $$lib ]; then \
-			file_name=`echo $$lib | awk -F/ '{print $$NF}'`; \
-			path=`echo $$lib | sed -e "s|\/$$file_name|\/|"`; \
-			# Remove fglrx prefix \
-			new_name=`echo $$file_name | sed -e "s|fglrx\-||"`; \
-			full_path=`echo "$$path$$new_name"`; \
-			mv -f $$lib $$full_path; \
-		fi \
-	done
-
-
-.PHONY: add-fglrx-prefix
-add-fglrx-prefix:
-	# Rename libraries which are supposed to have fglrx- as a prefix
-	for lib in arch/x86/usr/X11R6/lib/fglrx/libGL.so.1.2 \
-			arch/x86/usr/X11R6/lib/libGL.so.1.2 \
-			arch/x86_64/usr/X11R6/lib64/fglrx/libGL.so.1.2 \
-			arch/x86_64/usr/X11R6/lib64/libGL.so.1.2 \
-			xpic/usr/X11R6/lib/modules/extensions/fglrx/libglx.so \
-			xpic/usr/X11R6/lib/modules/extensions/libglx.so \
-			xpic_64a/usr/X11R6/lib64/modules/extensions/fglrx/libglx.so \
-			xpic_64a/usr/X11R6/lib64/modules/extensions/libglx.so; do \
-		if [ -e $$lib ]; then \
-			file_name=`echo $$lib | awk -F/ '{print $$NF}'`; \
-			path=`echo $$lib | sed -e "s|\/$$file_name|\/|"`; \
-			# Add fglrx prefix \
-			new_name=`echo "fglrx-$$file_name"`; \
-			full_path=`echo "$$path$$new_name"`; \
-			mv -f $$lib $$full_path; \
-		fi \
-	done
-
-	# Move libglx.so up by a level
-	if [ -d xpic/usr/X11R6/lib/modules/extensions/fglrx ]; then \
-		mv -f xpic/usr/X11R6/lib/modules/extensions/fglrx/fglrx-libglx.so \
-			xpic/usr/X11R6/lib/modules/extensions/fglrx-libglx.so || true; \
-		rmdir xpic/usr/X11R6/lib/modules/extensions/fglrx; \
-	fi
-	if [ -d xpic_64a/usr/X11R6/lib64/modules/extensions/fglrx ]; then \
-		mv -f xpic_64a/usr/X11R6/lib64/modules/extensions/fglrx/fglrx-libglx.so \
-			xpic_64a/usr/X11R6/lib64/modules/extensions/fglrx-libglx.so || true; \
-		rmdir xpic_64a/usr/X11R6/lib64/modules/extensions/fglrx; \
-	fi
-
-clean: add-fglrx-prefix ;
+clean:
 	dh clean
 
 
@@ -164,7 +109,7 @@ else
 endif
 
 
-binary-arch: remove-fglrx-prefix ;
+binary-arch:
 	#Steps that we can't easily represent in debhelper files or .in files yet
 
 	# Remove any libraries that may be caught by shell expansion
@@ -181,7 +126,7 @@ ifeq ($(DEB_HOST_ARCH),amd64)
 
 	for i in \
 			debian/$(PKG_driver)/$(DRIDIR32)/dri/fglrx_dri.so \
-			debian/$(PKG_driver)/$(DRIDIR32)/libGL.so.* \
+			debian/$(PKG_driver)/$(DRIDIR32)/*libGL.so.*.* \
 			; do execstack -q $$i; execstack -c $$i; done
 
 	#they don't provide the symlink for us (starting at 8.699)
@@ -200,12 +145,35 @@ endif
 			debian/$(PKG_driver)/$(DRIDIR)/bin/atiode \
 			debian/$(PKG_driver)/$(DRIDIR)/bin/amdnotifyui \
 			debian/$(PKG_driver)/$(DRIDIR)/dri/fglrx_dri.so \
-			debian/$(PKG_driver)/$(DRIDIR)/libGL.so.* \
+			debian/$(PKG_driver)/$(DRIDIR)/*libGL.so.*.* \
 			; do execstack -q $$i; execstack -c $$i; done
 
 	# Make some additional scripts executable
 	find debian/$(PKG_control)/$(DRIDIR)/bin/ \
 		-type f | xargs chmod a+x
+
+	# Rename libraries which are supposed to have fglrx-libGL as a prefix
+	for lib in `find debian/$(PKG_driver)/ -name 'fglrx-libGL*'`; \
+		do \
+			file_name=`echo $$lib | awk -F/ '{print $$NF}'`; \
+			path=`echo $$lib | sed -e "s|\/$$file_name|\/|"`; \
+			# Remove fglrx prefix \
+			new_name=`echo $$file_name | sed -e "s|fglrx\-||"`; \
+			full_path=`echo "$$path$$new_name"`; \
+			mv -f $$lib $$full_path; \
+	done
+
+	# Rename libraries which are supposed to have fglrx-libglx as a prefix
+	for lib in `find debian/$(PKG_driver)/ -name 'fglrx-libglx*'`; \
+		do \
+			file_name=`echo $$lib | awk -F/ '{print $$NF}'`; \
+			path=`echo $$lib | sed -e "s|\/$$file_name|\/|"`; \
+			new_path=`echo $$path | sed -e 's/fglrx\/$$//'`; \
+			# Remove fglrx prefix \
+			new_name=`echo $$file_name | sed -e "s|fglrx\-||"`; \
+			full_path=`echo "$$new_path$$new_name"`; \
+			mv -f $$lib $$full_path; \
+	done
 
 	# Blacklist any other driver that udev may want to load instead of fglrx
 	printf "blacklist radeon\n" > $(CURDIR)/debian/$(PKG_driver)/$(PKG_LIBDIR)/modprobe.conf
