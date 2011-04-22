@@ -1,8 +1,14 @@
-fglrx-installer (2:8.840-0ubuntu3) UNRELEASED; urgency=low
+fglrx-installer (2:8.840-0ubuntu3) natty; urgency=low
 
-  * 
+  * debian/rules, debian/README.debian:
+    - Regenerate debian/copyright automatically using AMD's EULA as a base.
+      This allows us to always have the latest EULA in the copyright file.
+      The file is created by concatenating copyright_stub_0, the EULA and
+      copyright_stub_1. This process is documented in the README.
+    - Install the authors list in the docs.
+    - Mention in the README the OBSOLETE_BY option in dkms.conf.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Fri, 22 Apr 2011 09:11:36 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Fri, 22 Apr 2011 09:55:41 +0200
 
 fglrx-installer (2:8.840-0ubuntu2) natty; urgency=low
 
