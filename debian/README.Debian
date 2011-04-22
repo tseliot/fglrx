@@ -36,6 +36,16 @@ as indicated in debian/rules.  When upgrading from current development
 release to next development release, this codename in debian/rules should
 be bumped too.
 
+Copyright file
+-------------------------
+The copyright file is automatically generated in debian/rules by
+concatenating debian/copyright_stub0, AMD's EULA and debian/
+copyright_stub1. This allows us to always ship the latest EULA
+from AMD.
+
+In order to update the copyright file manually it's sufficient to use
+the "debclean" command.
+
 Update procedure
 -------------------------
 When a new -fglrx is available, do the following to update
@@ -75,8 +85,8 @@ fglrx-installer:
 7.  Install and test the .debs, and then dput the .changes file
 
 If any changes to files in debian/ are needed, make sure to let the
-maintainer (Mario aka superm1) know, so he can sync them into the git
+maintainer (Alberto aka tseliot) know, so he can sync them into the git
 tree AMD pulls from.
 
 
- -- Bryce Harrington <bryce@ubuntu.com>, Tue, 14 Oct 2008 13:27:15 -0700
+ -- Alberto Milone <alberto.milone@canonical.com>  Thu, 21 Apr 2011 21:53:14 +0200

@@ -51,6 +51,11 @@ endif
 # DEB_DH_SHLIBDEPS_ARGS_ALL="-Xlib32"
 
 clean:
+	# refresh copyright file
+	cat debian/copyright_stub_0 > debian/copyright
+	cat usr/share/doc/fglrx/ATI_LICENSE.TXT >> debian/copyright
+	cat debian/copyright_stub_1 >> debian/copyright
+
 	dh clean
 
 
