@@ -140,6 +140,8 @@ else
 	dh_installdirs -p$(PKG_driver)
 endif
 	dh_installdocs -p$(PKG_driver) usr/share/doc/fglrx/* --exclude ATI_LICENSE.TXT
+	dh_installdocs -p$(PKG_driver) debian/AUTHORS
+
 	dh_installinit -p$(PKG_driver) --name="atieventsd" --no-start --update-rcd-params="defaults 31"
 
 	#remove executable bits from stack
