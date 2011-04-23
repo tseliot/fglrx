@@ -1,8 +1,12 @@
 fglrx-installer (2:8.840-0ubuntu4) UNRELEASED; urgency=low
 
-  * 
+  * debian/rules, fglrx.{preinst|postinst|prerm|postrm}:
+    - Add Canonical copyright in the scripts.
+  * debian/AUTHORS:
+    - Make it clear that the AUTHORS file refers only to the packaging
+      scripts.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Sat, 23 Apr 2011 09:52:53 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Sat, 23 Apr 2011 09:59:51 +0200
 
 fglrx-installer (2:8.840-0ubuntu3) natty; urgency=low
 
