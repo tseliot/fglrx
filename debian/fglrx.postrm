@@ -2,6 +2,9 @@
 # postrm script fglrx
 #
 # see: dh_installdeb(1)
+#
+# Copyright (C) 2007 Mario Limonciello
+# Copyright (C) 2009-2011 Canonical Ltd.
 
 set -e
 
