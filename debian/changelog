@@ -1,3 +1,9 @@
+fglrx-installer (2:8.850-0ubuntu1) UNRELEASED; urgency=low
+
+  * 
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Tue, 14 Jun 2011 17:45:18 +0200
+
 fglrx-installer (2:8.840-0ubuntu4) natty; urgency=low
 
   * debian/rules, fglrx.{preinst|postinst|prerm|postrm}:
