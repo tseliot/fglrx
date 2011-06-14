@@ -1,8 +1,17 @@
-fglrx-installer (2:8.850-0ubuntu1) UNRELEASED; urgency=low
+fglrx-installer (2:8.850-0ubuntu1) oneiric; urgency=low
 
-  * 
+  * New upstream release 8.850 (11-5).
+  * debian/dkms.conf{.in}:
+    - Enable builds for 3.0 kernels.
+  * Add replace-global-lock-with-a-driver-specific-mutex.patch:
+    - Add support for linux 3.0 by using a driver specific mutex
+      instead of the global lock.
+  * Drop obsolete patches:
+    - add-compatibility-with-2.6.36-kernels.patch, fglrx-2.6.37.patch,
+      rt_preempt_28.patch, rt_preempt_31.patch,
+      use-cflags_module-together-with-modflags.patch.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Tue, 14 Jun 2011 17:45:18 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Tue, 14 Jun 2011 20:30:49 +0200
 
 fglrx-installer (2:8.840-0ubuntu4) natty; urgency=low
 
