@@ -1,44 +1,47 @@
 #Lintian overrides
-debian/overrides/fglrx                          usr/share/lintian/overrides
+debian/overrides/#DRIVERNAME#                   #DATADIR#/lintian/overrides
 
 #Actual kernel modules
-lib/modules/fglrx/build_mod/*                   usr/src/fglrx-#CVERSION#
-debian/dkms/*                                   usr/src/fglrx-#CVERSION#
-arch/#ARCH#/lib/modules/fglrx/build_mod/lib*    usr/src/fglrx-#CVERSION#
-debian/dkms.conf                                usr/src/fglrx-#CVERSION#
+lib/modules/fglrx/build_mod/*                   usr/src/#DRIVERNAME#-#CVERSION#
+debian/dkms/*                                   usr/src/#DRIVERNAME#-#CVERSION#
+arch/#SRCARCH#/lib/modules/fglrx/build_mod/lib* usr/src/#DRIVERNAME#-#CVERSION#
+debian/dkms.conf                                usr/src/#DRIVERNAME#-#CVERSION#
 
 #DRI stuff
-arch/#ARCH#/usr/X11R6/#LIBDIR#/libAMD*          #DRIDIR#
+arch/#SRCARCH#/usr/X11R6/#SRCLIBDIR#/libAMD*    #PKGLIBDIR#
 
 #debian integration
-debian/overrides/fglrx                          usr/share/lintian/overrides
-debian/acpi/fglrx-*-aticonfig                   etc/acpi/events
-debian/acpi/fglrx-powermode.sh                  etc/acpi
-debian/10fglrx                                  #DRIDIR#
-etc/ati/*                                       #DRIDIR#/etc/ati
-debian/replacements/authatieventsd.sh           #DRIDIR#/etc/ati
+debian/overrides/#DRIVERNAME#                   #DATADIR#/lintian/overrides
+debian/acpi/fglrx-*-aticonfig                   #SYSCONFDIR#/acpi/events
+debian/acpi/fglrx-powermode.sh                  #SYSCONFDIR#/acpi
+debian/10fglrx                                  #PKGLIBDIR#
+etc/ati/*                                       #PKGLIBDIR#/#SYSCONFDIR#/ati
+debian/replacements/authatieventsd.sh           #PKGLIBDIR#/#SYSCONFDIR#/ati
 
 #Blacklist some card ids from GRUB gfxpayload=keep
-debian/fglrx.grub-gfxpayload                    usr/share/fglrx
+debian/fglrx.grub-gfxpayload                    #PKGDATADIR#
 
 #binaries
-arch/#ARCH#/usr/sbin/*                          #DRIDIR#/bin
-arch/#ARCH#/usr/X11R6/bin/ati*                  #DRIDIR#/bin
-arch/#ARCH#/usr/X11R6/bin/fgl*                  #DRIDIR#/bin
-usr/sbin/*sh                                    usr/share/fglrx
+arch/#SRCARCH#/usr/sbin/*                       #PKGBINDIR#
+arch/#SRCARCH#/usr/X11R6/bin/ati*               #PKGBINDIR#
+arch/#SRCARCH#/usr/X11R6/bin/fgl*               #PKGBINDIR#
+usr/sbin/*sh                                    #PKGDATADIR#
 
 #DRI stuff
-arch/#ARCH#/usr/X11R6/#LIBDIR#/liba*.so*        #DRIDIR#
-arch/#ARCH#/usr/X11R6/#LIBDIR#/libf*.so*        #DRIDIR#
-arch/#ARCH#/usr/X11R6/#LIBDIR#/libX*.so*        #DRIDIR#
-arch/#ARCH#/usr/X11R6/#LIBDIR#/fglrx/*libGL.so* #DRIDIR#
-arch/#ARCH#/usr/X11R6/#LIBDIR#/modules/dri      #DRIDIR#
+arch/#SRCARCH#/usr/X11R6/#SRCLIBDIR#/liba*.so*        #PKGLIBDIR#
+arch/#SRCARCH#/usr/X11R6/#SRCLIBDIR#/libf*.so*        #PKGLIBDIR#
+arch/#SRCARCH#/usr/X11R6/#SRCLIBDIR#/libX*.so*        #PKGLIBDIR#
+arch/#SRCARCH#/usr/X11R6/#SRCLIBDIR#/fglrx/*libGL.so* #PKGLIBDIR#
+arch/#SRCARCH#/usr/X11R6/#SRCLIBDIR#/modules/dri      #PKGLIBDIR#
 
 #Xorg stuff
-#XARCH#/usr/X11R6/#LIBDIR#/modules/*.so         #XMODDIR#
-#XARCH#/usr/X11R6/#LIBDIR#/modules/drivers      #XMODDIR#
-#XARCH#/usr/X11R6/#LIBDIR#/modules/linux        #XMODDIR#
-#XARCH#/usr/X11R6/#LIBDIR#/modules/extensions   #XMODDIR#
+#SRCXARCH#/usr/X11R6/#SRCLIBDIR#/modules/*.so         #PKGXMODDIR#
+#SRCXARCH#/usr/X11R6/#SRCLIBDIR#/modules/drivers      #PKGXMODDIR#
+#SRCXARCH#/usr/X11R6/#SRCLIBDIR#/modules/linux        #PKGXMODDIR#
+#SRCXARCH#/usr/X11R6/#SRCLIBDIR#/modules/extensions   #PKGXMODDIR#
 
 #CAL stuff
-arch/#ARCH#/usr/#LIBDIR#/*.so*                  #DRIDIR#
+arch/#SRCARCH#/usr/#SRCLIBDIR#/*.so*                  #PKGLIBDIR#
+
+#PXpress stuff
+debian/pxpress/*                                      #PXDIR#

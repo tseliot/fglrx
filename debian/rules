@@ -9,44 +9,75 @@ CVERSION := $(shell dpkg-parsechangelog | grep '^Version:' | cut -d' ' -f2 | cut
 DVERSION := $(shell dpkg-parsechangelog | grep '^Version:' | cut -d' ' -f2 | cut -d\: -f2)
 DISTRO   := $(shell dpkg-parsechangelog | grep '^Distribution:' | cut -d' ' -f2 | cut -d\: -f2)
 
-VIDEODEP = $(shell cat /usr/share/xserver-xorg/videodrvdep 2>/dev/null)
-INPUTDEP = $(shell cat /usr/share/xserver-xorg/xinputdep 2>/dev/null)
-
-VIDEOABI = $(shell cat /usr/share/xserver-xorg/videoabiver 2>/dev/null)
-INPUTABI = $(shell cat /usr/share/xserver-xorg/inputabiver 2>/dev/null)
-
-# Manual VIDEO ABI dependencies
-# Comment out the following 2 lines to re-enable automatic ABI detection
-# VIDEODEP = xorg-video-abi-8.0, xserver-xorg-core (>= 2:1.8.99.905-1ubuntu3)
-# VIDEOABI = 8
-
-VIDDRIVER_PROVIDES = xserver-xorg-video-$(VIDEOABI), xorg-driver-video
-INPDRIVER_PROVIDES = xserver-xorg-input-$(INPUTABI), xorg-driver-input
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+# If the host is i386 set OTHER_ARCH to x86_64 and vice versa
+OTHER_ARCH := $(shell (echo "$(DEB_HOST_MULTIARCH)" | grep i386 >/dev/null) && \
+		echo "$(DEB_HOST_MULTIARCH)" | sed s/i386/x86_64/ || \
+		echo "$(DEB_HOST_MULTIARCH)" | sed s/x86_64/i386/)
 
 # Package names
 PKG_driver      := fglrx
 PKG_driver_dev  := fglrx-dev
 PKG_control     := fglrx-amdcccle
 
+# Priority of the alternatives
+alt_priority         := 1000
+PX_alt_priority      := 900
+
 #Directory naming schemes
-DRIDIR   := usr/lib/$(PKG_driver)
-DRIDIR32 := usr/lib32/$(PKG_driver)
-XMODDIR  := $(DRIDIR)/xorg/modules
-LIBDIR   := lib
-ARCH     := x86
-XARCH    := xpic
+PKG_dirname          := $(PKG_driver)
+bindir               := usr/bin
+datadir              := usr/share
+PKG_datadir          := $(datadir)/$(PKG_dirname)
+libdir               := usr/lib
+libdir32             := usr/lib32
+includedir           := usr/include
+sysconfdir           := etc
+PKG_libdir           := $(libdir)/$(PKG_dirname)
+PKG_libdir32         := $(libdir32)/$(PKG_dirname)
+xorg_libdir          := $(libdir)/xorg
+xorg_extra_modules   := $(xorg_libdir)/extra-modules
+xorg_extensionsdir   := $(xorg_libdir)/modules/extensions
+PKG_driversdir       := $(PKG_libdir)/xorg
+PKG_extensionsdir    := $(PKG_driversdir)
+PKG_bindir           := $(PKG_libdir)/bin
+PKG_deskdir          := $(PKG_datadir)
+PKG_configdir        := $(PKG_libdir)
+ld_so_conf_dir       := $(PKG_configdir)
+ld_so_conf_file      := ld.so.conf
+ld_so_conf_path      := $(ld_so_conf_dir)/$(ld_so_conf_file)
+mandir               := usr/share/man/man1
+PKG_bugdir           := usr/share/bug/$(PKG_dirname)
+autostartdir         := etc/xdg/autostart
+PKG_autostartdir     := $(PKG_configdir)
+grub_blacklistdir    := usr/share/grub-gfxpayload-lists/blacklist
+
+PKG_xmoddir  := $(PKG_libdir)/xorg/modules
+
+PX_dirname := pxpress
+PX_dir := $(libdir)/$(PX_dirname)
+PX_dir32 := $(libdir32)/$(PX_dirname)
+PX_xmoddir := $(PX_dir)/xorg/modules
+PX_libdir := $(PX_dir)/lib
+PX_libdir32 := $(PX_dir32)/lib
+PX_ld_so_conf := $(PX_dir)/$(ld_so_conf_file)
 
 # This is a hack to make sure that
 # the blacklist file is available
 # early in the boot process when
 # /usr is on a separate partition.
 # See LP: #538071.
-PKG_LIBDIR := lib/fglrx
+PKG_libconfdir := lib/$(PKG_dirname)
+
+# Paths to the dirs from the installer
+SRC_libdir   := lib
+SRC_arch     := x86
+SRC_xarch    := xpic
 
 ifeq ($(DEB_HOST_ARCH),amd64)
-	LIBDIR  := lib64
-	ARCH    := x86_64
-	XARCH   := $(XARCH)_64a
+	SRC_libdir  := lib64
+	SRC_arch    := x86_64
+	SRC_xarch   := $(SRC_xarch)_64a
 endif
 
 # DEB_DH_SHLIBDEPS_ARGS_ALL="-Xlib32"
@@ -57,6 +88,13 @@ clean:
 	cat usr/share/doc/fglrx/ATI_LICENSE.TXT >> debian/copyright
 	cat debian/copyright_stub_1 >> debian/copyright
 
+	# remove any file generated from a template
+	for file in *.in; do \
+		# strip only the last .in from the name \
+		filename=`echo $$file | sed -e "s|.in|$1|"` \
+		rm -f $(filename); \
+	done
+
 	dh clean
 
 
@@ -66,16 +104,56 @@ build:
 			 dkms.conf \
 			 $(PKG_driver).install \
 			 $(PKG_driver_dev).install \
+			 $(PKG_driver_dev).links \
 			 $(PKG_control).install \
+			 $(PKG_driver).dirs \
+			 $(PKG_driver).links \
+			 $(PKG_driver).postinst \
+			 $(PKG_driver).postrm \
+			 $(PKG_driver).preinst \
+			 $(PKG_driver).prerm \
 			 overrides/$(PKG_driver); do \
-		sed -e "s|#XMODDIR#|$(XMODDIR)|"     \
-			-e "s|#XMODDIR32#|$(XMODDIR32)|" \
-			-e "s|#DRIDIR32#|$(DRIDIR32)|"   \
-			-e "s|#LIBDIR#|$(LIBDIR)|"       \
-			-e "s|#DRIDIR#|$(DRIDIR)|"       \
-			-e "s|#CVERSION#|$(CVERSION)|"   \
-			-e "s|#XARCH#|$(XARCH)|"   \
-			-e "s|#ARCH#|$(ARCH)|"   \
+		sed -e "s|#PKGXMODDIR#|$(PKG_xmoddir)|g" \
+			-e "s|#LIBDIR#|$(libdir)|g" \
+			-e "s|#LIBDIR32#|$(libdir32)|g" \
+			-e "s|#BINDIR#|$(bindir)|g" \
+			-e "s|#SYSCONFDIR#|$(sysconfdir)|g" \
+			-e "s|#MANDIR#|$(mandir)|g" \
+			-e "s|#LDSOCONF#|$(ld_so_conf_path)|g" \
+			-e "s|#ALTPRIORITY#|$(alt_priority)|g" \
+			-e "s|#PXALTPRIORITY#|$(PX_alt_priority)|g" \
+			-e "s|#AUTOSTARTDIR#|$(autostartdir)|g" \
+			-e "s|#DATADIR#|$(datadir)|g" \
+			-e "s|#PKGDESKDIR#|$(PKG_deskdir)|g" \
+			-e "s|#PKGDATADIR#|$(PKG_datadir)|g" \
+			-e "s|#PKGCONFIGDIR#|$(PKG_configdir)|g" \
+			-e "s|#PKGBINDIR#|$(PKG_bindir)|g" \
+			-e "s|#PKGLIBDIR#|$(PKG_libdir)|g" \
+			-e "s|#PKGLIBDIR32#|$(PKG_libdir32)|g" \
+			-e "s|#PKGDRIVERSDIR#|$(PKG_driversdir)|g" \
+			-e "s|#XORGEXTRA#|$(xorg_extra_modules)|g" \
+			-e "s|#PKGEXTENSIONDIR#|$(PKG_extensionsdir)|g" \
+			-e "s|#XORGEXTENSIONSDIR#|$(xorg_extensionsdir)|g" \
+			-e "s|#DRIVERNAME#|$(PKG_driver)|g" \
+			-e "s|#DRIVERDEVNAME#|$(PKG_driver_dev)|g" \
+			-e "s|#DRIVERSRCNAME#|$(PKG_source)|g" \
+			-e "s|#INCLUDEDIR#|$(includedir)|g" \
+			-e "s|#PKGLIBCONFDIR#|$(PKG_libconfdir)|g" \
+			-e "s|#GRUBBLKLISTDIR#|$(grub_blacklistdir)|g" \
+			-e "s|#PKGXMODDIR#|$(PKG_xmoddir)|g" \
+			-e "s|#PXDIR#|$(PX_dir)|g" \
+			-e "s|#PXDIR32#|$(PX_dir32)|g" \
+			-e "s|#PXXMODDIR#|$(PX_xmoddir)|g" \
+			-e "s|#PXDIRNAME#|$(PX_dirname)|g" \
+			-e "s|#PXLIBDIR#|$(PX_libdir)|g" \
+			-e "s|#PXLIBDIR32#|$(PX_libdir32)|g" \
+			-e "s|#PXLDSOCONF#|$(PX_ld_so_conf)|g" \
+			-e "s|#CVERSION#|$(CVERSION)|g" \
+			-e "s|#SRCXARCH#|$(SRC_xarch)|g" \
+			-e "s|#SRCARCH#|$(SRC_arch)|g" \
+			-e "s|#SRCLIBDIR#|$(SRC_libdir)|g" \
+			-e "s|#DEB_HOST_MULTIARCH#|$(DEB_HOST_MULTIARCH)|g" \
+			-e "s|#OTHER_ARCH#|$(OTHER_ARCH)|g" \
 			debian/$$i.in > debian/$$i;      \
 	done
 
@@ -85,34 +163,20 @@ build:
 		lib \
 		module \
 		usr \
-		$(XARCH)     -type f | xargs chmod -x
+		$(SRC_xarch)     -type f | xargs chmod -x
 
 	# set executable on user apps
-	find arch/$(ARCH)/usr/sbin \
-		arch/$(ARCH)/usr/X11R6/bin \
+	find arch/$(SRC_arch)/usr/sbin \
+		arch/$(SRC_arch)/usr/X11R6/bin \
 		usr/sbin/ -type f | xargs chmod a+x
 
 	# set exec bit on scripts
 	find lib etc debian -name "*.sh" -type f | xargs chmod +x
 
+	# set the permissions on the pxpress scripts
+	chmod 744 debian/pxpress/switch*
+
 	dh build
-
-
-# This makes sure that the xserver ABI is bumped to match the current one when the
-# packages are built
-.PHONY: serverabi
-serverabi:
-ifeq ($(VIDEODEP),)
-	@echo 'error: xserver-xorg-dev >= 1.7.6.901 needs to be installed'
-	@exit 1
-else
-	echo "xviddriver:Depends=$(VIDEODEP)" >> debian/$(PKG_driver).substvars
-	echo "xinpdriver:Depends=$(INPUTDEP)" >> debian/$(PKG_driver).substvars
-	# the following is there for compatibility...
-	echo "xviddriver:Provides=$(VIDDRIVER_PROVIDES)" >> debian/$(PKG_driver).substvars
-	echo "xinpdriver:Provides=$(INPDRIVER_PROVIDES)" >> debian/$(PKG_driver).substvars
-	echo "xserver:Depends=$(VIDEODEP), $(INPUTDEP)" >> debian/$(PKG_driver).substvars
-endif
 
 
 binary-arch:
@@ -123,20 +187,20 @@ binary-arch:
 	find . -name libEGL* | xargs rm -f
 
 ifeq ($(DEB_HOST_ARCH),amd64)
-	dh_install -p$(PKG_driver)    "arch/x86/usr/X11R6/lib/libAMD*.so*"           "$(DRIDIR32)"
-	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/*.so*"           "$(DRIDIR32)"
-	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/fglrx/*.so*"     "$(DRIDIR32)"
-	dh_installdirs -p$(PKG_driver) "$(DRIDIR32)"
-	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/modules/dri"     "$(DRIDIR32)"
-	dh_install -p$(PKG_driver) "arch/x86/usr/lib/*.so*"                 "$(DRIDIR32)"
+	dh_install -p$(PKG_driver)    "arch/x86/usr/X11R6/lib/libAMD*.so*"           "$(PKG_libdir32)"
+	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/*.so*"           "$(PKG_libdir32)"
+	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/fglrx/*.so*"     "$(PKG_libdir32)"
+	dh_installdirs -p$(PKG_driver) "$(PKG_libdir32)"
+	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/modules/dri"     "$(PKG_libdir32)"
+	dh_install -p$(PKG_driver) "arch/x86/usr/lib/*.so*"                 "$(PKG_libdir32)"
 
 	for i in \
-			debian/$(PKG_driver)/$(DRIDIR32)/dri/fglrx_dri.so \
-			debian/$(PKG_driver)/$(DRIDIR32)/*libGL.so.*.* \
+			debian/$(PKG_driver)/$(PKG_libdir32)/dri/fglrx_dri.so \
+			debian/$(PKG_driver)/$(PKG_libdir32)/*libGL.so.* \
 			; do execstack -q $$i; execstack -c $$i; done
 
 	#they don't provide the symlink for us (starting at 8.699)
-	dh_link -p$(PKG_driver) $(DRIDIR32)/libatiuki.so.1.0 $(DRIDIR32)/libatiuki.so.1
+	dh_link -p$(PKG_driver) $(PKG_libdir32)/libatiuki.so.1.0 $(PKG_libdir32)/libatiuki.so.1
 else
 	dh_installdirs -p$(PKG_driver)
 endif
@@ -147,17 +211,17 @@ endif
 
 	#remove executable bits from stack
 	dh_install -p$(PKG_control)
-	execstack -c debian/$(PKG_control)/$(DRIDIR)/bin/amdcccle
+	execstack -c debian/$(PKG_control)/$(PKG_libdir)/bin/amdcccle
 	dh_install -p$(PKG_driver)
 	for i in \
-			debian/$(PKG_driver)/$(DRIDIR)/bin/atiode \
-			debian/$(PKG_driver)/$(DRIDIR)/bin/amdnotifyui \
-			debian/$(PKG_driver)/$(DRIDIR)/dri/fglrx_dri.so \
-			debian/$(PKG_driver)/$(DRIDIR)/*libGL.so.*.* \
+			debian/$(PKG_driver)/$(PKG_libdir)/bin/atiode \
+			debian/$(PKG_driver)/$(PKG_libdir)/bin/amdnotifyui \
+			debian/$(PKG_driver)/$(PKG_libdir)/dri/fglrx_dri.so \
+			debian/$(PKG_driver)/$(PKG_libdir)/*libGL.so.*.* \
 			; do execstack -q $$i; execstack -c $$i; done
 
 	# Make some additional scripts executable
-	find debian/$(PKG_control)/$(DRIDIR)/bin/ \
+	find debian/$(PKG_control)/$(PKG_libdir)/bin/ \
 		-type f | xargs chmod a+x
 
 	# Rename libraries which are supposed to have fglrx-libGL as a prefix
@@ -183,13 +247,81 @@ endif
 			mv -f $$lib $$full_path; \
 	done
 
+	# Create links for PowerXpress X modules (except for extensions)
+	for i in \
+		debian/$(PKG_driver)/$(PKG_xmoddir)/* \
+		; do \
+			orig_name=`echo $$i  | sed -e "s|debian/$(PKG_driver)/||"`; \
+			if [ `echo $$orig_name  | sed -e "s|$(PKG_xmoddir)/||"` != "extensions" ]; then \
+				link_name=$$orig_name ; \
+				link_name=`echo $$orig_name  | sed -e "s|$(PKG_xmoddir)|$(PX_xmoddir)|"`; \
+				dh_link -p$(PKG_driver) $$orig_name $$link_name ; \
+			fi \
+		done
+
+	# Create links for PowerXpress libs (except for libGL)
+	for i in \
+		debian/$(PKG_driver)/$(PKG_libdir)/* \
+		; do \
+			orig_name=`echo $$i  | sed -e "s|debian/$(PKG_driver)/||"`; \
+			# Copy each file except for libGL* \
+			if [ -f $$i ]; then \
+				if [ ! `echo $$orig_name  | grep libGL` ]; then \
+					link_name=$$orig_name ; \
+					link_name=`echo $$orig_name  | sed -e "s|$(PKG_libdir)|$(PX_libdir)|"`; \
+					dh_link -p$(PKG_driver) $$orig_name $$link_name ; \
+				fi \
+			else \
+				# Here we only accept the dri directory \
+				dir_name=`echo $$orig_name | awk -F/ '{print $$NF}'`; \
+				if [ "$$dir_name" = "dri" ]; then \
+					link_name=$$orig_name ; \
+					link_name=`echo $$orig_name  | sed -e "s|$(PKG_libdir)|$(PX_libdir)|"`; \
+					dh_link -p$(PKG_driver) $$orig_name $$link_name ; \
+				fi \
+			fi \
+		done
+
+ifeq ($(DEB_HOST_ARCH),amd64)
+	# Create links for PowerXpress 32bit libs (except for libGL)
+	for i in \
+		debian/$(PKG_driver)/$(PKG_libdir32)/* \
+		; do \
+			orig_name=`echo $$i  | sed -e "s|debian/$(PKG_driver)/||"`; \
+			# Copy each file except for libGL* \
+			if [ -f $$i ]; then \
+				if [ ! `echo $$orig_name  | grep libGL` ]; then \
+					link_name=$$orig_name ; \
+					link_name=`echo $$orig_name  | sed -e "s|$(PKG_libdir32)|$(PX_libdir32)|"`; \
+					dh_link -p$(PKG_driver) $$orig_name $$link_name ; \
+				fi \
+			else \
+				# Here we only accept the dri directory \
+				dir_name=`echo $$orig_name | awk -F/ '{print $$NF}'`; \
+				if [ "$$dir_name" = "dri" ]; then \
+					link_name=$$orig_name ; \
+					link_name=`echo $$orig_name  | sed -e "s|$(PKG_libdir32)|$(PX_libdir32)|"`; \
+					dh_link -p$(PKG_driver) $$orig_name $$link_name ; \
+				fi \
+			fi \
+		done
+endif
+
 	# Blacklist any other driver that udev may want to load instead of fglrx
-	printf "blacklist radeon\n" > $(CURDIR)/debian/$(PKG_driver)/$(PKG_LIBDIR)/modprobe.conf
+	printf "blacklist radeon\n" > $(CURDIR)/debian/$(PKG_driver)/$(PKG_libconfdir)/modprobe.conf
 
 	#ld.so.conf
-	echo "/$(DRIDIR)" >	"$(CURDIR)/debian/$(PKG_driver)/$(DRIDIR)/ld.so.conf"
+	echo "/$(PKG_libdir)" >	"$(CURDIR)/debian/$(PKG_driver)/$(PKG_libdir)/ld.so.conf"
 ifeq ($(DEB_HOST_ARCH),amd64)
-	echo "/$(DRIDIR32)" >>	"$(CURDIR)/debian/$(PKG_driver)/$(DRIDIR)/ld.so.conf"
+	echo "/$(PKG_libdir32)" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PKG_libdir)/ld.so.conf"
+endif
+
+	# ld.so.conf for PowerXpress
+	echo "/usr/lib/mesa" >		"$(CURDIR)/debian/$(PKG_driver)/$(PX_dir)/ld.so.conf"
+	echo "/$(PX_libdir)" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PX_dir)/ld.so.conf"
+ifeq ($(DEB_HOST_ARCH),amd64)
+	echo "/usr/lib32/mesa" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PX_dir)/ld.so.conf"
+	echo "/$(PX_libdir32)" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PX_dir)/ld.so.conf"
 endif
 
 	# Generate modaliases
@@ -202,15 +334,15 @@ endif
 	#Run the normal stuff
 	dh binary-arch
 
-binary: serverabi binary-arch binary-indep ;
+binary: binary-arch binary-indep ;
 	#Run the normal stuff
 	dh binary
 
 override_dh_shlibdeps:
 ifeq ($(DEB_HOST_ARCH),amd64)
-	dh_shlibdeps -l$(CURDIR)/debian/fglrx/usr/lib/fglrx:$(CURDIR)/debian/fglrx/usr/lib32/fglrx -Xlib32
+	dh_shlibdeps -l$(CURDIR)/debian/fglrx/$(PKG_libdir):$(CURDIR)/debian/fglrx/$(PKG_libdir32) -Xlib32
 else
-	dh_shlibdeps -l$(CURDIR)/debian/fglrx/usr/lib/fglrx
+	dh_shlibdeps -l$(CURDIR)/debian/fglrx/$(PKG_libdir)
 endif
 
 %:

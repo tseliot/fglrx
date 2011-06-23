@@ -1,7 +1,7 @@
-LIBGL_DRIVERS_PATH=/#DRIDIR#/dri
+LIBGL_DRIVERS_PATH=/#PKGLIBDIR#/dri
 if [ `uname -m` = 'x86_64' ]; then
-  if [ -d /#DRIDIR32#/dri ]; then
-    LIBGL_DRIVERS_PATH=${LIBGL_DRIVERS_PATH}:/#DRIDIR32#/dri
+  if [ -d /#PKGLIBDIR32#/dri ]; then
+    LIBGL_DRIVERS_PATH=${LIBGL_DRIVERS_PATH}:/#PKGLIBDIR32#/dri
     if [ ! -z $LD_LIBRARY_PATH ]; then
 	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:
     fi

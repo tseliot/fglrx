@@ -4,7 +4,7 @@
 # Copyright (C) 2007 Mario Limonciello
 # Copyright (C) 2009-2011 Canonical Ltd.
 
-PACKAGE_NAME=fglrx
+PACKAGE_NAME=#DRIVERNAME#
 CVERSION=`dpkg-query -W -f='${Version}' $PACKAGE_NAME | awk -F "-" '{print $1}' | cut -d\: -f2`
 
 remove_dkms_module() {
@@ -20,7 +20,8 @@ case "$1" in
 	remove)
 		remove_dkms_module 
 	
-		update-alternatives --remove gl_conf /usr/lib/fglrx/ld.so.conf
+		update-alternatives --remove #DEB_HOST_MULTIARCH#_gl_conf #LDSOCONF#
+		update-alternatives --remove #OTHER_ARCH#_gl_conf #LDSOCONF#
 
 		# Trigger gmenu so as to update the gnome menu
 		dpkg-trigger --by-package=$PACKAGE_NAME gmenucache || true

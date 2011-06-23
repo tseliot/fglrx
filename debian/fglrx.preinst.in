@@ -16,7 +16,7 @@ set -e
 #
 # For details see /usr/share/doc/packaging-manual/
 
-PKGNAME=fglrx
+PKGNAME=#DRIVERNAME#
 OLDPKGNAME=xorg-driver-fglrx
 
 if [ `dpkg --print-architecture` = "amd64" ]; then
