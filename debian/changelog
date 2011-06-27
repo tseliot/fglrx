@@ -1,8 +1,10 @@
-fglrx-installer (2:8.861-0ubuntu2) UNRELEASED; urgency=low
+fglrx-installer (2:8.861-0ubuntu2) oneiric; urgency=low
 
-  * 
+  * Use an empty ld.so.conf when installing alternative for the
+    non-native arch, otherwise it would be impossible to switch
+    to mesa without installing mesa for the same architecture.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Mon, 27 Jun 2011 14:50:32 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Mon, 27 Jun 2011 15:01:47 +0100
 
 fglrx-installer (2:8.861-0ubuntu1) oneiric; urgency=low
 
