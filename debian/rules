@@ -345,17 +345,17 @@ endif
 	printf "blacklist radeon\n" > $(CURDIR)/debian/$(PKG_driver)/$(PKG_libconfdir)/modprobe.conf
 
 	#ld.so.conf
-	echo "/$(PKG_libdir)" >	"$(CURDIR)/debian/$(PKG_driver)/$(PKG_libdir)/ld.so.conf"
+	echo "/$(PKG_libdir)" >	"$(CURDIR)/debian/$(PKG_driver)/$(ld_so_conf_path)"
 ifeq ($(DEB_HOST_ARCH),amd64)
-	echo "/$(PKG_libdir32)" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PKG_libdir)/ld.so.conf"
+	echo "/$(PKG_libdir32)" >>	"$(CURDIR)/debian/$(PKG_driver)/$(ld_so_conf_path)"
 endif
 
 	# ld.so.conf for PowerXpress
-	echo "/usr/lib/mesa" >		"$(CURDIR)/debian/$(PKG_driver)/$(PX_dir)/ld.so.conf"
-	echo "/$(PX_libdir)" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PX_dir)/ld.so.conf"
+	echo "/usr/lib/mesa" >		"$(CURDIR)/debian/$(PKG_driver)/$(PX_ld_so_conf)"
+	echo "/$(PX_libdir)" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PX_ld_so_conf)"
 ifeq ($(DEB_HOST_ARCH),amd64)
-	echo "/usr/lib32/mesa" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PX_dir)/ld.so.conf"
-	echo "/$(PX_libdir32)" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PX_dir)/ld.so.conf"
+	echo "/usr/lib32/mesa" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PX_ld_so_conf)"
+	echo "/$(PX_libdir32)" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PX_ld_so_conf)"
 endif
 
 	# empty ld.so.conf for the fake multi-arch alternative
