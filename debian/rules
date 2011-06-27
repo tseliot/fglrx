@@ -59,7 +59,9 @@ PKG_deskdir          := $(PKG_datadir)
 PKG_configdir        := $(PKG_libdir)
 ld_so_conf_dir       := $(PKG_configdir)
 ld_so_conf_file      := ld.so.conf
+alt_ld_so_conf_file  := alt_ld.so.conf
 ld_so_conf_path      := $(ld_so_conf_dir)/$(ld_so_conf_file)
+alt_ld_so_conf_path  := $(ld_so_conf_dir)/$(alt_ld_so_conf_file)
 mandir               := usr/share/man/man1
 PKG_bugdir           := usr/share/bug/$(PKG_dirname)
 autostartdir         := etc/xdg/autostart
@@ -75,6 +77,7 @@ PX_xmoddir := $(PX_dir)/xorg/modules
 PX_libdir := $(PX_dir)/lib
 PX_libdir32 := $(PX_dir32)/lib
 PX_ld_so_conf := $(PX_dir)/$(ld_so_conf_file)
+PX_ld_so_conf_alt := $(alt_ld_so_conf_path)
 
 # This is a hack to make sure that
 # the blacklist file is available
@@ -134,6 +137,7 @@ build:
 			-e "s|#SYSCONFDIR#|$(sysconfdir)|g" \
 			-e "s|#MANDIR#|$(mandir)|g" \
 			-e "s|#LDSOCONF#|$(ld_so_conf_path)|g" \
+			-e "s|#ALTLDSOCONF#|$(alt_ld_so_conf_path)|g" \
 			-e "s|#ALTPRIORITY#|$(alt_priority)|g" \
 			-e "s|#PXALTPRIORITY#|$(PX_alt_priority)|g" \
 			-e "s|#AUTOSTARTDIR#|$(autostartdir)|g" \
@@ -162,6 +166,7 @@ build:
 			-e "s|#PXLIBDIR#|$(PX_libdir)|g" \
 			-e "s|#PXLIBDIR32#|$(PX_libdir32)|g" \
 			-e "s|#PXLDSOCONF#|$(PX_ld_so_conf)|g" \
+			-e "s|#ALTPXLDSOCONF#|$(PX_ld_so_conf_alt)|g" \
 			-e "s|#CVERSION#|$(CVERSION)|g" \
 			-e "s|#SRCXARCH#|$(SRC_xarch)|g" \
 			-e "s|#SRCARCH#|$(SRC_arch)|g" \
@@ -352,6 +357,9 @@ ifeq ($(DEB_HOST_ARCH),amd64)
 	echo "/usr/lib32/mesa" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PX_dir)/ld.so.conf"
 	echo "/$(PX_libdir32)" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PX_dir)/ld.so.conf"
 endif
+
+	# empty ld.so.conf for the fake multi-arch alternative
+	echo "" > "$(CURDIR)/debian/$(PKG_driver)/$(alt_ld_so_conf_path)"
 
 	# Generate modaliases
 	sh -e debian/modaliases/fglrx_supported \
