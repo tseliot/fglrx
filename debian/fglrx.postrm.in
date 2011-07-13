@@ -31,7 +31,7 @@ case "$1" in
             rm -Rf /#PKGLIBDIR#
         else
             # This will preserve the etc directory
-            rm -f /#PKGLIBDIR#/*
+            rm -f /#PKGLIBDIR#/*  2>/dev/null || true
         fi
 
         rm -Rf /#PKGLIBDIR32#
