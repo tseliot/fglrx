@@ -6,3 +6,4 @@
 #PKGLIBCONFDIR#
 #PKGLIBDIR#/#SYSCONFDIR#/ati
 #DATADIR#/grub-gfxpayload-lists/blacklist
+#LIBDIR#/dri
