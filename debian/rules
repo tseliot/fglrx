@@ -99,12 +99,13 @@ endif
 
 # DEB_DH_SHLIBDEPS_ARGS_ALL="-Xlib32"
 
-clean:
+refresh_copyright:
 	# refresh copyright file
 	cat debian/copyright_stub_0 > debian/copyright
 	cat usr/share/doc/fglrx/ATI_LICENSE.TXT >> debian/copyright
 	cat debian/copyright_stub_1 >> debian/copyright
 
+clean: refresh_copyright
 	# remove any file generated from a template
 	for file in *.in; do \
 		# strip only the last .in from the name \
@@ -213,7 +214,7 @@ else
 	echo "xserver:Depends=$(VIDEODEP), $(INPUTDEP)" >> debian/$(PKG_driver).substvars
 endif
 
-binary-arch:
+binary-arch: refresh_copyright
 	#Steps that we can't easily represent in debhelper files or .in files yet
 
 	# Remove any libraries that may be caught by shell expansion
@@ -240,6 +241,7 @@ else
 endif
 	dh_installdocs -p$(PKG_driver) usr/share/doc/fglrx/* --exclude ATI_LICENSE.TXT
 	dh_installdocs -p$(PKG_driver) debian/AUTHORS
+	dh_installdocs -p$(PKG_driver) debian/copyright
 
 	dh_installinit -p$(PKG_driver) --name="atieventsd" --no-start --update-rcd-params="defaults 31"
 
