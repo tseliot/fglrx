@@ -1,8 +1,20 @@
-fglrx-installer (2:8.861-0ubuntu3) UNRELEASED; urgency=low
+fglrx-installer (2:8.861-0ubuntu3) oneiric; urgency=low
 
-  * 
+  * debian/fglrx.dirs.in:
+    - Make sure to create the /usr/lib/dri directory (LP: #807347).
+  * debian/fglrx.postrm.in:
+    - Do not fail when trying to remove only the files in
+      /usr/lib/fglrx (LP: #807092). We don't want to remove the
+      /usr/lib/fglrx/etc directory unless we're using --purge
+      remove, otherwise user settings will be lost.
+  * debian/rules:
+    - Make sure that the copyright file is installed after it's
+      generated. On some systems this wasn't guaranteed to happen.
+      Thanks to Felix Kuehling and Mabel Lee for reporting the
+      problem and for debugging the issue on the affected systems.
+    - Use the multi-arch path for xorg extra-modules (LP: #807209).
 
- -- Alberto Milone <alberto.milone@canonical.com>  Wed, 20 Jul 2011 14:42:23 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Wed, 20 Jul 2011 17:15:31 +0200
 
 fglrx-installer (2:8.861-0ubuntu2) oneiric; urgency=low
 
