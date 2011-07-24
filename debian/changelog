@@ -1,8 +1,10 @@
-fglrx-installer (2:8.861-0ubuntu4) UNRELEASED; urgency=low
+fglrx-installer (2:8.861-0ubuntu4) oneiric; urgency=low
 
-  * 
+  * debian/fglrx.dirs.in:
+    - Create some extra directories, usually made by mesa, to fix
+      the installation in chroots (LP: #807347).
 
- -- Alberto Milone <alberto.milone@canonical.com>  Sun, 24 Jul 2011 11:58:57 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Sun, 24 Jul 2011 12:23:23 +0200
 
 fglrx-installer (2:8.861-0ubuntu3) oneiric; urgency=low
 
