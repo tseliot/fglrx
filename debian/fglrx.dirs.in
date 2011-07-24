@@ -7,3 +7,5 @@
 #PKGLIBDIR#/#SYSCONFDIR#/ati
 #DATADIR#/grub-gfxpayload-lists/blacklist
 #LIBDIR#/dri
+#LIBDIR#/xorg/modules/drivers/
+#XORGEXTRA#
