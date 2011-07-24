@@ -1,3 +1,9 @@
+fglrx-installer (2:8.861-0ubuntu4) UNRELEASED; urgency=low
+
+  * 
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Sun, 24 Jul 2011 11:58:57 +0200
+
 fglrx-installer (2:8.861-0ubuntu3) oneiric; urgency=low
 
   * debian/fglrx.dirs.in:
