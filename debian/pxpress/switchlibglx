@@ -188,7 +188,7 @@ class Switcher(object):
         # Abort if gl_alternative is null
         if gl_alternative and gl_alternative_other:
             success = (self._gl_switcher.set_alternative(gl_alternative) and
-                       self._gl_switcher_other.set_alternative(gl_alternative))
+                       self._gl_switcher_other.set_alternative(gl_alternative_other))
             return success
         else:
             sys.stderr.write("Error: no alternative can be found for %s\n" % alternative)

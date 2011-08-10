@@ -1,10 +1,10 @@
-ATI video drivers for Ubuntu
+AMD video drivers for Ubuntu
 ============================
 
-Further information can be found at http://www.ati.com/ -- look for
-the "Drivers & Software" page and follow links to the Linux drivers.
+Further information can be found at http://support.amd.com/ -- look for
+the "Download Drivers" area and follow links to the Linux drivers.
 
-This package is generated automatically via the official ATI driver
+This package is generated automatically via the official AMD driver
 installer that is available from the above homepage.
 
 DKMS

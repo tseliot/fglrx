@@ -3,3 +3,4 @@
 #PKGLIBDIR#/libGL.so.1.2 #PKGLIBDIR#/libGL.so.1
 #PKGLIBDIR#/libGL.so.1 #PKGLIBDIR#/libGL.so
 #PKGLIBDIR#/libAMDXvBA.so.1.0 #PKGLIBDIR#/libAMDXvBA.so.1
+#PKGLIBDIR#/bin/aticonfig #PKGLIBDIR#/bin/amdconfig

@@ -44,4 +44,4 @@ arch/#SRCARCH#/usr/X11R6/#SRCLIBDIR#/modules/dri      #PKGLIBDIR#
 arch/#SRCARCH#/usr/#SRCLIBDIR#/*.so*                  #PKGLIBDIR#
 
 #PXpress stuff
-debian/pxpress/*                                      #PXDIR#
+debian/pxpress/*                                      usr/lib/fglrx

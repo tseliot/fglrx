@@ -17,24 +17,20 @@ Build-Depends: debhelper (>= 7),
                libgl1-mesa-glx,
                libxinerama1,
                libqtgui4,
-               xserver-xorg-dev (>= 2:1.10.0),
                execstack
 Standards-Version: 3.8.3
-Homepage: http://ati.amd.com/support/driver.html
-Vcs-Git: git://github.com/tseliot/fglrx.git
-Vcs-Browser: http://github.com/tseliot/fglrx
+Homepage: http://support.amd.com
 
 Package: fglrx
 Architecture: amd64 i386
 Recommends: fglrx-amdcccle
-Depends: ${shlibs:Depends}, xserver-xorg-core, lib32gcc1 [amd64], libc6-i386 [amd64], dkms, make, linux-libc-dev,
- linux-headers-generic | linux-headers, ${xviddriver:Depends}
+Depends: ${shlibs:Depends}, xserver-xorg-core, lib32gcc1 [amd64], libc6-i386 [amd64], dkms, make, linux-libc-dev, linux-headers-generic | linux-headers
 Conflicts: fglrx-driver, xfree86-driver-fglrx, xorg-driver-fglrx, fglrx-kernel-source, libamdxvba1, fglrx-modaliases
-Replaces: fglrx-driver, xfree86-driver-fglrx, xorg-driver-fglrx, fglrx-kernel-source, libamdxvba1, fglrx-modaliases
-Provides: ${xviddriver:Provides}
+Replaces: fglrx-driver, xfree86-driver-fglrx, xorg-driver-fglrx, fglrx-kernel-source, libamdxvba1, fglrx-modaliases, fglrx-updates
+Provides: fglrx-driver
 XB-Modaliases: ${modaliases}
-Description: Video driver for the ATI graphics accelerators
- Video driver for the ATI Radeon and FireGL graphics accelerators.
+Description: Video driver for the AMD graphics accelerators
+ Video driver for the AMD Radeon and FireGL graphics accelerators.
  .
  This package provides 2D display drivers
  and hardware accelerated OpenGL.
@@ -43,9 +39,10 @@ Package: fglrx-dev
 Architecture: amd64 i386
 Depends: fglrx
 Conflicts: fglrx-driver-dev, xfree86-driver-fglrx-dev
-Replaces: fglrx-driver-dev, xfree86-driver-fglrx-dev, xorg-driver-fglrx-dev
-Description: Video driver for the ATI graphics accelerators (devel files)
- Video driver for the ATI Radeon and FireGL graphics accelerators.
+Replaces: fglrx-driver-dev, xfree86-driver-fglrx-dev, xorg-driver-fglrx-dev, fglrx-updates-dev
+Provides: fglrx-driver-dev
+Description: Video driver for the AMD graphics accelerators (devel files)
+ Video driver for the AMD Radeon and FireGL graphics accelerators.
  .
  This package provides definitions for the GL and GLX extensions.
 
@@ -53,8 +50,9 @@ Package: fglrx-amdcccle
 Architecture: amd64 i386
 Depends: fglrx, ${shlibs:Depends}
 Conflicts: fglrx-control-qt2, fglrx-control
-Replaces: fglrx-control
-Description: Catalyst Control Center for the ATI graphics accelerators
- Catalyst Control Center for the ATI Radeon and FireGL graphics accelerators.
+Replaces: fglrx-control, fglrx-amdcccle-updates
+Provides: fglrx-control
+Description: Catalyst Control Center for the AMD graphics accelerators
+ Catalyst Control Center for the AMD Radeon and FireGL graphics accelerators.
  .
  This package provides the Catalyst Control Center, Linux Edition

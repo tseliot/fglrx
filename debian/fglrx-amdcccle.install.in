@@ -4,4 +4,3 @@ usr/share/ati usr/share
 usr/share/applications/*.desktop usr/share/fglrx
 usr/X11R6/bin/* #PKGLIBDIR#/bin
 arch/#SRCARCH#/usr/X11R6/bin/amdcccle #PKGLIBDIR#/bin
-debian/pxpress/* #PKGLIBDIR#/
