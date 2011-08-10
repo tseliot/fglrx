@@ -17,6 +17,7 @@ Build-Depends: debhelper (>= 7),
                libgl1-mesa-glx,
                libxinerama1,
                libqtgui4,
+               xserver-xorg-dev (>= 2:1.10.0),
                execstack
 Standards-Version: 3.8.3
 Homepage: http://support.amd.com
@@ -24,10 +25,11 @@ Homepage: http://support.amd.com
 Package: fglrx
 Architecture: amd64 i386
 Recommends: fglrx-amdcccle
-Depends: ${shlibs:Depends}, xserver-xorg-core, lib32gcc1 [amd64], libc6-i386 [amd64], dkms, make, linux-libc-dev, linux-headers-generic | linux-headers
+Depends: ${shlibs:Depends}, xserver-xorg-core, lib32gcc1 [amd64], libc6-i386 [amd64], dkms, make, linux-libc-dev,
+ linux-headers-generic | linux-headers, , ${xviddriver:Depends}
 Conflicts: fglrx-driver, xfree86-driver-fglrx, xorg-driver-fglrx, fglrx-kernel-source, libamdxvba1, fglrx-modaliases
 Replaces: fglrx-driver, xfree86-driver-fglrx, xorg-driver-fglrx, fglrx-kernel-source, libamdxvba1, fglrx-modaliases, fglrx-updates
-Provides: fglrx-driver
+Provides: fglrx-driver, ${xviddriver:Provides}
 XB-Modaliases: ${modaliases}
 Description: Video driver for the AMD graphics accelerators
  Video driver for the AMD Radeon and FireGL graphics accelerators.
