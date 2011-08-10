@@ -1,8 +1,25 @@
 fglrx-installer (2:8.872-0ubuntu1) UNRELEASED; urgency=low
 
-  * 
+  * New upstream release 8.872 (11-7).
+  * debian/rules:
+    - Further improvements on files generation from templates.
+    - Make sure to ship an empty ld.so.conf for the other arch for
+      PXpress.
+  * debian/fglrx.postinst.in:
+    - Make amdconfig point at aticonfig.
+  * debian/control, debian/README:
+    - Replace "ATI" with "AMD".
+  * debian/control:
+    - Add conflicts/replaces to deal with fglrx-updates.
+  * debian/fglrx.install.in:
+    - Make sure to always install PXpress scripts in /usr/lib/fglrx
+      (LP: #815322).
+  * debian/fglrx-amdcccle.install.in:
+    - Do not install the PXpress scripts in amdcccle.
+  * debian/pxpress/switchlib{glx|GL):
+    - Fix issue when setting the alternative for the other arch.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Wed, 10 Aug 2011 12:10:43 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Wed, 10 Aug 2011 18:45:41 +0200
 
 fglrx-installer (2:8.861-0ubuntu4) oneiric; urgency=low
 
