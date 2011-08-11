@@ -19,7 +19,7 @@ etc/ati/*                                       #PKGLIBDIR#/#SYSCONFDIR#/ati
 debian/replacements/authatieventsd.sh           #PKGLIBDIR#/#SYSCONFDIR#/ati
 
 #Blacklist some card ids from GRUB gfxpayload=keep
-debian/fglrx.grub-gfxpayload                    #PKGDATADIR#
+debian/fglrx-updates.grub-gfxpayload            #PKGDATADIR#
 
 #binaries
 arch/#SRCARCH#/usr/sbin/*                       #PKGBINDIR#
