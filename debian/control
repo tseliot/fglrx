@@ -1,4 +1,4 @@
-Source: fglrx-installer
+Source: fglrx-installer-updates
 Section: restricted/misc
 Priority: extra
 Maintainer: Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>
@@ -22,13 +22,13 @@ Build-Depends: debhelper (>= 7),
 Standards-Version: 3.8.3
 Homepage: http://support.amd.com
 
-Package: fglrx
+Package: fglrx-updates
 Architecture: amd64 i386
-Recommends: fglrx-amdcccle
+Recommends: fglrx-amdcccle-updates
 Depends: ${shlibs:Depends}, xserver-xorg-core, lib32gcc1 [amd64], libc6-i386 [amd64], dkms, make, linux-libc-dev,
  linux-headers-generic | linux-headers, , ${xviddriver:Depends}
 Conflicts: fglrx-driver, xfree86-driver-fglrx, xorg-driver-fglrx, fglrx-kernel-source, libamdxvba1, fglrx-modaliases
-Replaces: fglrx-driver, xfree86-driver-fglrx, xorg-driver-fglrx, fglrx-kernel-source, libamdxvba1, fglrx-modaliases, fglrx-updates
+Replaces: fglrx-driver, xfree86-driver-fglrx, xorg-driver-fglrx, fglrx-kernel-source, libamdxvba1, fglrx-modaliases, fglrx
 Provides: fglrx-driver, ${xviddriver:Provides}
 XB-Modaliases: ${modaliases}
 Description: Video driver for the AMD graphics accelerators
@@ -37,22 +37,22 @@ Description: Video driver for the AMD graphics accelerators
  This package provides 2D display drivers
  and hardware accelerated OpenGL.
 
-Package: fglrx-dev
+Package: fglrx-updates-dev
 Architecture: amd64 i386
-Depends: fglrx
+Depends: fglrx-updates
 Conflicts: fglrx-driver-dev, xfree86-driver-fglrx-dev
-Replaces: fglrx-driver-dev, xfree86-driver-fglrx-dev, xorg-driver-fglrx-dev, fglrx-updates-dev
+Replaces: fglrx-driver-dev, xfree86-driver-fglrx-dev, xorg-driver-fglrx-dev, fglrx-dev
 Provides: fglrx-driver-dev
 Description: Video driver for the AMD graphics accelerators (devel files)
  Video driver for the AMD Radeon and FireGL graphics accelerators.
  .
  This package provides definitions for the GL and GLX extensions.
 
-Package: fglrx-amdcccle
+Package: fglrx-amdcccle-updates
 Architecture: amd64 i386
-Depends: fglrx, ${shlibs:Depends}
+Depends: fglrx-updates, ${shlibs:Depends}
 Conflicts: fglrx-control-qt2, fglrx-control
-Replaces: fglrx-control, fglrx-amdcccle-updates
+Replaces: fglrx-control, fglrx-amdcccle
 Provides: fglrx-control
 Description: Catalyst Control Center for the AMD graphics accelerators
  Catalyst Control Center for the AMD Radeon and FireGL graphics accelerators.

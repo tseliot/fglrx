@@ -30,16 +30,16 @@ OTHER_ARCH := $(shell (echo "$(DEB_HOST_MULTIARCH)" | grep i386 >/dev/null) && \
 		echo "$(DEB_HOST_MULTIARCH)" | sed s/x86_64/i386/)
 
 # Package names
-PKG_driver      := fglrx
-PKG_driver_dev  := fglrx-dev
-PKG_control     := fglrx-amdcccle
+PKG_driver      := fglrx-updates
+PKG_driver_dev  := fglrx-dev-updates
+PKG_control     := fglrx-amdcccle-updates
 
 # Priority of the alternatives
-alt_priority         := 1000
-PX_alt_priority      := 900
+alt_priority         := 1001
+PX_alt_priority      := 901
 
 #Directory naming schemes
-PKG_dirname          := $(PKG_driver)
+PKG_dirname          := fglrx
 bindir               := usr/bin
 datadir              := usr/share
 PKG_datadir          := $(datadir)/$(PKG_dirname)
