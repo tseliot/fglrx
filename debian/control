@@ -28,7 +28,7 @@ Recommends: fglrx-amdcccle
 Depends: ${shlibs:Depends}, xserver-xorg-core, lib32gcc1 [amd64], libc6-i386 [amd64], dkms, make, linux-libc-dev,
  linux-headers-generic | linux-headers, , ${xviddriver:Depends}
 Conflicts: fglrx-driver, xfree86-driver-fglrx, xorg-driver-fglrx, fglrx-kernel-source, libamdxvba1, fglrx-modaliases
-Replaces: fglrx-driver, xfree86-driver-fglrx, xorg-driver-fglrx, fglrx-kernel-source, libamdxvba1, fglrx-modaliases, fglrx-updates
+Replaces: fglrx-driver, xfree86-driver-fglrx, xorg-driver-fglrx, fglrx-kernel-source, libamdxvba1, fglrx-modaliases, fglrx-updates, fglrx-amdcccle
 Provides: fglrx-driver, ${xviddriver:Provides}
 XB-Modaliases: ${modaliases}
 Description: Video driver for the AMD graphics accelerators
