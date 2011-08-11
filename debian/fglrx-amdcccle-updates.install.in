@@ -1,4 +1,4 @@
-debian/overrides/fglrx-amdcccle usr/share/lintian/overrides
+debian/overrides/#DRIVERCTRLNAME# usr/share/lintian/overrides
 usr/share/icons/*.xpm usr/share/pixmaps
 usr/share/ati usr/share
 usr/share/applications/*.desktop usr/share/fglrx

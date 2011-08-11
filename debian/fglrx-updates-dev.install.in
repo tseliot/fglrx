@@ -1,4 +1,4 @@
-debian/overrides/fglrx-dev                  usr/share/lintian/overrides
+debian/overrides/#DRIVERDEVNAME#            usr/share/lintian/overrides
 
 usr/include/*                               usr/include
 

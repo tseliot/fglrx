@@ -33,6 +33,7 @@ OTHER_ARCH := $(shell (echo "$(DEB_HOST_MULTIARCH)" | grep i386 >/dev/null) && \
 PKG_driver      := fglrx-updates
 PKG_driver_dev  := fglrx-updates-dev
 PKG_control     := fglrx-amdcccle-updates
+PKG_module      := $(PKG_driver)
 
 # Priority of the alternatives
 alt_priority         := 1001
@@ -154,8 +155,11 @@ build:
 			-e "s|#PKGEXTENSIONDIR#|$(PKG_extensionsdir)|g" \
 			-e "s|#XORGEXTENSIONSDIR#|$(xorg_extensionsdir)|g" \
 			-e "s|#DRIVERNAME#|$(PKG_driver)|g" \
+			-e "s|#MODULENAME#|$(PKG_module)|g" \
+			-e "s|#DRIVERDIRNAME#|$(PKG_dirname)|g" \
 			-e "s|#DRIVERDEVNAME#|$(PKG_driver_dev)|g" \
 			-e "s|#DRIVERSRCNAME#|$(PKG_source)|g" \
+			-e "s|#DRIVERCTRLNAME#|$(PKG_control)|g" \
 			-e "s|#INCLUDEDIR#|$(includedir)|g" \
 			-e "s|#PKGLIBCONFDIR#|$(PKG_libconfdir)|g" \
 			-e "s|#GRUBBLKLISTDIR#|$(grub_blacklistdir)|g" \
@@ -382,9 +386,9 @@ binary: binary-arch binary-indep ;
 
 override_dh_shlibdeps:
 ifeq ($(DEB_HOST_ARCH),amd64)
-	dh_shlibdeps -l$(CURDIR)/debian/fglrx/$(PKG_libdir):$(CURDIR)/debian/fglrx/$(PKG_libdir32) -Xlib32
+	dh_shlibdeps -l$(CURDIR)/debian/$(PKG_driver)/$(PKG_libdir):$(CURDIR)/debian/$(PKG_driver)/$(PKG_libdir32) -Xlib32
 else
-	dh_shlibdeps -l$(CURDIR)/debian/fglrx/$(PKG_libdir)
+	dh_shlibdeps -l$(CURDIR)/debian/$(PKG_driver)/$(PKG_libdir)
 endif
 
 %:
