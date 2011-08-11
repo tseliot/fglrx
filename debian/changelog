@@ -1,6 +1,5 @@
-fglrx-installer-updates (2:8.872-0ubuntu1) UNRELEASED; urgency=low
+fglrx-installer-updates (2:8.872-0ubuntu1) oneiric; urgency=low
 
   * First release.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Thu, 11 Aug 2011 15:53:02 +0200
-
+ -- Alberto Milone <alberto.milone@canonical.com>  Thu, 11 Aug 2011 16:11:25 +0200
