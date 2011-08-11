@@ -31,7 +31,7 @@ OTHER_ARCH := $(shell (echo "$(DEB_HOST_MULTIARCH)" | grep i386 >/dev/null) && \
 
 # Package names
 PKG_driver      := fglrx-updates
-PKG_driver_dev  := fglrx-dev-updates
+PKG_driver_dev  := fglrx-updates-dev
 PKG_control     := fglrx-amdcccle-updates
 
 # Priority of the alternatives
