@@ -1,8 +1,11 @@
-fglrx-installer (2:8.872-0ubuntu2) UNRELEASED; urgency=low
+fglrx-installer (2:8.872-0ubuntu2) oneiric; urgency=low
 
-  * 
+  * debian/fglrx.prerm.in:
+    - Remove trailing whitespace.
+    - Make sure to remove the alternatives for PXpress on
+      uninstallation (LP:# 827046).
 
- -- Alberto Milone <alberto.milone@canonical.com>  Tue, 16 Aug 2011 16:17:52 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Tue, 16 Aug 2011 16:25:24 +0200
 
 fglrx-installer (2:8.872-0ubuntu1) oneiric; urgency=low
 
