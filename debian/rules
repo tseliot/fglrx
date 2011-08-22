@@ -103,7 +103,7 @@ endif
 refresh_copyright:
 	# refresh copyright file
 	cat debian/copyright_stub_0 > debian/copyright
-	cat usr/share/doc/fglrx/ATI_LICENSE.TXT >> debian/copyright
+	cat usr/share/doc/fglrx/LICENSE.TXT >> debian/copyright
 	cat debian/copyright_stub_1 >> debian/copyright
 
 clean: refresh_copyright
@@ -243,7 +243,7 @@ ifeq ($(DEB_HOST_ARCH),amd64)
 else
 	dh_installdirs -p$(PKG_driver)
 endif
-	dh_installdocs -p$(PKG_driver) usr/share/doc/fglrx/* --exclude ATI_LICENSE.TXT
+	dh_installdocs -p$(PKG_driver) usr/share/doc/fglrx/* --exclude LICENSE.TXT
 	dh_installdocs -p$(PKG_driver) debian/AUTHORS
 	dh_installdocs -p$(PKG_driver) debian/copyright
 
