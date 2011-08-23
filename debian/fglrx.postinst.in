@@ -134,7 +134,7 @@ if [ "$1" = "configure" ]; then
         --slave /#LIBDIR32#/libaticalcl.so #DEB_HOST_MULTIARCH#_libaticalcl.so_lib32 /#PKGLIBDIR32#/libaticalcl.so \
         --slave /#LIBDIR#/libaticalrt.so #DEB_HOST_MULTIARCH#_libaticalrt.so /#PKGLIBDIR#/libaticalrt.so \
         --slave /#LIBDIR32#/libaticalrt.so #DEB_HOST_MULTIARCH#_libaticalrt.so_lib32 /#PKGLIBDIR32#/libaticalrt.so \
-        --slave /#DATADIR#/grub-gfxpayload-lists/blacklist/10_$PACKAGE_NAME #DEB_HOST_MULTIARCH#_grub_fb_blacklist /#PKGDATADIR#/fglrx.grub-gfxpayload
+        --slave /#DATADIR#/grub-gfxpayload-lists/blacklist/10_proprietary-graphics-drivers #DEB_HOST_MULTIARCH#_grub_fb_blacklist /#PKGDATADIR#/fglrx.grub-gfxpayload
 
     # This is for switchable graphics
     # Note: the radeon kernel module is still blacklisted
@@ -164,7 +164,7 @@ if [ "$1" = "configure" ]; then
         --slave /#LIBDIR32#/libaticalcl.so #DEB_HOST_MULTIARCH#_libaticalcl.so_lib32 /#PKGLIBDIR32#/libaticalcl.so \
         --slave /#LIBDIR#/libaticalrt.so #DEB_HOST_MULTIARCH#_libaticalrt.so /#PKGLIBDIR#/libaticalrt.so \
         --slave /#LIBDIR32#/libaticalrt.so #DEB_HOST_MULTIARCH#_libaticalrt.so_lib32 /#PKGLIBDIR32#/libaticalrt.so \
-        --slave /#DATADIR#/grub-gfxpayload-lists/blacklist/10_$PACKAGE_NAME #DEB_HOST_MULTIARCH#_grub_fb_blacklist /#PKGDATADIR#/fglrx.grub-gfxpayload
+        --slave /#DATADIR#/grub-gfxpayload-lists/blacklist/10_proprietary-graphics-drivers #DEB_HOST_MULTIARCH#_grub_fb_blacklist /#PKGDATADIR#/fglrx.grub-gfxpayload
 
     # Install just the ld.so.conf.d alternatives for the secondary architecture.
     # We need only to ensure that any mesa ld.so.conf.d alternative isn't active.
