@@ -1,8 +1,15 @@
-fglrx-installer-updates (2:8.881-0ubuntu1) UNRELEASED; urgency=low
+fglrx-installer-updates (2:8.881-0ubuntu1) oneiric; urgency=low
 
-  * 
+  * New upstream release 8.881 (11-8).
+  * debian/rules:
+    - Make sure to use LICENSE instead of ATI_LICENSE, as it
+      has been renamed by AMD.
+    - Add a hack for pbuild which would otherwise fail to call
+      execstack when trying to build.
+    - Rename the grub_fb_blacklist link, so that it has a name
+      shared with all the other proprietary drivers.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Mon, 29 Aug 2011 16:08:02 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Mon, 29 Aug 2011 16:17:33 +0200
 
 fglrx-installer-updates (2:8.872-0ubuntu2) oneiric; urgency=low
 
