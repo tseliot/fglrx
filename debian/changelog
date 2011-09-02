@@ -1,8 +1,12 @@
-fglrx-installer-updates (2:8.881-0ubuntu2) UNRELEASED; urgency=low
+fglrx-installer-updates (2:8.881-0ubuntu2) oneiric; urgency=low
 
-  * 
+  * debian/dkms.conf.in:
+    - Disable replace-global-lock-with-a-driver-specific-mutex.patch
+      now that the problem is fixed in the upstream driver
+      (LP: #827652). Thanks to Daniel van Vugt for suggesting the
+      fix.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Fri, 02 Sep 2011 16:15:44 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Fri, 02 Sep 2011 17:03:49 +0200
 
 fglrx-installer-updates (2:8.881-0ubuntu1) oneiric; urgency=low
 
