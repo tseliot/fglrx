@@ -5,6 +5,7 @@
 #PKGDATADIR#
 #PKGLIBCONFDIR#
 #PKGLIBDIR#/#SYSCONFDIR#/ati
+usr/share/initramfs-tools/conf-hooks.d
 #DATADIR#/grub-gfxpayload-lists/blacklist
 #LIBDIR#/dri
 #LIBDIR#/xorg/modules/drivers/
