@@ -270,6 +270,7 @@ ifeq ($(DEB_HOST_ARCH),amd64)
 else
 	dh_installdirs -p$(PKG_driver)
 endif
+	dh_installdirs -p$(PKG_driver_dev)
 	dh_installdocs -p$(PKG_driver) usr/share/doc/fglrx/* --exclude LICENSE.TXT
 	dh_installdocs -p$(PKG_driver) debian/AUTHORS
 	dh_installdocs -p$(PKG_driver) debian/copyright
@@ -405,9 +406,9 @@ endif
 	# Generate modaliases
 	sh -e debian/modaliases/fglrx_supported \
 		lib/modules/fglrx/build_mod/fglrxko_pci_ids.h > \
-		debian/fglrx.modaliases
+		debian/$(PKG_driver).modaliases
 	dh_modaliases
-	rm debian/fglrx.modaliases
+	rm debian/$(PKG_driver).modaliases
 
 	#Run the normal stuff
 	dh binary-arch
