@@ -1,8 +1,10 @@
-fglrx-installer-updates (2:8.881-0ubuntu4) UNRELEASED; urgency=low
+fglrx-installer-updates (2:8.881-0ubuntu4) oneiric; urgency=low
 
-  * 
+  * debian/rules:
+    - Make sure to install the correct modaliases file so that
+      the driver can be detected by Jockey (LP: #855396).
 
- -- Alberto Milone <alberto.milone@canonical.com>  Thu, 22 Sep 2011 16:07:03 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Fri, 23 Sep 2011 13:28:49 +0200
 
 fglrx-installer-updates (2:8.881-0ubuntu3) oneiric; urgency=low
 
