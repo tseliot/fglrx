@@ -152,6 +152,7 @@ build:
 			 $(PKG_driver_dev).install \
 			 $(PKG_driver_dev).links \
 			 $(PKG_control).install \
+			 $(PKG_driver).grub-gfxpayload \
 			 $(PKG_driver).dirs \
 			 $(PKG_driver).links \
 			 $(PKG_driver).postinst \
