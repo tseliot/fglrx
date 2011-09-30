@@ -36,7 +36,7 @@ PATH := $(PATH):/usr/sbin
 PKG_driver      := fglrx-updates
 PKG_driver_dev  := fglrx-updates-dev
 PKG_control     := fglrx-amdcccle-updates
-PKG_module      := $(PKG_driver)
+PKG_module      := $(shell echo "$(PKG_driver)" | sed s/\-/_/g)
 
 # Priority of the alternatives
 alt_priority         := 1001
@@ -405,7 +405,7 @@ endif
 
 	# Generate modaliases
 	sh -e debian/modaliases/fglrx_supported \
-		lib/modules/fglrx/build_mod/fglrxko_pci_ids.h > \
+		lib/modules/fglrx/build_mod/fglrxko_pci_ids.h $(PKG_module) $(PKG_driver) > \
 		debian/$(PKG_driver).modaliases
 	dh_modaliases
 	rm debian/$(PKG_driver).modaliases
