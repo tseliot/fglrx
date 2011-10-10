@@ -1,8 +1,9 @@
-fglrx-installer (2:8.881-0ubuntu4) UNRELEASED; urgency=low
+fglrx-installer (2:8.881-0ubuntu4) oneiric; urgency=low
 
-  * 
+  * Re-enable grub fb and drop the initramfs hook in favour of
+    "alias radeon/lbm_radeon off" (LP: #864149).
 
- -- Alberto Milone <alberto.milone@canonical.com>  Mon, 10 Oct 2011 16:43:41 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Mon, 10 Oct 2011 20:29:27 +0200
 
 fglrx-installer (2:8.881-0ubuntu3) oneiric; urgency=low
 
