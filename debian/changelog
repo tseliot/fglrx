@@ -1,3 +1,9 @@
+fglrx-installer-updates (2:8.881-0ubuntu6) UNRELEASED; urgency=low
+
+  * 
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Mon, 10 Oct 2011 16:57:35 +0200
+
 fglrx-installer-updates (2:8.881-0ubuntu5) oneiric; urgency=low
 
   * debian/rules, debian/modaliases/fglrx_supported:
