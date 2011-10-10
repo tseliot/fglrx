@@ -1,8 +1,9 @@
-fglrx-installer-updates (2:8.881-0ubuntu6) UNRELEASED; urgency=low
+fglrx-installer-updates (2:8.881-0ubuntu6) oneiric; urgency=low
 
-  * 
+  * Re-enable grub fb and drop the initramfs hook in favour of
+    "alias nouveau/lbm_nouveau off" (LP: #864149).
 
- -- Alberto Milone <alberto.milone@canonical.com>  Mon, 10 Oct 2011 16:57:35 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Mon, 10 Oct 2011 18:51:26 +0200
 
 fglrx-installer-updates (2:8.881-0ubuntu5) oneiric; urgency=low
 
