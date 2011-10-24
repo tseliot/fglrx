@@ -1,3 +1,9 @@
+fglrx-installer (2:8.881-0ubuntu5) UNRELEASED; urgency=low
+
+  * 
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Mon, 24 Oct 2011 16:12:37 +0200
+
 fglrx-installer (2:8.881-0ubuntu4) oneiric; urgency=low
 
   * Re-enable grub fb and drop the initramfs hook in favour of
