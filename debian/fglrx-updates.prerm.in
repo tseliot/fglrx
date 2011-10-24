@@ -31,7 +31,7 @@ case "$1" in
 		dpkg-trigger --by-package=$PACKAGE_NAME gmenucache || true
 
 		# explicit ldconfig due to alternatives
-		ldconfig
+		LDCONFIG_NOTRIGGER=y ldconfig
 
 		# Update the grub gfxpayload blacklist
 		if which update-grub-gfxpayload >/dev/null 2>&1; then
