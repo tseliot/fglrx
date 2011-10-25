@@ -1,8 +1,12 @@
-fglrx-installer (2:8.881-0ubuntu5) UNRELEASED; urgency=low
+fglrx-installer (2:8.881-0ubuntu5) precise; urgency=low
 
-  * 
+  * debian/fglrx.prerm.in:
+    - Make sure to remove the correct alternatives on package
+      removal (LP: #855943).
+    - Call ldconfig with the LDCONFIG_NOTRIGGER=y environment
+      variable, as in the postinst script.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Mon, 24 Oct 2011 16:12:37 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Tue, 25 Oct 2011 17:52:12 +0200
 
 fglrx-installer (2:8.881-0ubuntu4) oneiric; urgency=low
 
