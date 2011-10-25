@@ -1,8 +1,12 @@
-fglrx-installer-updates (2:8.881-0ubuntu7) UNRELEASED; urgency=low
+fglrx-installer-updates (2:8.881-0ubuntu7) precise; urgency=low
 
-  * 
+  * debian/fglrx-updates.prerm.in:
+    - Make sure to remove the correct alternatives on package
+      removal (LP: #855943).
+    - Call ldconfig with the NOTRIGGER environment variable
+      as in the postinst.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Tue, 25 Oct 2011 17:46:49 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Tue, 25 Oct 2011 17:51:23 +0200
 
 fglrx-installer-updates (2:8.881-0ubuntu6) oneiric; urgency=low
 
