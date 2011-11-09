@@ -122,6 +122,7 @@ if [ "$1" = "configure" ]; then
         --slave /#BINDIR#/fgl_glxgears #DEB_HOST_MULTIARCH#_fgl_glxgears /#PKGBINDIR#/fgl_glxgears \
         --slave /#BINDIR#/fglrxinfo #DEB_HOST_MULTIARCH#_fglrxinfo /#PKGBINDIR#/fglrxinfo \
         --slave /#BINDIR#/atiodcli #DEB_HOST_MULTIARCH#_atiodcli  /#PKGBINDIR#/atiodcli \
+        --slave /#BINDIR#/clinfo #DEB_HOST_MULTIARCH#_clinfo  /#PKGBINDIR#/clinfo \
         --slave /#BINDIR#/atieventsd #DEB_HOST_MULTIARCH#_atieventsd  /#PKGBINDIR#/atieventsd \
         --slave /#LIBDIR#/xorg/modules/drivers/fglrx_drv.so #DEB_HOST_MULTIARCH#_fglrx_drv /#PKGLIBDIR#/xorg/modules/drivers/fglrx_drv.so \
         --slave /#LIBDIR#/dri/fglrx_dri.so #DEB_HOST_MULTIARCH#_fglrx_dri /#PKGLIBDIR#/dri/fglrx_dri.so \
@@ -129,6 +130,9 @@ if [ "$1" = "configure" ]; then
         --slave /#SYSCONFDIR#/modprobe.d/fglrx.conf #DEB_HOST_MULTIARCH#_fglrx_modconf /lib/fglrx/modprobe.conf \
         --slave /#SYSCONFDIR#/X11/Xsession.d/10fglrx #DEB_HOST_MULTIARCH#_10fglrx /#PKGLIBDIR#/10fglrx \
         --slave /#SYSCONFDIR#/ati #DEB_HOST_MULTIARCH#_ati_conf /#PKGLIBDIR#/#SYSCONFDIR#/ati \
+        --slave /#SYSCONFDIR#/OpenCL/vendors/amdocl32.icd #DEB_HOST_MULTIARCH#_amdocl32.icd /#PKGLIBDIR#/#SYSCONFDIR#/OpenCL/vendors/amdocl32.icd \
+        --slave /#SYSCONFDIR#/OpenCL/vendors/amdocl64.icd #DEB_HOST_MULTIARCH#_amdocl64.icd /#PKGLIBDIR#/#SYSCONFDIR#/OpenCL/vendors/amdocl64.icd \
+        --slave /#LIBDIR#/libOpenCL.so #DEB_HOST_MULTIARCH#_libOpenCL.so /#PKGLIBDIR#/libOpenCL.so \
         --slave /#XORGEXTRA# #DEB_HOST_MULTIARCH#_xorg_extra_modules /#PKGLIBDIR#/xorg \
         --slave /#LIBDIR#/libaticalcl.so #DEB_HOST_MULTIARCH#_libaticalcl.so /#PKGLIBDIR#/libaticalcl.so \
         --slave /#LIBDIR32#/libaticalcl.so #DEB_HOST_MULTIARCH#_libaticalcl.so_lib32 /#PKGLIBDIR32#/libaticalcl.so \
@@ -152,6 +156,7 @@ if [ "$1" = "configure" ]; then
         --slave /#BINDIR#/fgl_glxgears #DEB_HOST_MULTIARCH#_fgl_glxgears /#PKGBINDIR#/fgl_glxgears \
         --slave /#BINDIR#/fglrxinfo #DEB_HOST_MULTIARCH#_fglrxinfo /#PKGBINDIR#/fglrxinfo \
         --slave /#BINDIR#/atiodcli #DEB_HOST_MULTIARCH#_atiodcli  /#PKGBINDIR#/atiodcli \
+        --slave /#BINDIR#/clinfo #DEB_HOST_MULTIARCH#_clinfo  /#PKGBINDIR#/clinfo \
         --slave /#BINDIR#/atieventsd #DEB_HOST_MULTIARCH#_atieventsd  /#PKGBINDIR#/atieventsd \
         --slave /#LIBDIR#/xorg/modules/drivers/fglrx_drv.so #DEB_HOST_MULTIARCH#_fglrx_drv /#PKGLIBDIR#/xorg/modules/drivers/fglrx_drv.so \
         --slave /#LIBDIR#/dri/fglrx_dri.so #DEB_HOST_MULTIARCH#_fglrx_dri /#PKGLIBDIR#/dri/fglrx_dri.so \
@@ -159,6 +164,9 @@ if [ "$1" = "configure" ]; then
         --slave /#SYSCONFDIR#/modprobe.d/fglrx.conf #DEB_HOST_MULTIARCH#_fglrx_modconf /lib/fglrx/modprobe.conf \
         --slave /#SYSCONFDIR#/X11/Xsession.d/10fglrx #DEB_HOST_MULTIARCH#_10fglrx /#PKGLIBDIR#/10fglrx \
         --slave /#SYSCONFDIR#/ati #DEB_HOST_MULTIARCH#_ati_conf /#PKGLIBDIR#/#SYSCONFDIR#/ati \
+        --slave /#SYSCONFDIR#/OpenCL/vendors/amdocl32.icd #DEB_HOST_MULTIARCH#_amdocl32.icd /#PKGLIBDIR#/#SYSCONFDIR#/OpenCL/vendors/amdocl32.icd \
+        --slave /#SYSCONFDIR#/OpenCL/vendors/amdocl64.icd #DEB_HOST_MULTIARCH#_amdocl64.icd /#PKGLIBDIR#/#SYSCONFDIR#/OpenCL/vendors/amdocl64.icd \
+        --slave /#LIBDIR#/libOpenCL.so #DEB_HOST_MULTIARCH#_libOpenCL.so /#PKGLIBDIR#/libOpenCL.so \
         --slave /#XORGEXTRA# #DEB_HOST_MULTIARCH#_xorg_extra_modules /#PXDIR#/xorg \
         --slave /#LIBDIR#/libaticalcl.so #DEB_HOST_MULTIARCH#_libaticalcl.so /#PKGLIBDIR#/libaticalcl.so \
         --slave /#LIBDIR32#/libaticalcl.so #DEB_HOST_MULTIARCH#_libaticalcl.so_lib32 /#PKGLIBDIR32#/libaticalcl.so \
