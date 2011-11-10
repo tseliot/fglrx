@@ -17,8 +17,7 @@ debian/acpi/fglrx-powermode.sh                  #SYSCONFDIR#/acpi
 debian/10fglrx                                  #PKGLIBDIR#
 etc/ati/*                                       #PKGLIBDIR#/#SYSCONFDIR#/ati
 debian/replacements/authatieventsd.sh           #PKGLIBDIR#/#SYSCONFDIR#/ati
-arch/x86/etc/OpenCL/vendors/*.icd               #PKGLIBDIR#/#SYSCONFDIR#/OpenCL/vendors
-arch/x86_64/etc/OpenCL/vendors/*.icd            #PKGLIBDIR#/#SYSCONFDIR#/OpenCL/vendors
+arch/#SRCARCH#/etc/OpenCL/vendors/*.icd         #PKGLIBDIR#/#SYSCONFDIR#/OpenCL/vendors
 
 #Blacklist some card ids from GRUB gfxpayload=keep
 debian/fglrx.grub-gfxpayload                    #PKGDATADIR#
