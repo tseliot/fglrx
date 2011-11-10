@@ -275,10 +275,12 @@ endif
 	execstack -c debian/$(PKG_control)/$(PKG_libdir)/bin/amdcccle
 	dh_install -p$(PKG_driver)
 	for i in \
+			debian/$(PKG_driver)/$(PKG_libdir)/bin/clinfo \
 			debian/$(PKG_driver)/$(PKG_libdir)/bin/atiode \
 			debian/$(PKG_driver)/$(PKG_libdir)/bin/amdnotifyui \
 			debian/$(PKG_driver)/$(PKG_libdir)/dri/fglrx_dri.so \
 			debian/$(PKG_driver)/$(PKG_libdir)/*libGL.so.*.* \
+			debian/$(PKG_driver)/$(PKG_libdir)/*libOpenCL.so.* \
 			; do execstack -q $$i; execstack -c $$i; done
 
 	# Make some additional scripts executable
