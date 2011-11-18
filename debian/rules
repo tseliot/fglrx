@@ -378,10 +378,10 @@ ifeq ($(DEB_HOST_ARCH),amd64)
 endif
 
 	# ld.so.conf for PowerXpress
-	echo "/usr/lib/mesa" >		"$(CURDIR)/debian/$(PKG_driver)/$(PX_ld_so_conf)"
+	echo "/usr/lib/$(DEB_HOST_MULTIARCH)/mesa" >		"$(CURDIR)/debian/$(PKG_driver)/$(PX_ld_so_conf)"
 	echo "/$(PX_libdir)" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PX_ld_so_conf)"
 ifeq ($(DEB_HOST_ARCH),amd64)
-	echo "/usr/lib32/mesa" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PX_ld_so_conf)"
+	echo "/usr/$(OTHER_ARCH)/mesa" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PX_ld_so_conf)"
 	echo "/$(PX_libdir32)" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PX_ld_so_conf)"
 endif
 
