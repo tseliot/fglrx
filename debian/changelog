@@ -1,8 +1,15 @@
-fglrx-installer (2:8.911-0ubuntu1) UNRELEASED; urgency=low
+fglrx-installer (2:8.911-0ubuntu1) precise; urgency=low
 
-  * 
+  * New upstream release (11-11).
+  * debian/fglrx.install.in, debian/fglrx.dirs.in,
+    debian/fglrx.links.in ,debian/fglrx.postinst.in,
+    debian/rules:
+    - Install OpenCL libraries.
+    - Make sure to use the multiarch path to the Mesa libraries.
+      This (partially) solves an issue with PXpress which couldn't
+      find the Mesa libraries (LP: #813809).
 
- -- Alberto Milone <alberto.milone@canonical.com>  Wed, 23 Nov 2011 16:36:36 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Fri, 25 Nov 2011 15:11:02 +0100
 
 fglrx-installer (2:8.881-0ubuntu5) precise; urgency=low
 
