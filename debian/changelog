@@ -1,8 +1,9 @@
-fglrx-installer-updates (2:8.960-0ubuntu1) UNRELEASED; urgency=low
+fglrx-installer-updates (2:8.960-0ubuntu1) precise; urgency=low
 
-  * 
+  * New upstream release:
+    - Fix issue with XVideo in the new xserver (LP: #921384).
 
- -- Alberto Milone <alberto.milone@canonical.com>  Thu, 22 Mar 2012 17:10:06 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Thu, 22 Mar 2012 17:29:41 +0100
 
 fglrx-installer-updates (2:8.911-0ubuntu1) precise; urgency=low
 
