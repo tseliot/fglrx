@@ -1,3 +1,15 @@
+fglrx-installer (2:8.960-0ubuntu1) UNRELEASED; urgency=low
+
+  * 
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Thu, 22 Mar 2012 10:20:13 +0100
+
+fglrx-installer (2:8.911-0ubuntu2) UNRELEASED; urgency=low
+
+  * 2:8.960-0ubuntu1
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Thu, 22 Mar 2012 10:20:02 +0100
+
 fglrx-installer (2:8.911-0ubuntu1) precise; urgency=low
 
   * New upstream release (11-11).
