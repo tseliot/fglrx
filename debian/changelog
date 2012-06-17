@@ -1,8 +1,10 @@
-fglrx-installer-updates (2:8.960-0ubuntu2) UNRELEASED; urgency=low
+fglrx-installer-updates (2:8.960-0ubuntu2) quantal; urgency=low
 
-  * 
+  * replace-do_mmap-and-do_munmap-with-vm_mmap-and-vm_mu.patch,
+    replace-for_each_cpu_mask-with-for_each_possible_cpu.patch:
+    - Add support for Linux 3.5.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Sun, 17 Jun 2012 17:23:12 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Sun, 17 Jun 2012 17:23:42 +0200
 
 fglrx-installer-updates (2:8.960-0ubuntu1) precise; urgency=low
 
