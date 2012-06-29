@@ -1,20 +1,30 @@
-From 6bc31befbd0defde8e62bc51c9e844abda339601 Mon Sep 17 00:00:00 2001
+From a679eb9e1e691eb04b4e266caab20f19be704de7 Mon Sep 17 00:00:00 2001
 From: Alberto Milone <alberto.milone@canonical.com>
-Date: Thu, 22 Mar 2012 10:35:05 +0100
+Date: Fri, 29 Jun 2012 18:46:12 +0200
 Subject: [PATCH 1/1] Fix build issue on i386 where TS_USEDFPU is no longer
  available
 
 
 Signed-off-by: Alberto Milone <alberto.milone@canonical.com>
 ---
- firegl_public.c |    6 ++++++
- 1 files changed, 6 insertions(+), 0 deletions(-)
+ firegl_public.c |    9 +++++++++
+ 1 file changed, 9 insertions(+)
 
 diff --git a/firegl_public.c b/firegl_public.c
-index 1612722..1d02a00 100755
+index 1612722..5a446be 100755
 --- a/firegl_public.c
 +++ b/firegl_public.c
-@@ -5834,10 +5834,16 @@ void ATI_API_CALL KCL_fpu_begin(void)
+@@ -187,6 +187,9 @@
+ #include <linux/gfp.h>
+ #include <linux/swap.h>
+ #include "asm/i387.h"
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,4,0)
++#include <asm/fpu-internal.h>
++#endif
+ 
+ #include "firegl_public.h"
+ #include "kcl_osconfig.h"
+@@ -5834,10 +5837,16 @@ void ATI_API_CALL KCL_fpu_begin(void)
  #ifdef CONFIG_X86_64
      kernel_fpu_begin();
  #else
@@ -32,5 +42,5 @@ index 1612722..1d02a00 100755
          clts();
  #endif
 -- 
-1.7.5.4
+1.7.9.5
 
