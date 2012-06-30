@@ -1,8 +1,10 @@
-fglrx-installer-updates (2:8.960-0ubuntu3) UNRELEASED; urgency=low
+fglrx-installer-updates (2:8.960-0ubuntu3) quantal; urgency=low
 
-  * 
+  * fix-build-issue-on-i386-where-TS_USEDFPU-is-no-longe.patch:
+    - Update patch so as to make sure to include
+      asm/fpu-internal.h (LP: #1017822).
 
- -- Alberto Milone <alberto.milone@canonical.com>  Sat, 30 Jun 2012 11:37:00 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Sat, 30 Jun 2012 11:37:33 +0200
 
 fglrx-installer-updates (2:8.960-0ubuntu2) quantal; urgency=low
 
