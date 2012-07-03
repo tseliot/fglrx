@@ -1,3 +1,9 @@
+fglrx-installer-updates (2:8.960-0ubuntu5) UNRELEASED; urgency=low
+
+  * 
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Tue, 03 Jul 2012 18:06:39 +0200
+
 fglrx-installer-updates (2:8.960-0ubuntu4) quantal; urgency=low
 
   * Rename build to build-arch and make build depend on build-arch.
