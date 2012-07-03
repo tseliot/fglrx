@@ -1,8 +1,12 @@
-fglrx-installer-updates (2:8.960-0ubuntu5) UNRELEASED; urgency=low
+fglrx-installer-updates (2:8.960-0ubuntu5) quantal; urgency=low
 
-  * 
+  * debian/control:
+    - Make sure that ${xviddriver:Depends} is actually replaced
+      with its value.
+  * debian/rules:
+    - Make sure to call the serverabi target.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Tue, 03 Jul 2012 18:06:39 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Tue, 03 Jul 2012 18:07:45 +0200
 
 fglrx-installer-updates (2:8.960-0ubuntu4) quantal; urgency=low
 
