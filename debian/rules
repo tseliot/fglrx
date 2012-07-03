@@ -135,8 +135,8 @@ clean: refresh_copyright
 
 	dh clean
 
-
-build:
+build: build-arch
+build-arch:
 	#Create important strings
 	for i in 10fglrx \
 			 dkms.conf \
