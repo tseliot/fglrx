@@ -20,7 +20,7 @@ debian/replacements/authatieventsd.sh           #PKGLIBDIR#/#SYSCONFDIR#/ati
 arch/#SRCARCH#/etc/OpenCL/vendors/*.icd         #PKGLIBDIR#/#SYSCONFDIR#/OpenCL/vendors
 
 #Blacklist some card ids from GRUB gfxpayload=keep
-debian/fglrx-updates.grub-gfxpayload            #PKGDATADIR#
+debian/fglrx-legacy.grub-gfxpayload            #PKGDATADIR#
 
 #binaries
 arch/#SRCARCH#/usr/sbin/*                       #PKGBINDIR#

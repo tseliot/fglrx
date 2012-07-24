@@ -1,4 +1,4 @@
-Source: fglrx-installer-updates
+Source: fglrx-installer-legacy
 Section: restricted/misc
 Priority: extra
 Maintainer: Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>
@@ -22,9 +22,9 @@ Build-Depends: debhelper (>= 7),
 Standards-Version: 3.8.3
 Homepage: http://support.amd.com
 
-Package: fglrx-updates
+Package: fglrx-legacy
 Architecture: amd64 i386
-Recommends: fglrx-amdcccle-updates
+Recommends: fglrx-amdcccle-legacy
 Depends: ${shlibs:Depends}, xserver-xorg-core, lib32gcc1 [amd64], libc6-i386 [amd64], dkms, make, linux-libc-dev,
  linux-headers-generic | linux-headers,
  ${xviddriver:Depends}
@@ -38,9 +38,9 @@ Description: Video driver for the AMD graphics accelerators
  This package provides 2D display drivers
  and hardware accelerated OpenGL.
 
-Package: fglrx-updates-dev
+Package: fglrx-legacy-dev
 Architecture: amd64 i386
-Depends: fglrx-updates
+Depends: fglrx-legacy
 Conflicts: fglrx-driver-dev, xfree86-driver-fglrx-dev
 Replaces: fglrx-driver-dev, xfree86-driver-fglrx-dev, xorg-driver-fglrx-dev, fglrx-dev
 Provides: fglrx-driver-dev
@@ -49,9 +49,9 @@ Description: Video driver for the AMD graphics accelerators (devel files)
  .
  This package provides definitions for the GL and GLX extensions.
 
-Package: fglrx-amdcccle-updates
+Package: fglrx-amdcccle-legacy
 Architecture: amd64 i386
-Depends: fglrx-updates, ${shlibs:Depends}
+Depends: fglrx-legacy, ${shlibs:Depends}
 Conflicts: fglrx-control-qt2, fglrx-control
 Replaces: fglrx-control, fglrx-amdcccle
 Provides: fglrx-control
