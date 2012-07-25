@@ -1,4 +1,4 @@
-fglrx-installer-updates (2:8.960-0ubuntu5) quantal; urgency=low
+fglrx-installer-legacy-updates (2:8.960-0ubuntu5) quantal; urgency=low
 
   * debian/control:
     - Make sure that ${xviddriver:Depends} is actually replaced
@@ -8,13 +8,13 @@ fglrx-installer-updates (2:8.960-0ubuntu5) quantal; urgency=low
 
  -- Alberto Milone <alberto.milone@canonical.com>  Tue, 03 Jul 2012 18:07:45 +0200
 
-fglrx-installer-updates (2:8.960-0ubuntu4) quantal; urgency=low
+fglrx-installer-legacy-updates (2:8.960-0ubuntu4) quantal; urgency=low
 
   * Rename build to build-arch and make build depend on build-arch.
 
  -- Adam Conrad <adconrad@ubuntu.com>  Mon, 02 Jul 2012 17:33:10 -0600
 
-fglrx-installer-updates (2:8.960-0ubuntu3) quantal; urgency=low
+fglrx-installer-legacy-updates (2:8.960-0ubuntu3) quantal; urgency=low
 
   * fix-build-issue-on-i386-where-TS_USEDFPU-is-no-longe.patch:
     - Update patch so as to make sure to include
@@ -22,7 +22,7 @@ fglrx-installer-updates (2:8.960-0ubuntu3) quantal; urgency=low
 
  -- Alberto Milone <alberto.milone@canonical.com>  Sat, 30 Jun 2012 11:37:33 +0200
 
-fglrx-installer-updates (2:8.960-0ubuntu2) quantal; urgency=low
+fglrx-installer-legacy-updates (2:8.960-0ubuntu2) quantal; urgency=low
 
   * replace-do_mmap-and-do_munmap-with-vm_mmap-and-vm_mu.patch,
     replace-for_each_cpu_mask-with-for_each_possible_cpu.patch:
@@ -30,20 +30,20 @@ fglrx-installer-updates (2:8.960-0ubuntu2) quantal; urgency=low
 
  -- Alberto Milone <alberto.milone@canonical.com>  Sun, 17 Jun 2012 17:23:42 +0200
 
-fglrx-installer-updates (2:8.960-0ubuntu1) precise; urgency=low
+fglrx-installer-legacy-updates (2:8.960-0ubuntu1) precise; urgency=low
 
   * New upstream release:
     - Fix issue with XVideo in the new xserver (LP: #921384).
 
  -- Alberto Milone <alberto.milone@canonical.com>  Thu, 22 Mar 2012 17:29:41 +0100
 
-fglrx-installer-updates (2:8.911-0ubuntu1) precise; urgency=low
+fglrx-installer-legacy-updates (2:8.911-0ubuntu1) precise; urgency=low
 
   * New upstream release (11-11).
-  * debian/fglrx-updates.install.in,
-    debian/fglrx-updates.dirs.in,
-    debian/fglrx-updates.links.in,
-    debian/fglrx-updates.postinst.in, debian/rules:
+  * debian/fglrx-legacy-updates.install.in,
+    debian/fglrx-legacy-updates.dirs.in,
+    debian/fglrx-legacy-updates.links.in,
+    debian/fglrx-legacy-updates.postinst.in, debian/rules:
     - Install OpenCL libraries.
     - Make sure to use the multiarch path to the Mesa libraries.
       This (partially) solves an issue with PXpress which
@@ -51,9 +51,9 @@ fglrx-installer-updates (2:8.911-0ubuntu1) precise; urgency=low
 
  -- Alberto Milone <alberto.milone@canonical.com>  Fri, 25 Nov 2011 15:12:22 +0100
 
-fglrx-installer-updates (2:8.881-0ubuntu7) precise; urgency=low
+fglrx-installer-legacy-updates (2:8.881-0ubuntu7) precise; urgency=low
 
-  * debian/fglrx-updates.prerm.in:
+  * debian/fglrx-legacy-updates.prerm.in:
     - Make sure to remove the correct alternatives on package
       removal (LP: #855943).
     - Call ldconfig with the NOTRIGGER environment variable
@@ -61,14 +61,14 @@ fglrx-installer-updates (2:8.881-0ubuntu7) precise; urgency=low
 
  -- Alberto Milone <alberto.milone@canonical.com>  Tue, 25 Oct 2011 17:51:23 +0200
 
-fglrx-installer-updates (2:8.881-0ubuntu6) oneiric; urgency=low
+fglrx-installer-legacy-updates (2:8.881-0ubuntu6) oneiric; urgency=low
 
   * Re-enable grub fb and drop the initramfs hook in favour of
     "alias nouveau/lbm_nouveau off" (LP: #864149).
 
  -- Alberto Milone <alberto.milone@canonical.com>  Mon, 10 Oct 2011 18:51:26 +0200
 
-fglrx-installer-updates (2:8.881-0ubuntu5) oneiric; urgency=low
+fglrx-installer-legacy-updates (2:8.881-0ubuntu5) oneiric; urgency=low
 
   * debian/rules, debian/modaliases/fglrx_supported:
     - Make sure that the module alias is always correct and
@@ -79,7 +79,7 @@ fglrx-installer-updates (2:8.881-0ubuntu5) oneiric; urgency=low
 
  -- Alberto Milone <alberto.milone@canonical.com>  Fri, 30 Sep 2011 15:36:28 +0200
 
-fglrx-installer-updates (2:8.881-0ubuntu4) oneiric; urgency=low
+fglrx-installer-legacy-updates (2:8.881-0ubuntu4) oneiric; urgency=low
 
   * debian/rules:
     - Make sure to install the correct modaliases file so that
@@ -87,7 +87,7 @@ fglrx-installer-updates (2:8.881-0ubuntu4) oneiric; urgency=low
 
  -- Alberto Milone <alberto.milone@canonical.com>  Fri, 23 Sep 2011 13:28:49 +0200
 
-fglrx-installer-updates (2:8.881-0ubuntu3) oneiric; urgency=low
+fglrx-installer-legacy-updates (2:8.881-0ubuntu3) oneiric; urgency=low
 
   * debian/rules:
     - Add an initramfs hook to make sure that nothing else loads
@@ -95,7 +95,7 @@ fglrx-installer-updates (2:8.881-0ubuntu3) oneiric; urgency=low
 
  -- Alberto Milone <alberto.milone@canonical.com>  Thu, 08 Sep 2011 18:11:28 +0200
 
-fglrx-installer-updates (2:8.881-0ubuntu2) oneiric; urgency=low
+fglrx-installer-legacy-updates (2:8.881-0ubuntu2) oneiric; urgency=low
 
   * debian/dkms.conf.in:
     - Disable replace-global-lock-with-a-driver-specific-mutex.patch
@@ -105,7 +105,7 @@ fglrx-installer-updates (2:8.881-0ubuntu2) oneiric; urgency=low
 
  -- Alberto Milone <alberto.milone@canonical.com>  Fri, 02 Sep 2011 17:03:49 +0200
 
-fglrx-installer-updates (2:8.881-0ubuntu1) oneiric; urgency=low
+fglrx-installer-legacy-updates (2:8.881-0ubuntu1) oneiric; urgency=low
 
   * New upstream release 8.881 (11-8).
   * debian/rules:
@@ -118,16 +118,16 @@ fglrx-installer-updates (2:8.881-0ubuntu1) oneiric; urgency=low
 
  -- Alberto Milone <alberto.milone@canonical.com>  Mon, 29 Aug 2011 16:17:33 +0200
 
-fglrx-installer-updates (2:8.872-0ubuntu2) oneiric; urgency=low
+fglrx-installer-legacy-updates (2:8.872-0ubuntu2) oneiric; urgency=low
 
-  * debian/fglrx-updates.prerm.in:
+  * debian/fglrx-legacy-updates.prerm.in:
     - Remove trailing whitespace.
     - Make sure to remove the alternatives for PXpress on
       uninstallation (LP:# 827046).
 
  -- Alberto Milone <alberto.milone@canonical.com>  Tue, 16 Aug 2011 16:41:04 +0200
 
-fglrx-installer-updates (2:8.872-0ubuntu1) oneiric; urgency=low
+fglrx-installer-legacy-updates (2:8.872-0ubuntu1) oneiric; urgency=low
 
   * First release.
 
