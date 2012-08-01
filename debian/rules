@@ -268,7 +268,7 @@ endif
 	dh_installdocs -p$(PKG_driver) debian/AUTHORS
 	dh_installdocs -p$(PKG_driver) debian/copyright
 
-	dh_installinit -p$(PKG_driver) --name="atieventsd" --no-start --update-rcd-params="defaults 31"
+	dh_installinit -p$(PKG_driver) -n --name="atieventsd" --no-start --update-rcd-params="defaults 31"
 
 	#remove executable bits from stack
 	dh_install -p$(PKG_control)
