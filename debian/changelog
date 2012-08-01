@@ -1,8 +1,10 @@
-fglrx-installer-updates (2:8.960-0ubuntu6) UNRELEASED; urgency=low
+fglrx-installer-updates (2:8.960-0ubuntu6) quantal; urgency=low
 
-  * 
+  [ Stéphane Graber ]
+  * Only purge the package if nothing else provides fglrx
+    (LP: #949641).
 
- -- Alberto Milone <alberto.milone@canonical.com>  Wed, 01 Aug 2012 12:06:56 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Wed, 01 Aug 2012 12:08:18 +0200
 
 fglrx-installer-updates (2:8.960-0ubuntu5) quantal; urgency=low
 
