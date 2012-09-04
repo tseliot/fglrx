@@ -391,7 +391,7 @@ endif
 	#Run the normal stuff
 	dh binary-arch
 
-binary: binary-arch binary-indep ;
+binary: binary-arch binary-indep serverabi ;
 	#Run the normal stuff
 	dh binary
 
