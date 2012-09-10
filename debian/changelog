@@ -1,8 +1,15 @@
-fglrx-installer-updates (2:8.982-0ubuntu1) UNRELEASED; urgency=low
+fglrx-installer-updates (2:8.982-0ubuntu1) quantal; urgency=low
 
-  * 
+  * New upstream release (LP: #1039397).
+  * debian/control:
+    - Conflict with/replace/provide nvidia and fglrx. This will make
+      sure that other binary drivers cannot be installed at the same
+      time. This is required by the new restricted drivers UI.
+  * debian/rules:
+    - Make sure to call the "serverabi" phony target.
+    - Hardcode the X ABI to 11.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Mon, 10 Sep 2012 10:45:02 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Mon, 10 Sep 2012 11:03:55 +0200
 
 fglrx-installer-updates (2:8.960-0ubuntu6) quantal; urgency=low
 
