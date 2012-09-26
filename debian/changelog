@@ -1,8 +1,16 @@
-fglrx-installer-updates (2:9.000-0ubuntu1) UNRELEASED; urgency=low
+fglrx-installer-updates (2:9.000-0ubuntu1) quantal; urgency=low
 
-  * 
+  * New upstream release (LP: #1032672).
+  * debian/dkms.conf.in:
+    - Do not apply any kernel patch
+  * debian/rules:
+    - Make it possible to set the xserver ABIs in debian/substvars.
+  * Merge fixes from the upstream installer:
+    - Fix openCL issues running x86 binaries on x86_64.
+    - Make sure that dh_shlibdeps doesn't complain about missing qt
+      libraries.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Wed, 26 Sep 2012 16:36:28 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Wed, 26 Sep 2012 16:49:27 +0200
 
 fglrx-installer-updates (2:8.982-0ubuntu1) quantal; urgency=low
 
