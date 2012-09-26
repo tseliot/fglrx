@@ -6,6 +6,7 @@
 #PKGLIBCONFDIR#
 #PKGLIBDIR#/#SYSCONFDIR#/ati
 #PKGLIBDIR#/#SYSCONFDIR#/OpenCL/vendors
+#DATADIR#/ati
 #DATADIR#/grub-gfxpayload-lists/blacklist
 #LIBDIR#/dri
 #LIBDIR#/xorg/modules/drivers/

@@ -86,11 +86,13 @@ PKG_libconfdir := lib/$(PKG_dirname)
 # Paths to the dirs from the installer
 SRC_libdir   := lib
 SRC_arch     := x86
+SRC_other_arch := x86_64
 SRC_xarch    := xpic
 
 ifeq ($(DEB_HOST_ARCH),amd64)
 	SRC_libdir  := lib64
 	SRC_arch    := x86_64
+	SRC_other_arch := x86
 	SRC_xarch   := $(SRC_xarch)_64a
 endif
 
@@ -127,6 +129,7 @@ clean: refresh_copyright
 	done
 
 	dh clean
+
 
 build: build-arch
 build-arch:
@@ -185,6 +188,7 @@ build-arch:
 			-e "s|#CVERSION#|$(CVERSION)|g" \
 			-e "s|#SRCXARCH#|$(SRC_xarch)|g" \
 			-e "s|#SRCARCH#|$(SRC_arch)|g" \
+			-e "s|#SRCOTHERARCH#|$(SRC_other_arch)|g" \
 			-e "s|#SRCLIBDIR#|$(SRC_libdir)|g" \
 			-e "s|#DEB_HOST_MULTIARCH#|$(DEB_HOST_MULTIARCH)|g" \
 			-e "s|#OTHER_ARCH#|$(OTHER_ARCH)|g" \
@@ -234,11 +238,14 @@ binary-arch: refresh_copyright serverabi
 
 ifeq ($(DEB_HOST_ARCH),amd64)
 	dh_install -p$(PKG_driver)    "arch/x86/usr/X11R6/lib/libAMD*.so*"           "$(PKG_libdir32)"
-	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/*.so*"           "$(PKG_libdir32)"
+	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/*.*"           "$(PKG_libdir32)"
 	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/fglrx/*.so*"     "$(PKG_libdir32)"
 	dh_installdirs -p$(PKG_driver) "$(PKG_libdir32)"
 	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/modules/dri"     "$(PKG_libdir32)"
 	dh_install -p$(PKG_driver) "arch/x86/usr/lib/*.so*"                 "$(PKG_libdir32)"
+
+	# Install the QT libraries
+	dh_install -p$(PKG_driver) "arch/x86_64/usr/share/ati/lib64" "$(datadir)/ati"
 
 	for i in \
 			debian/$(PKG_driver)/$(PKG_libdir32)/dri/fglrx_dri.so \
@@ -249,6 +256,9 @@ ifeq ($(DEB_HOST_ARCH),amd64)
 	dh_link -p$(PKG_driver) $(PKG_libdir32)/libatiuki.so.1.0 $(PKG_libdir32)/libatiuki.so.1
 else
 	dh_installdirs -p$(PKG_driver)
+
+	# Install the QT libraries
+	dh_install -p$(PKG_driver) "arch/x86_64/usr/share/ati/lib" "$(datadir)/ati"
 endif
 	dh_installdirs -p$(PKG_driver_dev)
 	dh_installdocs -p$(PKG_driver) usr/share/doc/fglrx/* --exclude LICENSE.TXT
@@ -397,9 +407,9 @@ binary: binary-arch binary-indep serverabi ;
 
 override_dh_shlibdeps:
 ifeq ($(DEB_HOST_ARCH),amd64)
-	dh_shlibdeps -l$(CURDIR)/debian/fglrx/$(PKG_libdir):$(CURDIR)/debian/fglrx/$(PKG_libdir32) -Xlib32
+	dh_shlibdeps -l$(CURDIR)/debian/fglrx/$(PKG_libdir):$(CURDIR)/debian/fglrx/$(PKG_libdir)/bin:$(CURDIR)/debian/fglrx/$(PKG_libdir)/sbin:$(CURDIR)/debian/fglrx/$(PKG_libdir32) -Xlib32
 else
-	dh_shlibdeps -l$(CURDIR)/debian/fglrx/$(PKG_libdir)
+	dh_shlibdeps -l$(CURDIR)/debian/fglrx/$(PKG_libdir):$(CURDIR)/debian/fglrx/$(PKG_libdir)/bin:$(CURDIR)/debian/fglrx/$(PKG_libdir)/sbin
 endif
 
 %:
