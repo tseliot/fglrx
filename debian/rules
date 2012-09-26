@@ -9,13 +9,6 @@ CVERSION := $(shell dpkg-parsechangelog | grep '^Version:' | cut -d' ' -f2 | cut
 DVERSION := $(shell dpkg-parsechangelog | grep '^Version:' | cut -d' ' -f2 | cut -d\: -f2)
 DISTRO   := $(shell dpkg-parsechangelog | grep '^Distribution:' | cut -d' ' -f2 | cut -d\: -f2)
 
-VIDEODEP = $(shell cat /usr/share/xserver-xorg/videodrvdep 2>/dev/null)
-VIDDRIVER_PROVIDES = xorg-driver-video
-
-# Manual VIDEO ABI dependencies
-# Comment out the following 2 lines to re-enable automatic ABI detection
-VIDEODEP = xorg-video-abi-11, xserver-xorg-core (>= 2:1.10.99.901)
-
 DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 # If the host is i386 set OTHER_ARCH to x86_64 and vice versa
 OTHER_ARCH := $(shell (echo "$(DEB_HOST_MULTIARCH)" | grep i386 >/dev/null) && \
@@ -127,6 +120,7 @@ clean: refresh_copyright
 		filename=`echo $$file | sed -e "s|.in|$1|"` \
 		rm -f $(filename); \
 	done
+	rm -f debian/$(PKG_driver).substvars
 
 	dh clean
 
@@ -219,20 +213,12 @@ build-arch:
 
 	dh build
 
-# This makes sure that the xserver ABI is bumped to match the current one when the
-# packages are built
-.PHONY: serverabi
-serverabi:
-ifeq ($(VIDEODEP),)
-	@echo 'error: xserver-xorg-dev >= 1.7.6.901 needs to be installed'
-	@exit 1
-else
-	echo "xviddriver:Depends=$(VIDEODEP)" >> debian/$(PKG_driver).substvars
-	# the following is there for compatibility...
-	echo "xviddriver:Provides=$(VIDDRIVER_PROVIDES)" >> debian/$(PKG_driver).substvars
-endif
+.PHONY: gen-abi-substvars
+gen-abi-substvars:
+	# Generate the xserver ABI dependencies
+	cat debian/substvars >> debian/$(PKG_driver).substvars
 
-binary-arch: refresh_copyright serverabi
+binary-arch: refresh_copyright gen-abi-substvars
 	#Steps that we can't easily represent in debhelper files or .in files yet
 
 	# Remove any libraries that may be caught by shell expansion
@@ -404,7 +390,7 @@ endif
 	#Run the normal stuff
 	dh binary-arch
 
-binary: binary-arch binary-indep serverabi ;
+binary: binary-arch binary-indep gen-abi-substvars ;
 	#Run the normal stuff
 	dh binary
 
