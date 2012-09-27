@@ -270,6 +270,10 @@ endif
 	find debian/$(PKG_control)/$(PKG_libdir)/bin/ \
 		-type f | xargs chmod a+x
 
+	# Make sure that every binary in bin is executable
+	find debian/$(PKG_driver)/$(PKG_libdir)/bin/ \
+		-type f | xargs chmod a+x
+
 	# Rename libraries which are supposed to have fglrx-libGL as a prefix
 	for lib in `find debian/$(PKG_driver)/ -name 'fglrx-libGL*'`; \
 		do \
