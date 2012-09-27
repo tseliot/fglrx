@@ -1,8 +1,10 @@
-fglrx-installer-updates (2:9.000-0ubuntu2) UNRELEASED; urgency=low
+fglrx-installer-updates (2:9.000-0ubuntu2) quantal; urgency=low
 
-  * 
+  * debian/rules:
+    - Make sure that all binaries in /usr/bin are executable.
+  * Switch to dpkg-source 3.0 (quilt) format.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Thu, 27 Sep 2012 15:36:37 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Thu, 27 Sep 2012 15:36:59 +0200
 
 fglrx-installer-updates (2:9.000-0ubuntu1) quantal; urgency=low
 
