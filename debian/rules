@@ -247,7 +247,7 @@ else
 	dh_installdirs -p$(PKG_driver)
 
 	# Install the QT libraries
-	dh_install -p$(PKG_driver) "arch/x86_64/usr/share/ati/lib" "$(datadir)/ati"
+	dh_install -p$(PKG_driver) "arch/x86/usr/share/ati/lib" "$(datadir)/ati"
 endif
 	dh_installdirs -p$(PKG_driver_dev)
 	dh_installdocs -p$(PKG_driver) usr/share/doc/fglrx/* --exclude LICENSE.TXT
