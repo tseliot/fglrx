@@ -1,3 +1,9 @@
+fglrx-installer-updates (2:9.000-0ubuntu4) UNRELEASED; urgency=low
+
+  * 
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Wed, 07 Nov 2012 15:39:46 +0100
+
 fglrx-installer-updates (2:9.000-0ubuntu3) quantal; urgency=low
 
   * debian/rules:
