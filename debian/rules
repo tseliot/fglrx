@@ -115,7 +115,7 @@ refresh_copyright:
 	cat usr/share/doc/fglrx/LICENSE.TXT >> debian/copyright
 	cat debian/copyright_stub_1 >> debian/copyright
 
-clean: refresh_copyright
+clean: refresh_copyright regen-from-templates
 	# remove any file generated from a template
 	for file in *.in; do \
 		# strip only the last .in from the name \
@@ -126,9 +126,8 @@ clean: refresh_copyright
 
 	dh clean
 
-
-build: build-arch
-build-arch:
+.PHONY: regen-from-templates
+regen-from-templates:
 	#Create important strings
 	for i in 10fglrx \
 			 control \
@@ -196,6 +195,7 @@ build-arch:
 			debian/$$i.in > debian/$$i;      \
 	done
 
+build: regen-from-templates
 	# remove exec bit on everything
 	find arch \
 		etc \
