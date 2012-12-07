@@ -25,8 +25,10 @@ Homepage: http://support.amd.com
 Package: fglrx
 Architecture: amd64 i386
 Recommends: fglrx-amdcccle
-Depends: ${shlibs:Depends}, ${misc:Depends}, xserver-xorg-core, lib32gcc1 [amd64], libc6-i386 [amd64], dkms, make, linux-libc-dev,
- linux-headers-generic | linux-headers,
+Depends: ${shlibs:Depends}, ${misc:Depends}, xserver-xorg-core,
+ lib32gcc1 [amd64], libc6-i386 [amd64], dkms, make, linux-libc-dev,
+ linux-headers-generic | linux-headers-server |
+ linux-headers-lowlatency | linux-headers-virtual,
  ${xviddriver:Depends}
 Provides: fglrx-driver, nvidia-current, nvidia-current-updates, nvidia-experimental,
  nvidia-173, nvidia-173-updates, nvidia-96, nvidia-96-updates, fglrx-updates,
