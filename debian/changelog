@@ -1,8 +1,21 @@
-fglrx-installer (2:9.000-0ubuntu4) UNRELEASED; urgency=low
+fglrx-installer (2:9.000-0ubuntu4) raring; urgency=low
 
-  * 
+  * debian/control:
+    - Conflict/replace/provide new nvidia flavours.
+    - Depend on other flavours of kernel headers.
+  * debian/dkms.conf.in,
+    replace-VM_RESERVED-with-VM_DONTEXPAND-and-VM_DONTDU.patch:
+    - Add support for Linux 3.7 (LP: #1075937).
+  * debian/10fglrx.in:
+    - Fix path for powerxpress (LP: #1068661). Thanks
+      to Nick Andrik and Lu Xingzhe for suggesting
+      the fix.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Fri, 07 Dec 2012 15:14:52 +0100
+  [ Benjamin Kerensa ]
+  * debian/control:
+    - Add ${misc:Depends} depends as needed.
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Fri, 07 Dec 2012 15:16:01 +0100
 
 fglrx-installer (2:9.000-0ubuntu3) quantal; urgency=low
 
