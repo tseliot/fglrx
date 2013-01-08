@@ -1,8 +1,17 @@
-fglrx-installer (2:9.010-0ubuntu1) UNRELEASED; urgency=low
+fglrx-installer (2:9.010-0ubuntu1) raring; urgency=low
 
-  * 
+  * New upstream release.
+  * debian/dkms.conf.in,
+    replace-archdata.acpi_handle-with-acpi_node.handle.patch:
+    - Add support for Linux 3.8 (LP: #1095755).
+      Thanks to Robert Hooker for the patch.
+  * debian/substvars:
+    - Remove versioned dependency on xserver-xorg-core.
+  * debian/10fglrx.in, debian/rules:
+    - Fix paths which prevented OpenGL operations on hybrid systems
+      on amd64 (LP: #1068661). Thanks to Nick Andrik for the patch.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Tue, 08 Jan 2013 15:26:19 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Tue, 08 Jan 2013 16:12:09 +0100
 
 fglrx-installer (2:9.000-0ubuntu4) raring; urgency=low
 
