@@ -1,3 +1,9 @@
+fglrx-installer-updates (2:9.010-0ubuntu3) UNRELEASED; urgency=low
+
+  * 
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Thu, 17 Jan 2013 17:47:18 +0100
+
 fglrx-installer-updates (2:9.010-0ubuntu2) raring; urgency=low
 
   * debian/control{.in}:
