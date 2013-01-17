@@ -25,8 +25,8 @@ Homepage: http://support.amd.com
 Package: #DRIVERNAME#
 Architecture: amd64 i386
 Recommends: fglrx-amdcccle-#FLAVOUR#
-Depends: ${shlibs:Depends}, xserver-xorg-core, lib32gcc1 [amd64], libc6-i386 [amd64], dkms, make, linux-libc-dev,
- linux-headers-generic | linux-headers, , ${xviddriver:Depends}
+Depends: ${shlibs:Depends}, lib32gcc1 [amd64], libc6-i386 [amd64], dkms, make, linux-libc-dev,
+ ${xviddriver:Depends}
 Conflicts: fglrx-driver, xfree86-driver-fglrx, xorg-driver-fglrx, fglrx-kernel-source, libamdxvba1, fglrx-modaliases
 Replaces: fglrx-driver, xfree86-driver-fglrx, xorg-driver-fglrx, fglrx-kernel-source, libamdxvba1, fglrx-modaliases, fglrx
 Provides: fglrx-driver, ${xviddriver:Provides}
