@@ -26,15 +26,23 @@ Package: fglrx-updates
 Architecture: amd64 i386
 Recommends: fglrx-amdcccle-updates
 Depends: ${shlibs:Depends}, lib32gcc1 [amd64], libc6-i386 [amd64], dkms, make, linux-libc-dev,
- ${xviddriver:Depends}
+ ${xviddriver:Depends}, ${misc:Depends}
 Conflicts: fglrx-driver, xfree86-driver-fglrx, xorg-driver-fglrx, fglrx-kernel-source,
- libamdxvba1, fglrx-modaliases, nvidia-310, nvidia-310-updates, nvidia-304,
- nvidia-304-updates, fglrx
+ libamdxvba1, fglrx-modaliases, nvidia-experimental, nvidia-current,
+ nvidia-current-updates, nvidia-173, nvidia-173-updates, nvidia-96,
+ nvidia-96-updates, fglrx, nvidia-304, nvidia-304-updates, nvidia-310,
+ nvidia-310-updates, nvidia-experimental-304, nvidia-experimental-310
 Replaces: fglrx-driver, xfree86-driver-fglrx, xorg-driver-fglrx, fglrx-kernel-source,
- libamdxvba1, fglrx-modaliases, nvidia-310, nvidia-310-updates, nvidia-304,
- nvidia-304-updates, fglrx
-Provides: fglrx-driver, nvidia-310, nvidia-310-updates, nvidia-304,
- nvidia-304-updates, fglrx, ${xviddriver:Provides}
+ libamdxvba1, fglrx-modaliases, fglrx, nvidia-current-modaliases,
+ nvidia-180-modaliases, nvidia-185-modaliases, nvidia-experimental,
+ nvidia-current, nvidia-current-updates, nvidia-173, nvidia-173-updates,
+ nvidia-96, nvidia-96-updates, fglrx, nvidia-304, nvidia-304-updates,
+ nvidia-310, nvidia-310-updates, nvidia-experimental-304,
+ nvidia-experimental-310
+Provides: fglrx-driver, nvidia-current, nvidia-current-updates, nvidia-experimental,
+ nvidia-173, nvidia-173-updates, nvidia-96, nvidia-96-updates, fglrx,
+ nvidia-304, nvidia-304-updates, nvidia-310, nvidia-310-updates,
+ nvidia-experimental-304, nvidia-experimental-310, ${xviddriver:Provides}
 XB-Modaliases: ${modaliases}
 Description: Video driver for the AMD graphics accelerators
  Video driver for the AMD Radeon and FireGL graphics accelerators.
@@ -44,7 +52,7 @@ Description: Video driver for the AMD graphics accelerators
 
 Package: fglrx-updates-dev
 Architecture: amd64 i386
-Depends: fglrx-updates
+Depends: fglrx-updates, ${misc:Depends}
 Conflicts: fglrx-driver-dev, xfree86-driver-fglrx-dev
 Replaces: fglrx-driver-dev, xfree86-driver-fglrx-dev, xorg-driver-fglrx-dev, fglrx-dev
 Provides: fglrx-driver-dev
@@ -55,7 +63,7 @@ Description: Video driver for the AMD graphics accelerators (devel files)
 
 Package: fglrx-amdcccle-updates
 Architecture: amd64 i386
-Depends: fglrx-updates, ${shlibs:Depends}
+Depends: fglrx-updates, ${shlibs:Depends}, ${misc:Depends}
 Conflicts: fglrx-control-qt2, fglrx-control
 Replaces: fglrx-control, fglrx-amdcccle
 Provides: fglrx-control
