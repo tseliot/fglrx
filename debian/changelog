@@ -1,8 +1,10 @@
-fglrx-installer-updates (2:9.010-0ubuntu3) UNRELEASED; urgency=low
+fglrx-installer-updates (2:9.010-0ubuntu3) raring; urgency=low
 
-  * 
+  * debian/control{.in}:
+    - Restore the previous conflict/replace/provide dropped
+      by mistake.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Thu, 17 Jan 2013 17:47:18 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Thu, 17 Jan 2013 18:02:13 +0100
 
 fglrx-installer-updates (2:9.010-0ubuntu2) raring; urgency=low
 
