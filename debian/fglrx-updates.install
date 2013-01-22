@@ -1,0 +1,50 @@
+#Lintian overrides
+debian/overrides/fglrx-updates                   usr/share/lintian/overrides
+
+#Actual kernel modules
+lib/modules/fglrx/build_mod/*                   usr/src/fglrx-updates-9.010
+debian/dkms/*                                   usr/src/fglrx-updates-9.010
+arch/x86/lib/modules/fglrx/build_mod/lib* usr/src/fglrx-updates-9.010
+debian/dkms.conf                                usr/src/fglrx-updates-9.010
+
+#DRI stuff
+arch/x86/usr/X11R6/lib/libAMD*    usr/lib/fglrx
+
+#debian integration
+debian/overrides/fglrx-updates                   usr/share/lintian/overrides
+debian/acpi/fglrx-*-aticonfig                   etc/acpi/events
+debian/acpi/fglrx-powermode.sh                  etc/acpi
+debian/10fglrx                                  usr/lib/fglrx
+etc/ati/*                                       usr/lib/fglrx/etc/ati
+debian/replacements/authatieventsd.sh           usr/lib/fglrx/etc/ati
+arch/x86/etc/OpenCL/vendors/*.icd         usr/lib/fglrx/etc/OpenCL/vendors
+arch/x86_64/etc/OpenCL/vendors/*.icd    usr/lib/fglrx/etc/OpenCL/vendors
+
+#Blacklist some card ids from GRUB gfxpayload=keep
+debian/fglrx-updates.grub-gfxpayload            usr/share/fglrx
+
+#binaries
+arch/x86/usr/sbin/*                       usr/lib/fglrx/bin
+arch/x86/usr/bin/*                        usr/lib/fglrx/bin
+arch/x86/usr/X11R6/bin/ati*               usr/lib/fglrx/bin
+arch/x86/usr/X11R6/bin/fgl*               usr/lib/fglrx/bin
+usr/sbin/*sh                                    usr/share/fglrx
+
+#DRI stuff
+arch/x86/usr/X11R6/lib/liba*.so*        usr/lib/fglrx
+arch/x86/usr/X11R6/lib/libf*.so*        usr/lib/fglrx
+arch/x86/usr/X11R6/lib/libX*.so*        usr/lib/fglrx
+arch/x86/usr/X11R6/lib/fglrx/*libGL.so* usr/lib/fglrx
+arch/x86/usr/X11R6/lib/modules/dri      usr/lib/fglrx
+
+#Xorg stuff
+xpic/usr/X11R6/lib/modules/*.so         usr/lib/fglrx/xorg/modules
+xpic/usr/X11R6/lib/modules/drivers      usr/lib/fglrx/xorg/modules
+xpic/usr/X11R6/lib/modules/linux        usr/lib/fglrx/xorg/modules
+xpic/usr/X11R6/lib/modules/extensions   usr/lib/fglrx/xorg/modules
+
+#CAL stuff
+arch/x86/usr/lib/*.so*                  usr/lib/fglrx
+
+#PXpress stuff
+debian/pxpress/*                                      usr/lib/fglrx

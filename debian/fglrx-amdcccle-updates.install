@@ -1,0 +1,6 @@
+debian/overrides/fglrx-amdcccle-updates usr/share/lintian/overrides
+usr/share/icons/*.xpm usr/share/pixmaps
+usr/share/ati usr/share
+usr/share/applications/*.desktop usr/share/fglrx
+usr/X11R6/bin/* usr/lib/fglrx/bin
+arch/x86/usr/X11R6/bin/amdcccle usr/lib/fglrx/bin
