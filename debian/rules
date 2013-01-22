@@ -195,7 +195,8 @@ regen-from-templates:
 			debian/$$i.in > debian/$$i;      \
 	done
 
-build: regen-from-templates
+build: build-arch
+build-arch: regen-from-templates
 	# remove exec bit on everything
 	find arch \
 		etc \
