@@ -1,8 +1,31 @@
-fglrx-installer-updates (2:9.012-0ubuntu1) UNRELEASED; urgency=low
+fglrx-installer-updates (2:9.012-0ubuntu1) raring; urgency=low
 
-  * 
+  * debian/control{.in}:
+    - Conflict/replace/provide xorg-driver-binary instead
+      of trying to conflict with or to replace any other
+      driver.
+  * New upstream release (Catalyst 13.1):
+    - Fixed issues:
+      + Driver release version is added to GL_VERSION.
+      + Blank VGA display after resume from suspend.
+      + X crash for AMD PowerXpress™ A+I High-
+        Performance mode on Ubuntu 12.10.
+      + Performance of Valve Linux games.
+      + Segmentation fault when exit QtOpenGL applications
+        such as AMD CodeXL.
+      + VariBright not working when change AMD PowerPlay™
+        settings in AMD Catalust Control Center:LE.
+      + VariBright doesn't work after resume from suspend
+        on "Trinity" platform.
+      + Flickering cursor when run some full-screen OpenGL
+        games with CrossFire enabled.
+      + OpenGL performance on "Southern Islands" ASICs
+      + 16 re-frames doesn't work for H.264 @Level 5.1.
+      + Corruption when resizing the Konsole window.
+      + One display goes black after changing from multi-
+        display desktop from single independent.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Mon, 15 Apr 2013 13:29:51 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Mon, 15 Apr 2013 15:36:07 +0200
 
 fglrx-installer-updates (2:9.010-0ubuntu5) raring; urgency=low
 
