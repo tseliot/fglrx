@@ -1,8 +1,11 @@
-fglrx-installer (2:9.010-0ubuntu3) UNRELEASED; urgency=low
+fglrx-installer (2:9.010-0ubuntu3) raring; urgency=low
 
-  * 
+  * debian/control:
+    - Conflict/replace/provide xorg-driver-binary. Also
+      get rid of all the other entries which have no
+      use now that xorg-driver-binary is in place.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Mon, 15 Apr 2013 11:00:45 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Mon, 15 Apr 2013 13:19:40 +0200
 
 fglrx-installer (2:9.010-0ubuntu2) raring; urgency=low
 
