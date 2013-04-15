@@ -2,10 +2,10 @@
 debian/overrides/fglrx-updates                   usr/share/lintian/overrides
 
 #Actual kernel modules
-lib/modules/fglrx/build_mod/*                   usr/src/fglrx-updates-9.010
-debian/dkms/*                                   usr/src/fglrx-updates-9.010
-arch/x86/lib/modules/fglrx/build_mod/lib* usr/src/fglrx-updates-9.010
-debian/dkms.conf                                usr/src/fglrx-updates-9.010
+lib/modules/fglrx/build_mod/*                   usr/src/fglrx-updates-9.012
+debian/dkms/*                                   usr/src/fglrx-updates-9.012
+arch/x86/lib/modules/fglrx/build_mod/lib* usr/src/fglrx-updates-9.012
+debian/dkms.conf                                usr/src/fglrx-updates-9.012
 
 #DRI stuff
 arch/x86/usr/X11R6/lib/libAMD*    usr/lib/fglrx
