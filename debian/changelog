@@ -1,8 +1,9 @@
-fglrx-installer (2:9.010-0ubuntu4) UNRELEASED; urgency=low
+fglrx-installer (2:9.010-0ubuntu4) saucy; urgency=low
 
-  * 
+  * debian/dkms.conf.in:
+    - Add support for Linux 3.9 (LP: #1185285).
 
- -- Alberto Milone <alberto.milone@canonical.com>  Fri, 14 Jun 2013 16:59:42 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Fri, 14 Jun 2013 17:02:58 +0200
 
 fglrx-installer (2:9.010-0ubuntu3) raring; urgency=low
 
