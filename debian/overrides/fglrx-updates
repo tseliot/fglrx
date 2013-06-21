@@ -2,10 +2,10 @@
 fglrx: unknown-section restricted
 
 #These unfortunately are needed if we really want to be able to link?
-fglrx: arch-independent-package-contains-binary-or-object ./usr/src/fglrx-9.012/libfglrx_ip.a.GCC3
-fglrx: unstripped-binary-or-object ./usr/src/fglrx-9.012/libfglrx_ip.a.GCC3
-fglrx: arch-independent-package-contains-binary-or-object ./usr/src/fglrx-9.012/libfglrx_ip.a.GCC4
-fglrx: unstripped-binary-or-object ./usr/src/fglrx-9.012/libfglrx_ip.a.GCC4
+fglrx: arch-independent-package-contains-binary-or-object ./usr/src/fglrx-13.101/libfglrx_ip.a.GCC3
+fglrx: unstripped-binary-or-object ./usr/src/fglrx-13.101/libfglrx_ip.a.GCC3
+fglrx: arch-independent-package-contains-binary-or-object ./usr/src/fglrx-13.101/libfglrx_ip.a.GCC4
+fglrx: unstripped-binary-or-object ./usr/src/fglrx-13.101/libfglrx_ip.a.GCC4
 
 #AMD doesn't appear to document these binaries
 fglrx: binary-without-manpage usr/bin/aticonfig
