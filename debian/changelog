@@ -1,8 +1,9 @@
-fglrx-installer-updates (2:13.101-0ubuntu3) UNRELEASED; urgency=low
+fglrx-installer-updates (2:13.101-0ubuntu3) saucy; urgency=low
 
-  * 
+  * debian/dkms.conf.in:
+    - Add support for Linux 3.11.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Tue, 06 Aug 2013 14:10:08 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Tue, 06 Aug 2013 14:11:09 +0200
 
 fglrx-installer-updates (2:13.101-0ubuntu2) saucy; urgency=low
 
