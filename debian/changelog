@@ -1,3 +1,9 @@
+fglrx-installer (2:13.101-0ubuntu6) UNRELEASED; urgency=low
+
+  * 
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Wed, 18 Dec 2013 18:13:57 +0100
+
 fglrx-installer (2:13.101-0ubuntu5) trusty; urgency=low
 
   * Revert previous upload and introduce the patch used in the
