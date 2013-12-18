@@ -1,8 +1,9 @@
-fglrx-installer (2:13.101-0ubuntu5) UNRELEASED; urgency=low
+fglrx-installer (2:13.101-0ubuntu5) trusty; urgency=low
 
-  * 
+  * Revert previous upload and introduce the patch used in the
+    -updates flavour using dkms instead of quilt.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Wed, 18 Dec 2013 17:10:42 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Wed, 18 Dec 2013 17:16:24 +0100
 
 fglrx-installer (2:13.101-0ubuntu4) trusty; urgency=low
 
