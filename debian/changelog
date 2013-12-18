@@ -1,3 +1,9 @@
+fglrx-installer (2:13.101-0ubuntu4) trusty; urgency=low
+
+  * Fix compile issue for Linux 3.12
+
+ -- Tim Gardner <tim.gardner@canonical.com>  Wed, 30 Oct 2013 18:18:59 +0000
+
 fglrx-installer (2:13.101-0ubuntu3) saucy; urgency=low
 
   * debian/dkms.conf.in:

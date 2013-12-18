@@ -1,0 +1,17 @@
+Index: fglrx-installer-13.101/lib/modules/fglrx/build_mod/firegl_public.c
+===================================================================
+--- fglrx-installer-13.101.orig/lib/modules/fglrx/build_mod/firegl_public.c	2013-10-30 18:13:17.672787296 +0000
++++ fglrx-installer-13.101/lib/modules/fglrx/build_mod/firegl_public.c	2013-10-30 18:14:34.042251621 +0000
+@@ -1543,7 +1543,12 @@
+ KCL_TYPE_Uid ATI_API_CALL KCL_GetEffectiveUid(void)
+ {
+ #ifdef current_euid
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,11,0)
++    kuid_t euid = current_euid();
++    return __kuid_val(euid);
++#else
+     return current_euid();
++#endif
+ #else
+     return current->euid;
+ #endif
