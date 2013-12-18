@@ -1,3 +1,9 @@
+fglrx-installer (2:13.101-0ubuntu5) UNRELEASED; urgency=low
+
+  * 
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Wed, 18 Dec 2013 17:10:42 +0100
+
 fglrx-installer (2:13.101-0ubuntu4) trusty; urgency=low
 
   * Fix compile issue for Linux 3.12
