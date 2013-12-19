@@ -1,0 +1,30 @@
+From 848e235831aba4579644993816381f97f30a034c Mon Sep 17 00:00:00 2001
+From: Alberto Milone <alberto.milone@canonical.com>
+Date: Thu, 19 Dec 2013 12:42:48 +0100
+Subject: [PATCH 1/1] kcl_acpi.c: use acpi_tbl_table_handler instead of
+ acpi_table_handler with Linux >= 3.9.1
+
+---
+ kcl_acpi.c |    6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/kcl_acpi.c b/kcl_acpi.c
+index d875bf9..8c1653a 100755
+--- a/kcl_acpi.c
++++ b/kcl_acpi.c
+@@ -995,7 +995,11 @@ int ATI_API_CALL KCL_ACPI_ParseTable(char *id, KCL_ACPI_IntCallbackHandle handle
+ #endif
+     {
+         return KCL_ACPI_ERROR;
+-    }    
++    }
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,9,1)
++    ((acpi_tbl_table_handler)handler)(hdr);
++#else
+     ((acpi_table_handler)handler)(hdr);
++#endif
+     return KCL_ACPI_OK;
+ }
+-- 
+1.7.9.5
+
