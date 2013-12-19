@@ -1,8 +1,47 @@
-fglrx-installer-updates (2:13.101-0ubuntu5) UNRELEASED; urgency=low
+fglrx-installer-updates (2:13.125-0ubuntu1) trusty; urgency=low
 
-  * 
+  * New upstream release:
+    - [384861] Ultra slow dota2 fps.
+    - [383176] System hang when startx after enable Eyefinity.
+    - [383109] System hang when run Unigine Heaven 4.0.
+    - [382494] Screen corruption when run C4Engine with
+      GL_ARB_texture_array enabled.
+    - [384193] Fix the procfs permission issue on kernel 3.10
+      and later.
+    - [373812] System hang when run some OpenGL stress test.
+    - [383430] Glxtest failed with force AA.
+    - [383372] Fail to launch cairo-dock.
+    - [384509] glClientWaitSync is waiting even when timeout
+      is 0.
+    - [383573] AC/DC switching is broken.
+    - [384194] Tear-Free Desktop sets V-Sync to 30Hz instead
+      of 60Hz.
+    - [385123] CrossFire aspect observed in CCCLE where it
+      should not.
+    - [385414] Steam crashes and games hang on a black screen
+      when Force AA is on.
+    - [387027] Glxtest failed on SLED11 SP3.
+    - [382079] MARI crash with weird stack.
+    - [387797] X crash when kill X with Xserver 1.13 and 1.14.
+    - [389431] Screens are distorted when connecting an
+      external monitor on some PowerXpress platform with Intel
+      Haswell.
+    - [389728] Segfault after disabling display on re-launch
+      of CCCLE.
+    - [387573] Soft hang and error observed on BasicDebug
+      sample for OpenCL when run on x86.
+    - [385704] Black window when run glxgears with TWM.
+    - [376115] Display corruption when using rotation.
+  * debian/dkms.conf.in:
+    - Drop procfs patch.
+  * debian/dkms/patches/replace_acpi_table_handler.patch:
+    - Fix build issues with Linux >= 3.9.1 (only required
+      by driver 13.125).
+  * debian/fglrx-updates.dirs.in:
+    - Add path to xorg modules.
+    - Add /usr/share/applications.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Wed, 18 Dec 2013 18:14:12 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Thu, 19 Dec 2013 17:08:28 +0100
 
 fglrx-installer-updates (2:13.101-0ubuntu4) trusty; urgency=low
 
