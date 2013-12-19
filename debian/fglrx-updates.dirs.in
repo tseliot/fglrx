@@ -12,3 +12,4 @@
 #LIBDIR#/xorg/modules/drivers/
 #SYSCONFDIR#/OpenCL/vendors
 /usr/share/applications/
+#XORGEXTRA#
