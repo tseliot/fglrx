@@ -11,3 +11,5 @@ usr/share/grub-gfxpayload-lists/blacklist
 usr/lib/dri
 usr/lib/xorg/modules/drivers/
 etc/OpenCL/vendors
+/usr/share/applications/
+usr/lib/x86_64-linux-gnu/xorg/extra-modules
