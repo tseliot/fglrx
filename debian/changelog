@@ -1,8 +1,12 @@
-fglrx-installer (2:13.101-0ubuntu6) UNRELEASED; urgency=low
+fglrx-installer (2:13.101-0ubuntu6) trusty; urgency=low
 
-  * 
+  * debian/fglrx.dirs.in:
+    - Add /usr/share/applications (this helps in chroots).
+  * debian/dkms.conf.in, debian/dkms/patches/buildfix_kernel_3.13.patch:
+    - Apply the procfs patch to kernels up to 3.14
+    - Add support for Linux 3.13.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Wed, 18 Dec 2013 18:13:57 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Wed, 08 Jan 2014 16:32:39 +0100
 
 fglrx-installer (2:13.101-0ubuntu5) trusty; urgency=low
 
