@@ -1,8 +1,9 @@
-fglrx-installer-updates (2:13.125-0ubuntu2) UNRELEASED; urgency=low
+fglrx-installer-updates (2:13.125-0ubuntu2) trusty; urgency=low
 
-  * 
+  * debian/dkms.conf.in, debian/dkms/patches/buildfix_kernel_3.13.patch:
+    - Add support for Linux 3.13.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Wed, 08 Jan 2014 16:31:18 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Wed, 08 Jan 2014 17:12:22 +0100
 
 fglrx-installer-updates (2:13.125-0ubuntu1) trusty; urgency=low
 
