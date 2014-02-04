@@ -1,3 +1,9 @@
+fglrx-installer-updates (2:13.350-0ubuntu1) UNRELEASED; urgency=low
+
+  * 
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Tue, 04 Feb 2014 12:45:39 +0100
+
 fglrx-installer-updates (2:13.125-0ubuntu2) trusty; urgency=low
 
   * debian/dkms.conf.in, debian/dkms/patches/buildfix_kernel_3.13.patch:
