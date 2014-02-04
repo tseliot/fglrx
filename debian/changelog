@@ -1,8 +1,51 @@
-fglrx-installer-updates (2:13.350-0ubuntu1) UNRELEASED; urgency=low
+fglrx-installer-updates (2:13.350-0ubuntu1) trusty; urgency=low
 
-  * 
+  * debian/dkms.conf.in:
+    - Drop all the patches.
+  * debian/substvars:
+    - Add support for X ABI 15.
+  * New upstream release (14.1):
+    - [386897]: System hang on resume from S4 with OpenGL screen
+      saver running.
+    - [387678]: Backtrace occurs when kill X.
+    - [387664]: Failed to start X without kernel module loaded.
+    - [378620]: OpenCL test failure in CrossFire Mode.
+    - [386945]: piglit test "spec/ARB_copy_buffer/overlap" failed.
+    - [386710]: piglit test "spec/ARB_draw_buffers_blend" failed.
+    - [386818]: piglit test "spec/OpenGL 2.0/depth-tex-modes-glsl"
+      failed.
+    - [386941]: piglit test "spec/ARB_blend_func_extended" failed.
+    - [386903]: piglit test "spec/OpenGL 3.0/gl-3.0-required-sized-
+      texture-formats" failed.
+    - [386840]: Viewport goes blank when mouse cursor leaves when run
+      Houdini on Ubuntu.
+    - [387596]: piglit test "spec/ARB_framebuffer_object (fbo-
+      scissor-blit)" failed.
+    - [389174]: Failed to get fan speed on Bonaire card.
+    - [388110]: Intermittent flashing problem when running at
+      2560x1600.
+    - [372656]: Crash when resizing Konsole.
+    - [388325]: Brightness cannot be adjusted on Ubuntu 12.04 LTS.
+    - [388330]: piglit test "spec/ARB_framebuffer_object (fbo-blit-
+      stretch)" failed.
+    - [385457]: Blue/white screen after using Google-chrome to run
+      fishietank.
+    - [388500]: piglit test "spec/EXT_texture_integer" failed.
+    - [388802]: piglit test "spec/ARB_map_buffer_alignment" failed.
+    - [386396]: piglit test "spec/ARB_depth_buffer_float/fbo-
+      depthstencil-drawpixels" failed.
+    - [389431]: Screens are distorted when connecting an external
+      monitor on some Haswell platforms.
+    - [389530]: Blank screen/crash observed while running unigine
+      heaven benchmark in windowed mode.
+    - [387124]: OpenCL performance drop observed on Hawaii compared
+      to Tahiti XT.
+    - [386940]: piglit test "spec/EXT_texture_sRGB" failed.
+    - [392137]: [SteamOS] Failed to return to desktop from steam.
+    - [392015]: [SteamOS] Screen is locked when changing user.
+    - [392014]: [SteamOS] Failed to login Steam sometimes.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Tue, 04 Feb 2014 12:45:39 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Tue, 04 Feb 2014 12:50:28 +0100
 
 fglrx-installer-updates (2:13.125-0ubuntu2) trusty; urgency=low
 
