@@ -1,8 +1,12 @@
-fglrx-installer-updates (2:13.350.1-0ubuntu1) UNRELEASED; urgency=medium
+fglrx-installer-updates (2:13.350.1-0ubuntu1) trusty; urgency=medium
 
-  * 
+  * New upstream release (14.3):
+    - [394848] - Xorg crashed 160 playing AVI video file in VLC
+      player or Parole player (LP: #1279412).
+    - [394705] - "Nexuiz - Demo3" Ubuntu performance lower than
+      Redhat.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Wed, 19 Mar 2014 11:21:53 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Wed, 19 Mar 2014 11:22:53 +0100
 
 fglrx-installer-updates (2:13.350-0ubuntu1) trusty; urgency=low
 
