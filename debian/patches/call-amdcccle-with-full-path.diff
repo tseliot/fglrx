@@ -1,0 +1,11 @@
+--- a/usr/share/applications/amdccclesu.desktop
++++ b/usr/share/applications/amdccclesu.desktop
+@@ -1,7 +1,7 @@
+ [Desktop Entry]
+ Encoding=UTF-8
+ Type=Application
+-Exec=amdxdg-su -c amdcccle
++Exec=amdxdg-su -c /usr/bin/amdcccle
+ Categories=GNOME;KDE;GTK;Qt;HardwareSettings;Settings;
+ Icon=ccc_large
+ 
