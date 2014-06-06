@@ -1,3 +1,9 @@
+fglrx-installer (2:13.350.1-0ubuntu3) UNRELEASED; urgency=medium
+
+  * 
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Fri, 06 Jun 2014 16:32:12 +0200
+
 fglrx-installer (2:13.350.1-0ubuntu2) trusty; urgency=medium
 
   * debian/dkms.conf.in,
