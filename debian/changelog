@@ -1,8 +1,12 @@
-fglrx-installer-updates (2:13.350.1-0ubuntu4) UNRELEASED; urgency=medium
+fglrx-installer-updates (2:13.350.1-0ubuntu4) utopic; urgency=medium
 
-  * 
+  * debian/dkms.conf.in,
+    debian/dkms/patches/buildfix_kernel_3.15.patch:
+    - Add support for Linux 3.15.
+  * debian/patches/call-amdcccle-with-full-path.diff:
+    - Pass amdxdg the full path.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Fri, 27 Jun 2014 17:02:31 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Fri, 27 Jun 2014 17:04:33 +0200
 
 fglrx-installer-updates (2:13.350.1-0ubuntu3) utopic; urgency=medium
 
