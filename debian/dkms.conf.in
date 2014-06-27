@@ -8,6 +8,7 @@ MAKE[0]="cd ${dkms_tree}/fglrx/#CVERSION#/build; sh make.sh --nohints --uname_r=
 DEST_MODULE_LOCATION[0]="/kernel/drivers/char/drm"
 AUTOINSTALL="yes"
 PATCH[0]="buildfix_kernel_3.14.patch"
+PATCH[1]="buildfix_kernel_3.15.patch"
 #PATCH_MATCH[0]="^3.1[0-2]"
 #PATCH[0]="buildfix_kernel_3.12.patch"
 #PATCH[1]="replace_acpi_table_handler.patch"
