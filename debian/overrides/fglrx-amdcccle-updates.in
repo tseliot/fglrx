@@ -1,0 +1,6 @@
+#DRIVERCTRLNAME#: binary-or-shlib-defines-rpath usr/bin/amdcccle /usr/share/ati/lib64
+#DRIVERCTRLNAME#: hardening-no-relro usr/bin/amdcccle
+#DRIVERCTRLNAME#: unknown-section restricted/misc
+#DRIVERCTRLNAME#: binary-without-manpage usr/bin/amdcccle
+#DRIVERCTRLNAME#: binary-without-manpage usr/bin/amdupdaterandrconfig
+#DRIVERCTRLNAME#: binary-without-manpage usr/bin/amdxdg-su

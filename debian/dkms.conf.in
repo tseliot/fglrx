@@ -1,4 +1,4 @@
-PACKAGE_NAME="#DRIVERNAME#"
+PACKAGE_NAME="#DRIVERCORENAME#"
 PACKAGE_VERSION="#CVERSION#"
 #Prevent builds with kernels newer than the ones we ship
 CLEAN="rm -f *.*o"

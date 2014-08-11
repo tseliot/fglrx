@@ -1,1 +1,5 @@
 #LIBDIR#/libfglrx_dm.so.1 #LIBDIR#/libfglrx_dm.so
+#LIBDIR#/libOpenCL.so.1 #LIBDIR#/libOpenCL.so
+#PKGLIBDIR#/libGL.so.1 #PKGLIBDIR#/libGL.so
+#LIBDIR#/libAMDXvBA.so.1 #LIBDIR#/libAMDXvBA.so
+#LIBDIR#/libXvBAW.so.1 #LIBDIR#/libXvBAW.so

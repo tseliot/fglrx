@@ -1,0 +1,10 @@
+usr/lib/fglrx
+usr/share/fglrx
+lib/fglrx
+usr/lib/fglrx-core
+usr/lib/fglrx/etc/ati
+usr/lib/fglrx/etc/OpenCL/vendors
+usr/share/ati
+usr/share/grub-gfxpayload-lists/blacklist
+usr/lib
+etc/OpenCL/vendors

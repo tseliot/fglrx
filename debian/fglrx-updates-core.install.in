@@ -1,0 +1,29 @@
+#Lintian overrides
+debian/overrides/#DRIVERCORENAME#                  #DATADIR#/lintian/overrides
+
+#Actual kernel modules
+lib/modules/fglrx/build_mod/*                   usr/src/#DRIVERCORENAME#-#CVERSION#
+debian/dkms/*                                   usr/src/#DRIVERCORENAME#-#CVERSION#
+arch/#SRCARCH#/lib/modules/fglrx/build_mod/lib* usr/src/#DRIVERCORENAME#-#CVERSION#
+debian/dkms.conf                                usr/src/#DRIVERCORENAME#-#CVERSION#
+
+#DRI stuff
+arch/#SRCARCH#/usr/X11R6/#SRCLIBDIR#/libatiadlxx.so     #LIBDIR#
+
+#debian integration
+#debian/overrides/#DRIVERCORENAME#                  #DATADIR#/lintian/overrides
+debian/acpi/fglrx-*-aticonfig                   #SYSCONFDIR#/acpi/events
+debian/acpi/fglrx-powermode.sh                  #SYSCONFDIR#/acpi
+
+#etc/ati/*                                       #SYSCONFDIR#/ati
+#debian/replacements/authatieventsd.sh           #SYSCONFDIR#/ati
+arch/#SRCARCH#/etc/OpenCL/vendors/*.icd         #SYSCONFDIR#/OpenCL/vendors
+
+#binaries
+arch/#SRCARCH#/usr/bin/clinfo                   #BINDIR#
+#arch/#SRCARCH#/usr/X11R6/bin/amd-console-helper #BINDIR#
+arch/#SRCARCH#/usr/X11R6/bin/atiodcli           #BINDIR#
+usr/sbin/atigetsysteminfo.sh                    #SBINDIR#
+
+#CAL stuff
+arch/#SRCARCH#/usr/#SRCLIBDIR#/*.so*                  #LIBDIR#
