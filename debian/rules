@@ -165,6 +165,7 @@ regen-from-templates:
 			 $(PKG_driver).preinst \
 			 $(PKG_driver).prerm \
 			 $(PKG_control).install \
+			 $(PKG_control).dirs \
 			 $(PKG_driver_core).install \
 			 $(PKG_driver_core).links \
 			 $(PKG_driver_core).dirs \
