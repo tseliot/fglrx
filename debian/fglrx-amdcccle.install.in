@@ -1,4 +1,5 @@
 debian/overrides/#DRIVERCTRLNAME# #DATADIR#/lintian/overrides
+debian/com.ubuntu.amdcccle.pkexec.policy usr/share/polkit-1/actions
 usr/share/icons/*.xpm usr/share/pixmaps
 usr/share/ati usr/share
 usr/share/applications/*.desktop usr/share/fglrx
