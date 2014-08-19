@@ -1,6 +1,6 @@
-debian/overrides/fglrx-amdcccle usr/share/lintian/overrides
+debian/overrides/#DRIVERCTRLNAME# #DATADIR#/lintian/overrides
 usr/share/icons/*.xpm usr/share/pixmaps
 usr/share/ati usr/share
 usr/share/applications/*.desktop usr/share/fglrx
-usr/X11R6/bin/* #PKGLIBDIR#/bin
-arch/#SRCARCH#/usr/X11R6/bin/amdcccle #PKGLIBDIR#/bin
+usr/X11R6/bin/* #BINDIR#
+arch/#SRCARCH#/usr/X11R6/bin/amdcccle #BINDIR#

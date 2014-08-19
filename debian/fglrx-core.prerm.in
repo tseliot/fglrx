@@ -1,0 +1,31 @@
+#!/bin/sh
+# prerm script for fglrx-core
+#
+# Copyright (C) 2007 Mario Limonciello
+# Copyright (C) 2009-2011 Canonical Ltd.
+
+PACKAGE_NAME=#DRIVERCORENAME#
+CVERSION=`dpkg-query -W -f='${Version}' $PACKAGE_NAME | awk -F "-" '{print $1}' | cut -d\: -f2`
+
+remove_dkms_module() {
+	echo "Removing all DKMS Modules"
+	dkms remove -m $PACKAGE_NAME -v $CVERSION --all > /dev/null
+	echo "Done."
+}
+
+case "$1" in
+	upgrade)
+		remove_dkms_module
+	;;
+	remove)
+		remove_dkms_module
+
+		update-alternatives --remove #DEB_HOST_MULTIARCH#_gfxcore_conf /#CORELDSOCONF#
+		update-alternatives --remove #DEB_HOST_MULTIARCH#_gfxcore_conf /#UNBLKCORELDSOCONF#
+
+		# explicit ldconfig due to alternatives
+		LDCONFIG_NOTRIGGER=y ldconfig
+	;;
+esac
+
+#DEBHELPER#

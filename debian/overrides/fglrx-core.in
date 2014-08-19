@@ -1,0 +1,40 @@
+#DRIVERCORENAME#: package-name-doesnt-match-sonames libOpenCL1 libatiuki1
+#DRIVERCORENAME#: hardening-no-relro usr/bin/atiodcli
+#DRIVERCORENAME#: hardening-no-relro usr/bin/clinfo
+#DRIVERCORENAME#: hardening-no-relro usr/lib/libOpenCL.so.1
+#DRIVERCORENAME#: hardening-no-relro usr/lib/libamdocl64.so
+#DRIVERCORENAME#: hardening-no-relro usr/lib/libatiadlxx.so
+#DRIVERCORENAME#: hardening-no-relro usr/lib/libaticalcl.so
+#DRIVERCORENAME#: hardening-no-relro usr/lib/libaticaldd.so
+#DRIVERCORENAME#: hardening-no-relro usr/lib/libaticalrt.so
+#DRIVERCORENAME#: hardening-no-relro usr/lib/libatiuki.so.1.0
+#DRIVERCORENAME#: hardening-no-relro usr/lib32/libOpenCL.so.1
+#DRIVERCORENAME#: hardening-no-relro usr/lib32/libamdocl32.so
+#DRIVERCORENAME#: hardening-no-relro usr/lib32/libatiadlxx.so
+#DRIVERCORENAME#: hardening-no-relro usr/lib32/libaticalcl.so
+#DRIVERCORENAME#: hardening-no-relro usr/lib32/libaticaldd.so
+#DRIVERCORENAME#: hardening-no-relro usr/lib32/libaticalrt.so
+#DRIVERCORENAME#: hardening-no-relro usr/lib32/libatiuki.so.1.0
+#DRIVERCORENAME#: unstripped-binary-or-object usr/src/#DRIVERCORENAME#-#CVERSION#/libfglrx_ip.a
+#DRIVERCORENAME#: unknown-section restricted/misc
+#DRIVERCORENAME#: non-multi-arch-lib-dir usr/lib32/
+#DRIVERCORENAME#: script-with-language-extension usr/sbin/atigetsysteminfo.sh
+#DRIVERCORENAME#: binary-without-manpage usr/sbin/atigetsysteminfo.sh
+#DRIVERCORENAME#: binary-without-manpage usr/bin/atiodcli
+#DRIVERCORENAME#: binary-without-manpage usr/bin/clinfo
+#DRIVERCORENAME#: possibly-insecure-handling-of-tmp-files-in-maintainer-script postinst:13
+#DRIVERCORENAME#: possible-bashism-in-maintainer-script postinst:78 '&>'
+#DRIVERCORENAME#: command-with-path-in-maintainer-script postinst:151 /usr/sbin/update-initramfs
+#DRIVERCORENAME#: command-with-path-in-maintainer-script postrm:37 /usr/sbin/update-initramfs
+#DRIVERCORENAME#: maintainer-script-ignores-errors prerm
+#DRIVERCORENAME#: sharedobject-in-library-directory-missing-soname usr/lib/libamdocl64.so
+#DRIVERCORENAME#: sharedobject-in-library-directory-missing-soname usr/lib/libatiadlxx.so
+#DRIVERCORENAME#: sharedobject-in-library-directory-missing-soname usr/lib/libaticalcl.so
+#DRIVERCORENAME#: sharedobject-in-library-directory-missing-soname usr/lib/libaticaldd.so
+#DRIVERCORENAME#: sharedobject-in-library-directory-missing-soname usr/lib/libaticalrt.so
+#DRIVERCORENAME#: sharedobject-in-library-directory-missing-soname usr/lib32/libamdocl32.so
+#DRIVERCORENAME#: sharedobject-in-library-directory-missing-soname usr/lib32/libatiadlxx.so
+#DRIVERCORENAME#: sharedobject-in-library-directory-missing-soname usr/lib32/libaticalcl.so
+#DRIVERCORENAME#: sharedobject-in-library-directory-missing-soname usr/lib32/libaticaldd.so
+#DRIVERCORENAME#: sharedobject-in-library-directory-missing-soname usr/lib32/libaticalrt.so
+#DRIVERCORENAME#: prerm-calls-ldconfig

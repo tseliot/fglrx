@@ -7,19 +7,10 @@
 PACKAGE_NAME=#DRIVERNAME#
 CVERSION=`dpkg-query -W -f='${Version}' $PACKAGE_NAME | awk -F "-" '{print $1}' | cut -d\: -f2`
 
-remove_dkms_module() {
-	echo "Removing all DKMS Modules"
-	dkms remove -m $PACKAGE_NAME -v $CVERSION --all > /dev/null
-	echo "Done."
-}
-
 case "$1" in
 	upgrade)
-		remove_dkms_module
 	;;
 	remove)
-		remove_dkms_module
-
 		update-alternatives --remove #DEB_HOST_MULTIARCH#_gl_conf /#LDSOCONF#
 		update-alternatives --remove #OTHER_ARCH#_gl_conf /#ALTLDSOCONF#
 
@@ -32,11 +23,6 @@ case "$1" in
 
 		# explicit ldconfig due to alternatives
 		LDCONFIG_NOTRIGGER=y ldconfig
-
-		# Update the grub gfxpayload blacklist
-		if which update-grub-gfxpayload >/dev/null 2>&1; then
-		    update-grub-gfxpayload
-		fi
 	;;
 esac
 

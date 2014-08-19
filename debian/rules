@@ -15,22 +15,31 @@ OTHER_ARCH := $(shell (echo "$(DEB_HOST_MULTIARCH)" | grep i386 >/dev/null) && \
 		echo "$(DEB_HOST_MULTIARCH)" | sed s/i386/x86_64/ || \
 		echo "$(DEB_HOST_MULTIARCH)" | sed s/x86_64/i386/)
 
+# Fallback for local debuild
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+
 # Hack for pbuild which would otherwise fail to call execstack
 PATH := $(PATH):/usr/sbin
 
 # Package names
-PKG_driver      := fglrx
-PKG_driver_dev  := fglrx-dev
-PKG_control     := fglrx-amdcccle
+PKG_flavour     := $(shell dpkg-parsechangelog | sed -n 's/^Source: //p' | sed 's/fglrx\-installer\-//g')
+PKG_driver      := fglrx-$(PKG_flavour)
+PKG_driver_dev  := $(PKG_driver)-dev
+PKG_driver_core := $(PKG_driver)-core
+PKG_control     := fglrx-amdcccle-$(PKG_flavour)
+PKG_source      := $(shell dpkg-parsechangelog | sed -n 's/^Source: //p')
 PKG_module      := $(shell echo "$(PKG_driver)" | sed s/\-/_/g)
 
 # Priority of the alternatives
 alt_priority         := 1000
 PX_alt_priority      := 900
+CORE_priority        := $(alt_priority)
+UNBLKLST_CORE_priority  := $(PX_alt_priority)
 
 #Directory naming schemes
-PKG_dirname          := $(PKG_driver)
+PKG_dirname          := fglrx
 bindir               := usr/bin
+sbindir              := usr/sbin
 datadir              := usr/share
 PKG_datadir          := $(datadir)/$(PKG_dirname)
 libdir               := usr/lib
@@ -56,7 +65,6 @@ mandir               := usr/share/man/man1
 PKG_bugdir           := usr/share/bug/$(PKG_dirname)
 autostartdir         := etc/xdg/autostart
 PKG_autostartdir     := $(PKG_configdir)
-grub_blacklistdir    := usr/share/grub-gfxpayload-lists/blacklist
 
 PKG_xmoddir  := $(PKG_libdir)/xorg/modules
 
@@ -69,6 +77,17 @@ PX_libdir32 := $(PX_dir32)/lib
 PX_ld_so_conf := $(PX_dir)/$(ld_so_conf_file)
 PX_ld_so_conf_alt := $(PX_dir)/$(alt_ld_so_conf_file)
 
+CORE_dirname := fglrx-core
+CORE_dir     := $(libdir)/$(CORE_dirname)
+CORE_dir32     := $(libdir32)/$(CORE_dirname)
+CORE_ld_so_conf := $(CORE_dir)/$(ld_so_conf_file)
+CORE_libdir := $(CORE_dir)/lib
+CORE_libdir32 := $(CORE_dir32)/lib
+
+# This is remove fglrx from the blacklist
+UNBLKLST_CORE_ld_so_conf_file  := unblacklist_ld.so.conf
+UNBLKLST_CORE_ld_so_conf := $(CORE_dir)/$(UNBLKLST_CORE_ld_so_conf_file)
+
 # This is a hack to make sure that
 # the blacklist file is available
 # early in the boot process when
@@ -77,16 +96,16 @@ PX_ld_so_conf_alt := $(PX_dir)/$(alt_ld_so_conf_file)
 PKG_libconfdir := lib/$(PKG_dirname)
 
 # Paths to the dirs from the installer
-SRC_libdir   := lib
-SRC_arch     := x86
-SRC_other_arch := x86_64
-SRC_xarch    := xpic
-
 ifeq ($(DEB_HOST_ARCH),amd64)
 	SRC_libdir  := lib64
 	SRC_arch    := x86_64
 	SRC_other_arch := x86
-	SRC_xarch   := $(SRC_xarch)_64a
+	SRC_xarch   := xpic_64a
+else
+	SRC_libdir   := lib
+	SRC_arch     := x86
+	SRC_other_arch := x86_64
+	SRC_xarch    := xpic
 endif
 
 #These "define" bits are needed for the blacklist file
@@ -113,7 +132,7 @@ refresh_copyright:
 	cat usr/share/doc/fglrx/LICENSE.TXT >> debian/copyright
 	cat debian/copyright_stub_1 >> debian/copyright
 
-clean: refresh_copyright
+clean: refresh_copyright regen-from-templates
 	# remove any file generated from a template
 	for file in *.in; do \
 		# strip only the last .in from the name \
@@ -124,28 +143,39 @@ clean: refresh_copyright
 
 	dh clean
 
-
-build: build-arch
-build-arch:
+.PHONY: regen-from-templates
+regen-from-templates:
 	#Create important strings
 	for i in 10fglrx \
+			 control \
 			 dkms.conf \
 			 $(PKG_driver).install \
 			 $(PKG_driver_dev).install \
 			 $(PKG_driver_dev).links \
-			 $(PKG_control).install \
-			 $(PKG_driver).grub-gfxpayload \
 			 $(PKG_driver).dirs \
 			 $(PKG_driver).links \
 			 $(PKG_driver).postinst \
 			 $(PKG_driver).postrm \
 			 $(PKG_driver).preinst \
 			 $(PKG_driver).prerm \
-			 overrides/$(PKG_driver); do \
+			 $(PKG_control).install \
+			 $(PKG_control).dirs \
+			 $(PKG_driver_core).install \
+			 $(PKG_driver_core).links \
+			 $(PKG_driver_core).dirs \
+			 $(PKG_driver_core).postinst \
+			 $(PKG_driver_core).postrm \
+			 $(PKG_driver_core).preinst \
+			 $(PKG_driver_core).prerm \
+			 overrides/$(PKG_driver) \
+			 overrides/$(PKG_driver_dev) \
+			 overrides/$(PKG_driver_core) \
+			 overrides/$(PKG_control); do \
 		sed -e "s|#PKGXMODDIR#|$(PKG_xmoddir)|g" \
 			-e "s|#LIBDIR#|$(libdir)|g" \
 			-e "s|#LIBDIR32#|$(libdir32)|g" \
 			-e "s|#BINDIR#|$(bindir)|g" \
+			-e "s|#SBINDIR#|$(sbindir)|g" \
 			-e "s|#SYSCONFDIR#|$(sysconfdir)|g" \
 			-e "s|#MANDIR#|$(mandir)|g" \
 			-e "s|#LDSOCONF#|$(ld_so_conf_path)|g" \
@@ -165,11 +195,15 @@ build-arch:
 			-e "s|#PKGEXTENSIONDIR#|$(PKG_extensionsdir)|g" \
 			-e "s|#XORGEXTENSIONSDIR#|$(xorg_extensionsdir)|g" \
 			-e "s|#DRIVERNAME#|$(PKG_driver)|g" \
+			-e "s|#MODULENAME#|$(PKG_module)|g" \
+			-e "s|#DRIVERDIRNAME#|$(PKG_dirname)|g" \
 			-e "s|#DRIVERDEVNAME#|$(PKG_driver_dev)|g" \
 			-e "s|#DRIVERSRCNAME#|$(PKG_source)|g" \
+			-e "s|#DRIVERCORENAME#|$(PKG_driver_core)|g" \
+			-e "s|#FLAVOUR#|$(PKG_flavour)|g" \
+			-e "s|#DRIVERCTRLNAME#|$(PKG_control)|g" \
 			-e "s|#INCLUDEDIR#|$(includedir)|g" \
 			-e "s|#PKGLIBCONFDIR#|$(PKG_libconfdir)|g" \
-			-e "s|#GRUBBLKLISTDIR#|$(grub_blacklistdir)|g" \
 			-e "s|#PKGXMODDIR#|$(PKG_xmoddir)|g" \
 			-e "s|#PXDIR#|$(PX_dir)|g" \
 			-e "s|#PXDIR32#|$(PX_dir32)|g" \
@@ -179,6 +213,13 @@ build-arch:
 			-e "s|#PXLIBDIR32#|$(PX_libdir32)|g" \
 			-e "s|#PXLDSOCONF#|$(PX_ld_so_conf)|g" \
 			-e "s|#ALTPXLDSOCONF#|$(PX_ld_so_conf_alt)|g" \
+			-e "s|#COREDIRNAME#|$(CORE_dirname)|g" \
+			-e "s|#COREDIR#|$(CORE_dir)|g" \
+			-e "s|#COREDIR32#|$(CORE_dir32)|g" \
+			-e "s|#CORELDSOCONF#|$(CORE_ld_so_conf)|g" \
+			-e "s|#COREPRIORITY#|$(CORE_priority)|g" \
+			-e "s|#UNBLKCOREPRIORITY#|$(UNBLKLST_CORE_priority)|g" \
+			-e "s|#UNBLKCORELDSOCONF#|$(UNBLKLST_CORE_ld_so_conf)|g" \
 			-e "s|#CVERSION#|$(CVERSION)|g" \
 			-e "s|#SRCXARCH#|$(SRC_xarch)|g" \
 			-e "s|#SRCARCH#|$(SRC_arch)|g" \
@@ -189,6 +230,8 @@ build-arch:
 			debian/$$i.in > debian/$$i;      \
 	done
 
+build: build-arch
+build-arch: regen-from-templates
 	# remove exec bit on everything
 	find arch \
 		etc \
@@ -215,15 +258,52 @@ gen-abi-substvars:
 	# Generate the xserver ABI dependencies
 	cat debian/substvars >> debian/$(PKG_driver).substvars
 
-binary-arch: refresh_copyright gen-abi-substvars
+pre-binary-arch: refresh_copyright gen-abi-substvars
 	#Steps that we can't easily represent in debhelper files or .in files yet
 
 	# Remove any libraries that may be caught by shell expansion
 	find . -name libGLE* | xargs rm -f
 	find . -name libEGL* | xargs rm -f
 
+	# Code for the CORE package
 ifeq ($(DEB_HOST_ARCH),amd64)
-	dh_install -p$(PKG_driver)    "arch/x86/usr/X11R6/lib/libAMD*.so*"           "$(PKG_libdir32)"
+	dh_install -p$(PKG_driver_core) "arch/x86/usr/lib/*.so*"                 "$(libdir32)"
+	dh_install -p$(PKG_driver_core) "arch/x86/usr/X11R6/lib/libatiadlxx.so"  "$(libdir32)"
+	dh_install -p$(PKG_driver_core) "arch/x86/usr/lib/*.so*"                 "$(libdir32)"
+
+	#they don't provide the symlink for us (starting at 8.699)
+	dh_link -p$(PKG_driver_core) $(libdir32)/libatiuki.so.1.0 $(libdir32)/libatiuki.so.1
+endif
+	dh_installdirs -p$(PKG_driver_core)
+
+	if [ -f "arch/$(SRC_arch)/usr/X11R6/bin/amd-console-helper" ]; then \
+		dh_install -p$(PKG_driver_core) "arch/$(SRC_arch)/usr/X11R6/bin/amd-console-helper" $(bindir); \
+	fi;
+
+	# Blacklist any other driver that udev may want to load instead of fglrx
+	# and create an alias for the module so that it can be used as fglrx
+	printf '$(subst $(newline),\n,${blacklist_file})' > $(CURDIR)/debian/$(PKG_driver_core)/$(PKG_libconfdir)/modprobe.conf
+
+	# This is empty, just for the alternative that blacklists the driver
+	echo "" > "$(CURDIR)/debian/$(PKG_driver_core)/$(CORE_ld_so_conf)"
+
+	# This is empty, just for the alternative that unblacklists the driver
+	echo "" > "$(CURDIR)/debian/$(PKG_driver_core)/$(UNBLKLST_CORE_ld_so_conf)"
+
+	dh_install -p$(PKG_driver_core)
+
+	# Make sure that every binary in bin is executable
+	find debian/$(PKG_driver_core)/$(bindir)/ \
+		-type f | xargs chmod a+x
+
+	# Make sure that every binary in sbin is executable
+	find debian/$(PKG_driver_core)/usr/sbin/ \
+		-type f | xargs chmod a+x
+
+	# End of code for the CODE package
+
+ifeq ($(DEB_HOST_ARCH),amd64)
+	dh_install -p$(PKG_driver)    "arch/x86/usr/X11R6/lib/libAMD*.so*"           "$(libdir32)"
 	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/*.*"           "$(PKG_libdir32)"
 	dh_install -p$(PKG_driver) "arch/x86/usr/X11R6/lib/fglrx/*.so*"     "$(PKG_libdir32)"
 	dh_installdirs -p$(PKG_driver) "$(PKG_libdir32)"
@@ -232,14 +312,6 @@ ifeq ($(DEB_HOST_ARCH),amd64)
 
 	# Install the QT libraries
 	dh_install -p$(PKG_driver) "arch/x86_64/usr/share/ati/lib64" "$(datadir)/ati"
-
-	for i in \
-			debian/$(PKG_driver)/$(PKG_libdir32)/dri/fglrx_dri.so \
-			debian/$(PKG_driver)/$(PKG_libdir32)/*libGL.so.* \
-			; do execstack -q $$i; execstack -c $$i; done
-
-	#they don't provide the symlink for us (starting at 8.699)
-	dh_link -p$(PKG_driver) $(PKG_libdir32)/libatiuki.so.1.0 $(PKG_libdir32)/libatiuki.so.1
 else
 	dh_installdirs -p$(PKG_driver)
 
@@ -253,25 +325,24 @@ endif
 
 	dh_installinit -p$(PKG_driver) -n --name="atieventsd" --no-start --update-rcd-params="defaults 31"
 
-	#remove executable bits from stack
 	dh_install -p$(PKG_control)
-	execstack -c debian/$(PKG_control)/$(PKG_libdir)/bin/amdcccle
 	dh_install -p$(PKG_driver)
-	for i in \
-			debian/$(PKG_driver)/$(PKG_libdir)/bin/clinfo \
-			debian/$(PKG_driver)/$(PKG_libdir)/bin/atiode \
-			debian/$(PKG_driver)/$(PKG_libdir)/bin/amdnotifyui \
-			debian/$(PKG_driver)/$(PKG_libdir)/dri/fglrx_dri.so \
-			debian/$(PKG_driver)/$(PKG_libdir)/*libGL.so.*.* \
-			debian/$(PKG_driver)/$(PKG_libdir)/*libOpenCL.so.* \
-			; do execstack -q $$i; execstack -c $$i; done
+	dh_install -p$(PKG_driver_dev)
+
+ifeq ($(DEB_HOST_ARCH),amd64)
+	# Create links for 32 bit libGL
+	dh_link -p$(PKG_driver) $(PKG_libdir32)/libGL.so.1.2 $(PKG_libdir32)/libGL.so.1
+	dh_link -p$(PKG_driver_dev) $(PKG_libdir32)/libGL.so.1 $(PKG_libdir32)/libGL.so
+	dh_link -p$(PKG_driver_dev) $(PKG_libdir32)/libAMDXvBA.so.1 $(PKG_libdir32)/libAMDXvBA.so
+	dh_link -p$(PKG_driver_dev) $(PKG_libdir32)/libXvBAW.so.1 $(PKG_libdir32)/libXvBAW.so
+endif
 
 	# Make some additional scripts executable
-	find debian/$(PKG_control)/$(PKG_libdir)/bin/ \
+	find debian/$(PKG_control)/$(bindir)/ \
 		-type f | xargs chmod a+x
 
 	# Make sure that every binary in bin is executable
-	find debian/$(PKG_driver)/$(PKG_libdir)/bin/ \
+	find debian/$(PKG_driver)/$(bindir)/ \
 		-type f | xargs chmod a+x
 
 	# Rename libraries which are supposed to have fglrx-libGL as a prefix
@@ -309,57 +380,9 @@ endif
 			fi \
 		done
 
-	# Create links for PowerXpress libs (except for libGL)
-	for i in \
-		debian/$(PKG_driver)/$(PKG_libdir)/* \
-		; do \
-			orig_name=`echo $$i  | sed -e "s|debian/$(PKG_driver)/||"`; \
-			# Copy each file except for libGL* \
-			if [ -f $$i ]; then \
-				if [ ! `echo $$orig_name  | grep libGL` ]; then \
-					link_name=$$orig_name ; \
-					link_name=`echo $$orig_name  | sed -e "s|$(PKG_libdir)|$(PX_libdir)|"`; \
-					dh_link -p$(PKG_driver) $$orig_name $$link_name ; \
-				fi \
-			else \
-				# Here we only accept the dri directory \
-				dir_name=`echo $$orig_name | awk -F/ '{print $$NF}'`; \
-				if [ "$$dir_name" = "dri" ]; then \
-					link_name=$$orig_name ; \
-					link_name=`echo $$orig_name  | sed -e "s|$(PKG_libdir)|$(PX_libdir)|"`; \
-					dh_link -p$(PKG_driver) $$orig_name $$link_name ; \
-				fi \
-			fi \
-		done
-
-ifeq ($(DEB_HOST_ARCH),amd64)
-	# Create links for PowerXpress 32bit libs (except for libGL)
-	for i in \
-		debian/$(PKG_driver)/$(PKG_libdir32)/* \
-		; do \
-			orig_name=`echo $$i  | sed -e "s|debian/$(PKG_driver)/||"`; \
-			# Copy each file except for libGL* \
-			if [ -f $$i ]; then \
-				if [ ! `echo $$orig_name  | grep libGL` ]; then \
-					link_name=$$orig_name ; \
-					link_name=`echo $$orig_name  | sed -e "s|$(PKG_libdir32)|$(PX_libdir32)|"`; \
-					dh_link -p$(PKG_driver) $$orig_name $$link_name ; \
-				fi \
-			else \
-				# Here we only accept the dri directory \
-				dir_name=`echo $$orig_name | awk -F/ '{print $$NF}'`; \
-				if [ "$$dir_name" = "dri" ]; then \
-					link_name=$$orig_name ; \
-					link_name=`echo $$orig_name  | sed -e "s|$(PKG_libdir32)|$(PX_libdir32)|"`; \
-					dh_link -p$(PKG_driver) $$orig_name $$link_name ; \
-				fi \
-			fi \
-		done
-endif
-
 	# Blacklist any other driver that udev may want to load instead of fglrx
 	# and create an alias for the module so that it can be used as fglrx
-	printf '$(subst $(newline),\n,${blacklist_file})' > $(CURDIR)/debian/$(PKG_driver)/$(PKG_libconfdir)/modprobe.conf
+	#printf '$(subst $(newline),\n,${blacklist_file})' > $(CURDIR)/debian/$(PKG_driver)/$(PKG_libconfdir)/modprobe.conf
 
 	#ld.so.conf
 	echo "/$(PKG_libdir)" >	"$(CURDIR)/debian/$(PKG_driver)/$(ld_so_conf_path)"
@@ -369,10 +392,10 @@ endif
 
 	# ld.so.conf for PowerXpress
 	echo "/usr/lib/$(DEB_HOST_MULTIARCH)/mesa" >		"$(CURDIR)/debian/$(PKG_driver)/$(PX_ld_so_conf)"
-	echo "/$(PX_libdir)" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PX_ld_so_conf)"
+	#echo "/$(PX_libdir)" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PX_ld_so_conf)"
 ifeq ($(DEB_HOST_ARCH),amd64)
 	echo "/usr/lib/$(OTHER_ARCH)/mesa" >>   "$(CURDIR)/debian/$(PKG_driver)/$(PX_ld_so_conf)"
-	echo "/$(PX_libdir32)" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PX_ld_so_conf)"
+	#echo "/$(PX_libdir32)" >>	"$(CURDIR)/debian/$(PKG_driver)/$(PX_ld_so_conf)"
 endif
 
 	# empty ld.so.conf for the fake multi-arch alternative
@@ -384,16 +407,44 @@ endif
 	# Generate modaliases
 	sh -e debian/modaliases/fglrx_supported \
 		lib/modules/fglrx/build_mod/fglrxko_pci_ids.h $(PKG_module) $(PKG_driver) > \
-		debian/fglrx.modaliases
+		debian/$(PKG_driver).modaliases
 	dh_modaliases
-	rm debian/fglrx.modaliases
+	rm debian/$(PKG_driver).modaliases
 
-	# Sign the driver
-	echo "9777c589791007f4aeef06c922ad54a2:\
-ae59f5b9572136d99fdd36f0109d358fa643f2bd4a2644d9efbb4fe91a9f6590a145:\
-f612f0b01f2565cd9bd834f8119b309bae11a1ed4a2661c49fdf3fad11986cc4f641f1\
-ba1f2265909a8e34ff1699309bf211a7eb4d7662cd9f8e3faf14986d92f646f1bc" > debian/$(PKG_driver)/$(PKG_libdir)/etc/ati/signature
+	# Remove all the binaries and shell scripts that already are in the
+	# core package from the x driver package
+	# PKG_driver_core always wins against PKG_driver
+	for i in $$(find debian/$(PKG_driver_core)/ -exec file {} \; | grep -e "shell" -e "ELF" | cut -d: -f1); do \
+		i_name="$${i##*/}"; \
+		for j in $$(find debian/$(PKG_driver)/ -exec file {} \; | grep -e "shell" -e "ELF" | cut -d: -f1); do \
+			j_name="$${j##*/}"; \
+			# Leave the DEBIAN directory and copyright files alone \
+			if [ -z "`echo $$i | grep -e \"DEBIAN\" -e \"copyright\"`" ] && [ "$$i_name" = "$$j_name" ]; then \
+				echo "$$i_name found in both $(PKG_driver_core) and $(PKG_driver)"; \
+				#echo "orig: $$i"; \
+				#echo "dupe: $$j"; \
+				echo "removing duplicate in $(PKG_driver): $$j"; \
+				rm -f "$$j"; \
+			fi; \
+		done \
+	done
 
+	# Disable the stack markings on all binaries in PKG_driver_core
+	for i in $$(find debian/$(PKG_driver_core)/ -exec file {} \; | grep -e "ELF" | cut -d: -f1); do \
+		execstack -q $$i && execstack -c $$i || true; done; \
+	done
+
+	# Disable the stack markings on all binaries in PKG_driver
+	for i in $$(find debian/$(PKG_driver)/ -exec file {} \; | grep -e "ELF" | cut -d: -f1); do \
+		execstack -q $$i && execstack -c $$i; done; \
+	done
+
+	# Disable the stack markings on all binaries in PKG_control
+	for i in $$(find debian/$(PKG_control)/ -exec file {} \; | grep -e "ELF" | cut -d: -f1); do \
+		execstack -q $$i && execstack -c $$i; done; \
+	done
+
+binary-arch: pre-binary-arch
 	#Run the normal stuff
 	dh binary-arch
 
@@ -401,11 +452,15 @@ binary: binary-arch binary-indep gen-abi-substvars ;
 	#Run the normal stuff
 	dh binary
 
+binary-no-x: build-arch pre-binary-arch ;
+	dh binary -p$(PKG_driver_core)
+	dh binary -p$(PKG_driver_dev)
+
 override_dh_shlibdeps:
 ifeq ($(DEB_HOST_ARCH),amd64)
-	dh_shlibdeps -l$(CURDIR)/debian/fglrx/$(PKG_libdir):$(CURDIR)/debian/fglrx/$(PKG_libdir)/bin:$(CURDIR)/debian/fglrx/$(PKG_libdir)/sbin:$(CURDIR)/debian/fglrx/$(PKG_libdir32) -Xlib32
+	dh_shlibdeps -l$(CURDIR)/debian/$(PKG_driver)/$(PKG_libdir):$(CURDIR)/debian/$(PKG_driver)/$(PKG_libdir)/bin:$(CURDIR)/debian/$(PKG_driver)/$(PKG_libdir)/sbin:$(CURDIR)/debian/$(PKG_driver)/$(PKG_libdir32):$(CURDIR)/debian/$(PKG_driver_core)/$(PKG_libdir):$(CURDIR)/debian/$(PKG_driver_core)/$(PKG_libdir)/bin:$(CURDIR)/debian/$(PKG_driver_core)/$(PKG_libdir)/sbin:$(CURDIR)/debian/$(PKG_driver_core)/$(PKG_libdir32) -Xlib32
 else
-	dh_shlibdeps -l$(CURDIR)/debian/fglrx/$(PKG_libdir):$(CURDIR)/debian/fglrx/$(PKG_libdir)/bin:$(CURDIR)/debian/fglrx/$(PKG_libdir)/sbin
+	dh_shlibdeps -l$(CURDIR)/debian/$(PKG_driver)/$(PKG_libdir):$(CURDIR)/debian/$(PKG_driver)/$(PKG_libdir)/bin:$(CURDIR)/debian/$(PKG_driver)/$(PKG_libdir)/sbin:$(CURDIR)/debian/$(PKG_driver_core)/$(PKG_libdir):$(CURDIR)/debian/$(PKG_driver_core)/$(PKG_libdir)/bin:$(CURDIR)/debian/$(PKG_driver_core)/$(PKG_libdir)/sbin
 endif
 
 %:

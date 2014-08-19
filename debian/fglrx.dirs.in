@@ -4,11 +4,8 @@
 #PXLIBDIR#
 #PKGDATADIR#
 #PKGLIBCONFDIR#
-#PKGLIBDIR#/#SYSCONFDIR#/ati
-#PKGLIBDIR#/#SYSCONFDIR#/OpenCL/vendors
+#SYSCONFDIR#/ati
 #DATADIR#/ati
-#DATADIR#/grub-gfxpayload-lists/blacklist
 #LIBDIR#/dri
 #LIBDIR#/xorg/modules/drivers/
-#SYSCONFDIR#/OpenCL/vendors
 /usr/share/applications/

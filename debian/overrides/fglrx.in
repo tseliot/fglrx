@@ -1,24 +1,60 @@
-#We are in restricted, whether lintian has ever heard of it or not
-fglrx: unknown-section restricted
-
-#These unfortunately are needed if we really want to be able to link?
-fglrx: arch-independent-package-contains-binary-or-object ./usr/src/fglrx-#CVERSION#/libfglrx_ip.a.GCC3
-fglrx: unstripped-binary-or-object ./usr/src/fglrx-#CVERSION#/libfglrx_ip.a.GCC3
-fglrx: arch-independent-package-contains-binary-or-object ./usr/src/fglrx-#CVERSION#/libfglrx_ip.a.GCC4
-fglrx: unstripped-binary-or-object ./usr/src/fglrx-#CVERSION#/libfglrx_ip.a.GCC4
-
-#AMD doesn't appear to document these binaries
-fglrx: binary-without-manpage usr/bin/aticonfig
-fglrx: binary-without-manpage usr/bin/atiodcli
-fglrx: binary-without-manpage usr/bin/atiode
-fglrx: binary-without-manpage usr/bin/fgl_glxgears
-fglrx: binary-without-manpage usr/bin/fglrxinfo
-fglrx: binary-without-manpage usr/sbin/atieventsd
-fglrx: binary-without-manpage usr/sbin/amdnotifyui
-
-#We have NO control of AMD's build process
-fglrx: sharedobject-in-library-directory-missing-soname usr/lib/libatiadlxx.so
-fglrx: shlib-with-non-pic-code usr/lib/libGL.so.1.2
-
-#It's awfully silly to break these out as they are only ever installed with fglrx
-fglrx: package-name-doesnt-match-sonames libGL1 libfglrx-dm1.0 libfglrx-pp1.0 libfglrx-tvout1
+#DRIVERNAME#: package-name-doesnt-match-sonames libAMDXvBA1 libXvBAW1 libfglrx-dm1.0
+#DRIVERNAME#: binary-in-etc etc/ati/atiapfxx
+#DRIVERNAME#: unstripped-binary-or-object etc/ati/atiapfxx
+#DRIVERNAME#: hardening-no-relro etc/ati/atiapfxx
+#DRIVERNAME#: hardening-no-relro usr/bin/aticonfig
+#DRIVERNAME#: hardening-no-relro usr/bin/atiode
+#DRIVERNAME#: hardening-no-relro usr/bin/fgl_glxgears
+#DRIVERNAME#: hardening-no-relro usr/bin/fglrxinfo
+#DRIVERNAME#: hardening-no-relro usr/lib/dri/fglrx_dri.so
+#DRIVERNAME#: hardening-no-relro usr/lib/fglrx/libGL.so.1.2
+#DRIVERNAME#: hardening-no-relro usr/lib/fglrx/xorg/modules/amdxmm.so
+#DRIVERNAME#: hardening-no-relro usr/lib/fglrx/xorg/modules/drivers/fglrx_drv.so
+#DRIVERNAME#: hardening-no-relro usr/lib/fglrx/xorg/modules/extensions/libglx.so
+#DRIVERNAME#: hardening-no-relro usr/lib/fglrx/xorg/modules/glesx.so
+#DRIVERNAME#: hardening-no-relro usr/lib/fglrx/xorg/modules/linux/libfglrxdrm.so
+#DRIVERNAME#: hardening-no-relro usr/lib/libAMDXvBA.so.1.0
+#DRIVERNAME#: hardening-no-relro usr/lib/libXvBAW.so.1.0
+#DRIVERNAME#: hardening-no-relro usr/lib/libfglrx_dm.so.1.0
+#DRIVERNAME#: hardening-no-relro usr/lib32/fglrx/dri/fglrx_dri.so
+#DRIVERNAME#: hardening-no-relro usr/lib32/fglrx/libAMDXvBA.so.1.0
+#DRIVERNAME#: hardening-no-relro usr/lib32/fglrx/libGL.so.1.2
+#DRIVERNAME#: hardening-no-relro usr/lib32/fglrx/libXvBAW.so.1.0
+#DRIVERNAME#: hardening-no-relro usr/lib32/fglrx/libfglrx_dm.so.1.0
+#DRIVERNAME#: hardening-no-relro usr/lib32/libAMDXvBA.so.1.0
+#DRIVERNAME#: hardening-no-relro usr/sbin/amdnotifyui
+#DRIVERNAME#: hardening-no-relro usr/sbin/atieventsd
+#DRIVERNAME#: arch-dependent-file-in-usr-share usr/share/ati/lib64/libQtCore.so.4
+#DRIVERNAME#: embedded-library usr/share/ati/lib64/libQtCore.so.4: zlib
+#DRIVERNAME#: hardening-no-relro usr/share/ati/lib64/libQtCore.so.4
+#DRIVERNAME#: arch-dependent-file-in-usr-share usr/share/ati/lib64/libQtGui.so.4
+#DRIVERNAME#: embedded-library usr/share/ati/lib64/libQtGui.so.4: libpng
+#DRIVERNAME#: hardening-no-relro usr/share/ati/lib64/libQtGui.so.4
+#DRIVERNAME#: debian-changelog-file-missing
+#DRIVERNAME#: unknown-section restricted/misc
+#DRIVERNAME#: non-multi-arch-lib-dir usr/lib32/
+#DRIVERNAME#: init.d-script-missing-dependency-on-remote_fs etc/init.d/atieventsd: required-start
+#DRIVERNAME#: init.d-script-missing-dependency-on-remote_fs etc/init.d/atieventsd: required-stop
+#DRIVERNAME#: binary-without-manpage usr/bin/amdconfig
+#DRIVERNAME#: binary-without-manpage usr/sbin/amdnotifyui
+#DRIVERNAME#: binary-without-manpage usr/bin/aticonfig
+#DRIVERNAME#: binary-without-manpage usr/sbin/atieventsd
+#DRIVERNAME#: binary-without-manpage usr/bin/atiode
+#DRIVERNAME#: binary-without-manpage usr/bin/fgl_glxgears
+#DRIVERNAME#: binary-without-manpage usr/bin/fglrxinfo
+#DRIVERNAME#: python-script-but-no-python-dep usr/lib/fglrx/switchlibGL
+#DRIVERNAME#: embedded-library usr/share/ati/lib64/libQtCore.so.4: zlib                                                                                                                                                                                                    [0/59]
+#DRIVERNAME#: hardening-no-relro usr/share/ati/lib64/libQtCore.so.4
+#DRIVERNAME#: arch-dependent-file-in-usr-share usr/share/ati/lib64/libQtGui.so.4
+#DRIVERNAME#: embedded-library usr/share/ati/lib64/libQtGui.so.4: libpng
+#DRIVERNAME#: hardening-no-relro usr/share/ati/lib64/libQtGui.so.4
+#DRIVERNAME#: debian-changelog-file-missing
+#DRIVERNAME#: unknown-section restricted/misc
+#DRIVERNAME#: non-multi-arch-lib-dir usr/lib32/
+#DRIVERNAME#: init.d-script-missing-dependency-on-remote_fs etc/init.d/atieventsd: required-start
+#DRIVERNAME#: init.d-script-missing-dependency-on-remote_fs etc/init.d/atieventsd: required-stop
+#DRIVERNAME#: python-script-but-no-python-dep usr/lib/fglrx/switchlibGL
+#DRIVERNAME#: python-script-but-no-python-dep usr/lib/fglrx/switchlibglx
+#DRIVERNAME#: maintainer-script-ignores-errors prerm
+#DRIVERNAME#: shlib-with-non-pic-code usr/lib32/fglrx/libGL.so.1.2
+#DRIVERNAME#: prerm-calls-ldconfig

@@ -1,0 +1,74 @@
+Source: #DRIVERSRCNAME#
+Section: restricted/misc
+Priority: extra
+Maintainer: Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Uploaders: Mario Limonciello <superm1@ubuntu.com>, Alberto Milone <albertomilone@alice.it>
+Build-Depends: debhelper (>= 7),
+               dh-modaliases,
+               libxext6,
+               libxrandr2,
+               libice6,
+               libsm6,
+               libfontconfig1,
+               libxi6,
+               libxcursor1,
+               fakeroot,
+               libdrm2,
+               libgl1-mesa-glx,
+               libxinerama1,
+               libqtgui4,
+               xserver-xorg-dev (>= 2:1.10.0),
+               execstack,
+               file
+Standards-Version: 3.8.3
+Homepage: http://support.amd.com
+
+Package: #DRIVERCORENAME#
+Architecture: amd64 i386
+Depends: ${shlibs:Depends}, lib32gcc1 [amd64], libc6-i386 [amd64], dkms, make, linux-libc-dev,
+ ${misc:Depends}
+Provides: fglrx-driver-core, libopencl1
+Conflicts: fglrx-driver-core, libopencl1
+Replaces: fglrx-driver-core, libopencl1
+Description: Minimal video driver for the AMD graphics accelerators
+ Minimal video driver for the AMD Radeon and FireGL graphics accelerators.
+ .
+ This package provides 2D display drivers.
+
+Package: #DRIVERNAME#
+Architecture: amd64 i386
+Recommends: fglrx-amdcccle-#FLAVOUR#
+Depends: ${shlibs:Depends}, #DRIVERCORENAME#, policykit-1,
+ ${xviddriver:Depends}, ${misc:Depends}
+Provides: fglrx-driver, xorg-driver-binary, ${xviddriver:Provides}
+Conflicts: fglrx-driver, xorg-driver-binary
+Replaces: fglrx-driver, xorg-driver-binary
+XB-Modaliases: ${modaliases}
+Description: Video driver for the AMD graphics accelerators
+ Video driver for the AMD Radeon and FireGL graphics accelerators.
+ .
+ This package provides 2D display drivers
+ and hardware accelerated OpenGL for X11.
+
+Package: #DRIVERDEVNAME#
+Architecture: amd64 i386
+Depends: #DRIVERCORENAME# | #DRIVERNAME#, ${misc:Depends}
+Conflicts: fglrx-driver-dev, xfree86-driver-fglrx-dev
+Replaces: fglrx-driver-dev, xfree86-driver-fglrx-dev, xorg-driver-fglrx-dev, fglrx-dev
+Provides: fglrx-driver-dev
+Description: Video driver for the AMD graphics accelerators (devel files)
+ Video driver for the AMD Radeon and FireGL graphics accelerators.
+ .
+ This package provides definitions for the GL and GLX extensions.
+
+Package: fglrx-amdcccle-#FLAVOUR#
+Architecture: amd64 i386
+Depends: #DRIVERNAME#, ${shlibs:Depends}, ${misc:Depends}
+Conflicts: fglrx-control-qt2, fglrx-control
+Replaces: fglrx-control, fglrx-amdcccle
+Provides: fglrx-control
+Description: Catalyst Control Center for the AMD graphics accelerators
+ Catalyst Control Center for the AMD Radeon and FireGL graphics accelerators.
+ .
+ This package provides the Catalyst Control Center, Linux Edition
+
