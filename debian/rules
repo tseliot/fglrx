@@ -23,10 +23,16 @@ PATH := $(PATH):/usr/sbin
 
 # Package names
 PKG_flavour     := $(shell dpkg-parsechangelog | sed -n 's/^Source: //p' | sed 's/fglrx\-installer\-//g')
-PKG_driver      := fglrx-$(PKG_flavour)
+# If it's the standard flavour then we set the flavour to ""
+ifeq ("$(PKG_flavour)", "fglrx-installer")
+	PKG_flavour := ""
+else
+	PKG_flavour := "-$(PKG_flavour)"
+endif
+PKG_driver      := fglrx$(PKG_flavour)
 PKG_driver_dev  := $(PKG_driver)-dev
 PKG_driver_core := $(PKG_driver)-core
-PKG_control     := fglrx-amdcccle-$(PKG_flavour)
+PKG_control     := fglrx-amdcccle$(PKG_flavour)
 PKG_source      := $(shell dpkg-parsechangelog | sed -n 's/^Source: //p')
 PKG_module      := $(shell echo "$(PKG_driver)" | sed s/\-/_/g)
 

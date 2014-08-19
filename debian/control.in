@@ -37,7 +37,7 @@ Description: Minimal video driver for the AMD graphics accelerators
 
 Package: #DRIVERNAME#
 Architecture: amd64 i386
-Recommends: fglrx-amdcccle-#FLAVOUR#
+Recommends: fglrx-amdcccle#FLAVOUR#
 Depends: ${shlibs:Depends}, #DRIVERCORENAME#,
  ${xviddriver:Depends}, ${misc:Depends}
 Provides: fglrx-driver, xorg-driver-binary, ${xviddriver:Provides}
@@ -61,7 +61,7 @@ Description: Video driver for the AMD graphics accelerators (devel files)
  .
  This package provides definitions for the GL and GLX extensions.
 
-Package: fglrx-amdcccle-#FLAVOUR#
+Package: fglrx-amdcccle#FLAVOUR#
 Architecture: amd64 i386
 Depends: #DRIVERNAME#, ${shlibs:Depends}, ${misc:Depends}
 Conflicts: fglrx-control-qt2, fglrx-control
