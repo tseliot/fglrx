@@ -1,3 +1,9 @@
+fglrx-installer-updates (2:14.300-0ubuntu1) UNRELEASED; urgency=medium
+
+  * 
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Tue, 19 Aug 2014 10:33:54 +0200
+
 fglrx-installer-updates (2:13.350.1-0ubuntu4) utopic; urgency=medium
 
   * debian/dkms.conf.in,
