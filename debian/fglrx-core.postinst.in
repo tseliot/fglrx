@@ -109,7 +109,7 @@ if [ "$1" = "configure" ]; then
     CURRENT_KERNEL=$(uname -r)
     NEWEST_KERNEL=$(get_newest_kernel "$KERNELS")
 
-    ALTERNATIVE=$(readlink /etc/alternatives/#DEB_HOST_MULTIARCH#_gl_conf)
+    ALTERNATIVE=$(readlink /etc/alternatives/#DEB_HOST_MULTIARCH#_gfxcore_conf)
     if [ "$ALTERNATIVE" = "/#LDSOCONF#" ]; then
         # Update initramfs so that the blacklist ends up in the initramfs
         update-initramfs -u
