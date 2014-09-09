@@ -1,6 +1,9 @@
 #Lintian overrides
 debian/overrides/#DRIVERCORENAME#                  #DATADIR#/lintian/overrides
 
+#Udev rules
+debian/71-fglrx.rules                           lib/udev/rules.d
+
 #Actual kernel modules
 lib/modules/fglrx/build_mod/*                   usr/src/#DRIVERCORENAME#-#CVERSION#
 debian/dkms/*                                   usr/src/#DRIVERCORENAME#-#CVERSION#
