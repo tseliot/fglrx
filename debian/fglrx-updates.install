@@ -1,50 +1,36 @@
 #Lintian overrides
 debian/overrides/fglrx-updates                   usr/share/lintian/overrides
 
-#Actual kernel modules
-lib/modules/fglrx/build_mod/*                   usr/src/fglrx-updates-13.350.1
-debian/dkms/*                                   usr/src/fglrx-updates-13.350.1
-arch/x86/lib/modules/fglrx/build_mod/lib* usr/src/fglrx-updates-13.350.1
-debian/dkms.conf                                usr/src/fglrx-updates-13.350.1
-
 #DRI stuff
-arch/x86/usr/X11R6/lib/libAMD*    usr/lib/fglrx
+arch/x86_64/usr/X11R6/lib64/libAMD*    usr/lib
 
 #debian integration
 debian/overrides/fglrx-updates                   usr/share/lintian/overrides
-debian/acpi/fglrx-*-aticonfig                   etc/acpi/events
-debian/acpi/fglrx-powermode.sh                  etc/acpi
+#debian/acpi/fglrx-*-aticonfig                   etc/acpi/events
+#debian/acpi/fglrx-powermode.sh                  etc/acpi
 debian/10fglrx                                  usr/lib/fglrx
-etc/ati/*                                       usr/lib/fglrx/etc/ati
-debian/replacements/authatieventsd.sh           usr/lib/fglrx/etc/ati
-arch/x86/etc/OpenCL/vendors/*.icd         usr/lib/fglrx/etc/OpenCL/vendors
-arch/x86_64/etc/OpenCL/vendors/*.icd    usr/lib/fglrx/etc/OpenCL/vendors
-
-#Blacklist some card ids from GRUB gfxpayload=keep
-debian/fglrx-updates.grub-gfxpayload            usr/share/fglrx
+etc/ati/*                                       etc/ati
+debian/replacements/authatieventsd.sh           etc/ati
 
 #binaries
-arch/x86/usr/sbin/*                       usr/lib/fglrx/bin
-arch/x86/usr/bin/*                        usr/lib/fglrx/bin
-arch/x86/usr/X11R6/bin/ati*               usr/lib/fglrx/bin
-arch/x86/usr/X11R6/bin/fgl*               usr/lib/fglrx/bin
-usr/sbin/*sh                                    usr/share/fglrx
+arch/x86_64/usr/sbin/*                       usr/sbin
+arch/x86_64/usr/bin/*                        usr/bin
+arch/x86_64/usr/X11R6/bin/ati*               usr/bin
+arch/x86_64/usr/X11R6/bin/fgl*               usr/bin
+usr/sbin/*sh                                    usr/sbin
 
 #DRI stuff
-arch/x86/usr/X11R6/lib/liba*.so*        usr/lib/fglrx
-arch/x86/usr/X11R6/lib/libf*.so*        usr/lib/fglrx
-arch/x86/usr/X11R6/lib/libX*.so*        usr/lib/fglrx
-arch/x86/usr/X11R6/lib/fglrx/*libGL.so* usr/lib/fglrx
-arch/x86/usr/X11R6/lib/modules/dri      usr/lib/fglrx
+arch/x86_64/usr/X11R6/lib64/*.so*        usr/lib
+arch/x86_64/usr/X11R6/lib64/modules/dri      usr/lib
+
+#GL stuff
+arch/x86_64/usr/X11R6/lib64/fglrx/*libGL.so* usr/lib/fglrx
 
 #Xorg stuff
-xpic/usr/X11R6/lib/modules/*.so         usr/lib/fglrx/xorg/modules
-xpic/usr/X11R6/lib/modules/drivers      usr/lib/fglrx/xorg/modules
-xpic/usr/X11R6/lib/modules/linux        usr/lib/fglrx/xorg/modules
-xpic/usr/X11R6/lib/modules/extensions   usr/lib/fglrx/xorg/modules
-
-#CAL stuff
-arch/x86/usr/lib/*.so*                  usr/lib/fglrx
+xpic_64a/usr/X11R6/lib64/modules/*.so         usr/lib/fglrx/xorg/modules
+xpic_64a/usr/X11R6/lib64/modules/drivers      usr/lib/fglrx/xorg/modules
+xpic_64a/usr/X11R6/lib64/modules/linux        usr/lib/fglrx/xorg/modules
+xpic_64a/usr/X11R6/lib64/modules/extensions   usr/lib/fglrx/xorg/modules
 
 #PXpress stuff
 debian/pxpress/*                                      usr/lib/fglrx

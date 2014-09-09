@@ -1,3 +1,5 @@
-#We are in restricted, whether lintian has ever heard of it or not
-xorg-driver-fglrx-dev: unknown-section restricted
+fglrx-updates-dev: debian-changelog-file-missing
+fglrx-updates-dev: no-copyright-file
+fglrx-updates-dev: unknown-section restricted/misc
+fglrx-updates-dev: non-multi-arch-lib-dir usr/lib32/
 

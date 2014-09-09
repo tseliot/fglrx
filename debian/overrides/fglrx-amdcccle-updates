@@ -1,5 +1,6 @@
-#We are in restricted, whether lintian has ever heard of it or not
-fglrx-amdcccle: unknown-section restricted
-
-#AMD doesn't appear to document these binaries
-fglrx-amdcccle: binary-without-manpage usr/bin/amdcccle
+fglrx-amdcccle-updates: binary-or-shlib-defines-rpath usr/bin/amdcccle /usr/share/ati/lib64
+fglrx-amdcccle-updates: hardening-no-relro usr/bin/amdcccle
+fglrx-amdcccle-updates: unknown-section restricted/misc
+fglrx-amdcccle-updates: binary-without-manpage usr/bin/amdcccle
+fglrx-amdcccle-updates: binary-without-manpage usr/bin/amdupdaterandrconfig
+fglrx-amdcccle-updates: binary-without-manpage usr/bin/amdxdg-su

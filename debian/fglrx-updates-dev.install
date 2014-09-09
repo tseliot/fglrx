@@ -2,4 +2,4 @@ debian/overrides/fglrx-updates-dev            usr/share/lintian/overrides
 
 usr/include/*                               usr/include
 
-arch/x86/usr/X11R6/lib/*.a          usr/lib
+arch/x86_64/usr/X11R6/lib64/*.a          usr/lib

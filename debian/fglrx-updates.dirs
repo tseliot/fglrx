@@ -4,12 +4,9 @@ usr/lib/pxpress/xorg/modules
 usr/lib/pxpress/lib
 usr/share/fglrx
 lib/fglrx
-usr/lib/fglrx/etc/ati
-usr/lib/fglrx/etc/OpenCL/vendors
+etc/ati
 usr/share/ati
-usr/share/grub-gfxpayload-lists/blacklist
 usr/lib/dri
 usr/lib/xorg/modules/drivers/
-etc/OpenCL/vendors
 /usr/share/applications/
 usr/lib/x86_64-linux-gnu/xorg/extra-modules

@@ -82,16 +82,6 @@ case "$1" in
         if [ ! -L /etc/X11/Xsession.d/10fglrx ]; then
             rm -f /etc/X11/Xsession.d/10fglrx
         fi
-
-        ## Just in case they installed without debs before, finish a proper uninstall routine ##
-        ## This will error out on any failure (which should be cleaned up anyway before installing debs) ##
-        [ -x /usr/share/ati/fglrx-uninstall.sh ] && /usr/share/ati/fglrx-uninstall.sh
-
-        # Remove the directory if it's not a symlink (as it should be
-        # a slave link now)
-        if [ ! -L /etc/ati ]; then
-            rm -Rf /etc/ati
-        fi
     ;;
 
     abort-upgrade)
