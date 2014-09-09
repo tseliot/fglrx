@@ -1,8 +1,17 @@
-fglrx-installer (2:14.201-0ubuntu1) UNRELEASED; urgency=medium
+fglrx-installer (2:14.201-0ubuntu1) utopic; urgency=medium
 
-  * 
+  * New upstream release.
+  * debian/control.in, debian/com.ubuntu.amdcccle.pkexec.policy:
+    - Make amdcccle depend on polkit-1.
+    - Use pkexec for amdcccle when running Unity.
+  * debian/dkms.conf.in:
+    - Drop all the patches.
+  * debian/substvars:
+    - Add support for xorg-video-abi-18 (LP: #1359769).
+  * debian/71-fglrx.rules:
+    - Tag the device for logind (LP: #1365336).
 
- -- Alberto Milone <alberto.milone@canonical.com>  Tue, 19 Aug 2014 13:46:44 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Tue, 09 Sep 2014 17:48:30 +0200
 
 fglrx-installer (2:13.350.1-0ubuntu3) utopic; urgency=medium
 
