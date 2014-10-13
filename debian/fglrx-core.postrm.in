@@ -34,7 +34,7 @@ case "$1" in
     purge)
         rm -Rf /#PKGLIBDIR32#
         rm -Rf /#SYSCONFDIR#/ati
-        rm -f /#SYSCONFDIR#/modprobe.d/fglrx.conf
+        rm -f /#SYSCONFDIR#/modprobe.d/fglrx-core.conf
         rm -f /#SYSCONFDIR#/OpenCL/vendors/amdocl*.icd
         rm -f /#SYSCONFDIR#/acpi/events/fglrx*
         rm -f /#SYSCONFDIR#/acpi/fglrx*
