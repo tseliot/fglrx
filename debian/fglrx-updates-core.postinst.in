@@ -94,7 +94,7 @@ if [ "$1" = "configure" ]; then
 
     update-alternatives --force \
         --install /#SYSCONFDIR#/ld.so.conf.d/#DEB_HOST_MULTIARCH#_GFXCORE.conf #DEB_HOST_MULTIARCH#_gfxcore_conf /#CORELDSOCONF# #COREPRIORITY# \
-        --slave /#SYSCONFDIR#/modprobe.d/fglrx.conf #DEB_HOST_MULTIARCH#_fglrx_modconf /lib/fglrx/modprobe.conf
+        --slave /#SYSCONFDIR#/modprobe.d/fglrx-core.conf #DEB_HOST_MULTIARCH#_fglrxcore_modconf /lib/fglrx/core-modprobe.conf
 
     # Install just the ld.so.conf.d alternatives so that we can disable
     # the module blacklisting. This has to be a lower priority so that

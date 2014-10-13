@@ -288,7 +288,7 @@ endif
 
 	# Blacklist any other driver that udev may want to load instead of fglrx
 	# and create an alias for the module so that it can be used as fglrx
-	printf '$(subst $(newline),\n,${blacklist_file})' > $(CURDIR)/debian/$(PKG_driver_core)/$(PKG_libconfdir)/modprobe.conf
+	printf '$(subst $(newline),\n,${blacklist_file})' > $(CURDIR)/debian/$(PKG_driver_core)/$(PKG_libconfdir)/core-modprobe.conf
 
 	# This is empty, just for the alternative that blacklists the driver
 	echo "" > "$(CURDIR)/debian/$(PKG_driver_core)/$(CORE_ld_so_conf)"
