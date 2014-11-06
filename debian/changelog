@@ -1,3 +1,9 @@
+fglrx-installer (2:14.201-0ubuntu3) UNRELEASED; urgency=medium
+
+  * 
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Thu, 06 Nov 2014 18:31:36 +0100
+
 fglrx-installer (2:14.201-0ubuntu2) utopic; urgency=medium
 
   * debian/fglrx-core.postinst.in, debian/fglrx-core.postrm.in,
