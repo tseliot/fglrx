@@ -1,8 +1,10 @@
-fglrx-installer-updates (2:14.201-0ubuntu3) UNRELEASED; urgency=medium
+fglrx-installer-updates (2:14.201-0ubuntu3) vivid; urgency=medium
 
-  * 
+  * debian/dkms.conf.in,
+    debian/dkms/patches/buildfix_kernel_3.17.patch:
+    - Add support for Linux 3.17 and 3.18.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Thu, 30 Oct 2014 11:40:14 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Thu, 06 Nov 2014 18:29:31 +0100
 
 fglrx-installer-updates (2:14.201-0ubuntu2) utopic; urgency=medium
 
