@@ -34,7 +34,7 @@ case "$1" in
     purge)
         rm -Rf /usr/lib32/fglrx
         rm -Rf /etc/ati
-        rm -f /etc/modprobe.d/fglrx.conf
+        rm -f /etc/modprobe.d/fglrx-core.conf
         rm -f /etc/OpenCL/vendors/amdocl*.icd
         rm -f /etc/acpi/events/fglrx*
         rm -f /etc/acpi/fglrx*

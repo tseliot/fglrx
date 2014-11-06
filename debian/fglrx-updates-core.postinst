@@ -94,7 +94,7 @@ if [ "$1" = "configure" ]; then
 
     update-alternatives --force \
         --install /etc/ld.so.conf.d/x86_64-linux-gnu_GFXCORE.conf x86_64-linux-gnu_gfxcore_conf /usr/lib/fglrx-core/ld.so.conf 1001 \
-        --slave /etc/modprobe.d/fglrx.conf x86_64-linux-gnu_fglrx_modconf /lib/fglrx/modprobe.conf
+        --slave /etc/modprobe.d/fglrx-core.conf x86_64-linux-gnu_fglrxcore_modconf /lib/fglrx/core-modprobe.conf
 
     # Install just the ld.so.conf.d alternatives so that we can disable
     # the module blacklisting. This has to be a lower priority so that
