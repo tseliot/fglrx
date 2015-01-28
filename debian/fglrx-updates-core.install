@@ -5,10 +5,10 @@ debian/overrides/fglrx-updates-core                  usr/share/lintian/overrides
 debian/71-fglrx.rules                           lib/udev/rules.d
 
 #Actual kernel modules
-lib/modules/fglrx/build_mod/*                   usr/src/fglrx-updates-core-14.201
-debian/dkms/*                                   usr/src/fglrx-updates-core-14.201
-arch/x86_64/lib/modules/fglrx/build_mod/lib* usr/src/fglrx-updates-core-14.201
-debian/dkms.conf                                usr/src/fglrx-updates-core-14.201
+lib/modules/fglrx/build_mod/*                   usr/src/fglrx-updates-core-14.501
+debian/dkms/*                                   usr/src/fglrx-updates-core-14.501
+arch/x86_64/lib/modules/fglrx/build_mod/lib* usr/src/fglrx-updates-core-14.501
+debian/dkms.conf                                usr/src/fglrx-updates-core-14.501
 
 #DRI stuff
 arch/x86_64/usr/X11R6/lib64/libatiadlxx.so     usr/lib
