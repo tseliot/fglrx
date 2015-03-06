@@ -27,9 +27,9 @@ Package: #DRIVERCORENAME#
 Architecture: amd64 i386
 Depends: ${shlibs:Depends}, lib32gcc1 [amd64], libc6-i386 [amd64], dkms, make, linux-libc-dev,
  ${misc:Depends}
-Provides: fglrx-driver-core, libopencl1
-Conflicts: fglrx-driver-core, libopencl1
-Replaces: fglrx-driver-core, libopencl1
+Provides: fglrx-driver-core
+Conflicts: fglrx-driver-core
+Replaces: fglrx-driver-core
 Description: Minimal video driver for the AMD graphics accelerators
  Minimal video driver for the AMD Radeon and FireGL graphics accelerators.
  .
