@@ -1,8 +1,17 @@
-fglrx-installer (2:15.200-0ubuntu1) UNRELEASED; urgency=medium
+fglrx-installer (2:15.200-0ubuntu1) vivid; urgency=medium
 
-  * 
+  * New upstream release:
+    - Add support for X ABI 19.
+  * debian/control.in:
+    - Drop conflicts/provides/replaces libopencl1 (LP: #1129409).
+  * debian/dkms.conf.in:
+    - Drop all the patches.
+  * debian/substvars:
+    - Add support for X ABI 19.
+  * debian/patches/series:
+    - Drop amdxdg-su-add-support-for-pkexec.patch.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Thu, 26 Feb 2015 12:27:58 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Wed, 11 Mar 2015 16:03:18 +0100
 
 fglrx-installer (2:14.501-0ubuntu1) vivid; urgency=medium
 
