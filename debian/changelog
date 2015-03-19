@@ -1,8 +1,9 @@
-fglrx-installer-updates (2:15.200-0ubuntu2) UNRELEASED; urgency=medium
+fglrx-installer-updates (2:15.200-0ubuntu2) vivid; urgency=medium
 
-  * 
+  * debian/control.in:
+    - Provide opencl-icd (LP: #1129409).
 
- -- Alberto Milone <alberto.milone@canonical.com>  Thu, 19 Mar 2015 12:34:27 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Thu, 19 Mar 2015 12:34:49 +0100
 
 fglrx-installer-updates (2:15.200-0ubuntu1) vivid; urgency=medium
 
