@@ -27,7 +27,7 @@ Package: fglrx-core
 Architecture: amd64 i386
 Depends: ${shlibs:Depends}, lib32gcc1 [amd64], libc6-i386 [amd64], dkms, make, linux-libc-dev,
  ${misc:Depends}
-Provides: fglrx-driver-core
+Provides: fglrx-driver-core, opencl-icd
 Conflicts: fglrx-driver-core
 Replaces: fglrx-driver-core
 Description: Minimal video driver for the AMD graphics accelerators
