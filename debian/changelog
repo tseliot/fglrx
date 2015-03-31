@@ -1,82 +1,8 @@
-fglrx-installer (2:15.200-0ubuntu2) vivid; urgency=medium
+fglrx-installer (2:15.200-0ubuntu0.1) UNRELEASED; urgency=medium
 
-  * debian/control.in:
-    - Provide opencl-icd (LP: #1129409).
+  * 
 
- -- Alberto Milone <alberto.milone@canonical.com>  Thu, 19 Mar 2015 12:25:58 +0100
-
-fglrx-installer (2:15.200-0ubuntu1) vivid; urgency=medium
-
-  * New upstream release:
-    - Add support for X ABI 19.
-  * debian/control.in:
-    - Drop conflicts/provides/replaces libopencl1 (LP: #1129409).
-  * debian/dkms.conf.in:
-    - Drop all the patches.
-  * debian/substvars:
-    - Add support for X ABI 19.
-  * debian/patches/series:
-    - Drop amdxdg-su-add-support-for-pkexec.patch.
-
- -- Alberto Milone <alberto.milone@canonical.com>  Wed, 11 Mar 2015 16:03:18 +0100
-
-fglrx-installer (2:14.501-0ubuntu1) vivid; urgency=medium
-
-  * New upstream release:
-    - OpenCL 2.0 support (requires 64-bit OS and compatible AMD
-      Radeon™ R Series GPU).
-    - VAAPI decoding support (H264, VC1, MPEG2, MPEG4).
-    - Fixed unexpected pixmap's timestamp change with composite
-      enabled that caused Linux Khronos CTS to randomly fail.
-  * debian/dkms.conf.in,
-    debian/dkms/patches/buildfix_kernel_3.19.patch:
-    - Add support for Linux 3.19.
-  * debian/patches/series:
-    - Re-apply amdxdg-su-add-support-for-pkexec.patch.
-
- -- Alberto Milone <alberto.milone@canonical.com>  Wed, 28 Jan 2015 16:12:21 +0100
-
-fglrx-installer (2:14.201-0ubuntu3) vivid; urgency=medium
-
-  * debian/dkms.conf.in,
-    debian/dkms/patches/buildfix_kernel_3.17.patch:
-    - Add support for Linux 3.17 and 3.18.
-
- -- Alberto Milone <alberto.milone@canonical.com>  Thu, 06 Nov 2014 18:33:22 +0100
-
-fglrx-installer (2:14.201-0ubuntu2) utopic; urgency=medium
-
-  * debian/fglrx-core.postinst.in, debian/fglrx-core.postrm.in,
-    debian/rules:
-    - Avoid alternatives clash caused by the addition of the
-      fglrx-core package.
-
- -- Alberto Milone <alberto.milone@canonical.com>  Tue, 14 Oct 2014 10:57:02 +0200
-
-fglrx-installer (2:14.201-0ubuntu1) utopic; urgency=medium
-
-  * New upstream release.
-  * debian/control.in, debian/com.ubuntu.amdcccle.pkexec.policy:
-    - Make amdcccle depend on polkit-1.
-    - Use pkexec for amdcccle when running Unity.
-  * debian/dkms.conf.in:
-    - Drop all the patches.
-  * debian/substvars:
-    - Add support for xorg-video-abi-18 (LP: #1359769).
-  * debian/71-fglrx.rules:
-    - Tag the device for logind (LP: #1365336).
-
- -- Alberto Milone <alberto.milone@canonical.com>  Tue, 09 Sep 2014 17:48:30 +0200
-
-fglrx-installer (2:13.350.1-0ubuntu3) utopic; urgency=medium
-
-  * debian/dkms.conf.in,
-    debian/dkms/patches/buildfix_kernel_3.15.patch:
-    - Add support for Linux 3.15.
-  * debian/patches/call-amdcccle-with-full-path.diff:
-    - Pass amdxdg the full path.
-
- -- Alberto Milone <alberto.milone@canonical.com>  Fri, 27 Jun 2014 16:39:59 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Tue, 31 Mar 2015 17:11:48 +0200
 
 fglrx-installer (2:13.350.1-0ubuntu2) trusty; urgency=medium
 
