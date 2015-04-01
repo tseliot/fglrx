@@ -1,8 +1,56 @@
-fglrx-installer (2:15.200-0ubuntu0.1) UNRELEASED; urgency=medium
+fglrx-installer (2:15.200-0ubuntu0.1) trusty-proposed; urgency=medium
 
-  * 
+  * New upstream release:
+    - Add support for X ABI 19.
+  * debian/control.in, debian/com.ubuntu.amdcccle.pkexec.policy,
+    debian/rules, debian/fglrx.dirs.in,
+    debian/fglrx.install.in,
+    debian/fglrx.links.in,
+    debian/fglrx.postinst.in,
+    debian/fglrx.postrm.in,
+    debian/fglrx.preinst.in,
+    debian/fglrx.prerm.in,
+    debian/fglrx.grub-gfxpayload.in,
+    debian/overrides/fglrx.in,
+    debian/overrides/fglrx-core.in,
+    debian/overrides/fglrx-dev.in,
+    debian/fglrx-amdcccle.dirs.in,
+    debian/fglrx-amdcccle.install.in,
+    debian/fglrx-core.dirs.in,
+    debian/fglrx-core.links.in,
+    debian/fglrx-core.postinst.in,
+    debian/fglrx-core.postrm.in,
+    debian/fglrx-core.preinst.in,
+    debian/fglrx-core.prerm.in,
+    debian/fglrx-core.postrm.in:
+    - Drop conflicts/provides/replaces libopencl1 and provide
+      opencl-icd (LP: #1129409).
+    - Make amdcccle depend on polkit-1.
+    - Use pkexec for amdcccle when running Unity.
+    - Split the minimal driver into the -core package.
+    - Depend on the "file" package.
+  * debian/fglrx-dev.links.in:
+    - Add links for libOpenCL libGL.so, libAMDXvBA, libXvBAW.
+  * debian/substvars:
+    - Add support for X ABI 18 and 19.
+  * debian/patches/series, amdxdg-su-add-support-for-pkexec.patch:
+    - Leave the patch disabled for future reference and easier
+      backporting.
+  * debian/patches/call-amdcccle-with-full-path.diff:
+    - Pass amdxdg the full path.
+  * debian/dkms.conf.in,
+    debian/dkms/patches/buildfix_kernel_3.15.patch,
+    debian/dkms/patches/buildfix_kernel_3.17.patch,
+    debian/dkms/patches/buildfix_kernel_3.19.patch:
+    - Add support for Linux 3.15-3.19.
+    - Leave the patches disabled for future reference and easier
+      backporting.
+    - Correct a typo that caused an incorrect dkms.conf to be
+      generated from the template.
+  * debian/71-fglrx.rules:
+    - Tag the device for logind.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Tue, 31 Mar 2015 17:11:48 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Wed, 01 Apr 2015 16:49:52 +0200
 
 fglrx-installer (2:13.350.1-0ubuntu2) trusty; urgency=medium
 
