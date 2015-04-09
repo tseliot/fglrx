@@ -63,7 +63,7 @@ Description: Video driver for the AMD graphics accelerators (devel files)
 
 Package: fglrx-amdcccle#FLAVOUR#
 Architecture: amd64 i386
-Depends: #DRIVERNAME#, policykit-1, ${shlibs:Depends}, ${misc:Depends}
+Depends: policykit-1, ${shlibs:Depends}, ${misc:Depends}
 Conflicts: fglrx-control-qt2, fglrx-control
 Replaces: fglrx-control, fglrx-amdcccle
 Provides: fglrx-control
