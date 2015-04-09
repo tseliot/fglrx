@@ -1,8 +1,9 @@
-fglrx-installer-updates (2:15.200-0ubuntu3) UNRELEASED; urgency=medium
+fglrx-installer-updates (2:15.200-0ubuntu3) vivid; urgency=medium
 
-  * 
+  * debian/control.in:
+    - Drop circular dependency between fglrx-updates and fglrx-amdcccle-updates.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Thu, 09 Apr 2015 10:10:28 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Thu, 09 Apr 2015 10:11:19 +0200
 
 fglrx-installer-updates (2:15.200-0ubuntu2) vivid; urgency=medium
 
