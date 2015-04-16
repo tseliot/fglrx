@@ -1,8 +1,11 @@
-fglrx-installer-updates (2:15.200-0ubuntu0.2) UNRELEASED; urgency=medium
+fglrx-installer-updates (2:15.200-0ubuntu0.2) trusty-proposed; urgency=medium
 
-  * 
+  * debian/control.in:
+    - Allow the -core package to overwrite files that belong to
+      fglrx. This prevents errors caused by the split into fglrx
+      and fglrx-core (LP: #1443016, LP: #1129409).
 
- -- Alberto Milone <alberto.milone@canonical.com>  Thu, 16 Apr 2015 11:23:06 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Thu, 16 Apr 2015 11:52:49 +0200
 
 fglrx-installer-updates (2:15.200-0ubuntu0.1) trusty-proposed; urgency=medium
 
