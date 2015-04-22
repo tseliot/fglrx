@@ -65,7 +65,7 @@ Package: fglrx-amdcccle#FLAVOUR#
 Architecture: amd64 i386
 Depends: policykit-1, ${shlibs:Depends}, ${misc:Depends}
 Conflicts: fglrx-control-qt2, fglrx-control
-Replaces: fglrx-control, fglrx-amdcccle
+Replaces: fglrx-control, fglrx-amdcccle, fglrx
 Provides: fglrx-control
 Description: Catalyst Control Center for the AMD graphics accelerators
  Catalyst Control Center for the AMD Radeon and FireGL graphics accelerators.
