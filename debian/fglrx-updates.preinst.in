@@ -18,6 +18,7 @@ set -e
 
 PKGNAME=#DRIVERNAME#
 OLDPKGNAME=xorg-driver-fglrx
+CORE_SPLIT_RELEASE="2:14.502-0ubuntu1"
 
 if [ `dpkg --print-architecture` = "amd64" ]; then
 	HAS_LIB32="yes"
@@ -82,6 +83,27 @@ case "$1" in
         if [ ! -L /etc/X11/Xsession.d/10fglrx ]; then
             rm -f /etc/X11/Xsession.d/10fglrx
         fi
+
+    if [ -n "$2" ]; then
+        if dpkg --compare-versions "$2" le "$CORE_SPLIT_RELEASE"; then
+            # Move the ati directory to /etc to preserve user settings,
+            # now that we no longer use alternatives for the directory
+            echo "Moving ati dir to /etc for the fglrx-core transition"
+            cp -RL /etc/ati /etc/ati.dpkg-bak 2>/dev/null || true
+            # Remove the link
+            rm -f /etc/ati 2>/dev/null
+            # Finally move ati into /etc
+            mv /etc/ati.dpkg-bak /etc/ati 2>/dev/null || true
+
+            # Remove the links that will otherwise prevent installing
+            # the actual files
+            echo "Removing links in /etc for the fglrx-core transition"
+            rm -f /etc/OpenCL/vendors/amdocl32.icd 2>/dev/null
+            rm -f /etc/OpenCL/vendors/amdocl64.icd 2>/dev/null
+            rm -f /usr/lib/libOpenCL.so 2>/dev/null
+        fi
+    fi
+
     ;;
 
     abort-upgrade)
