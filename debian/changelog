@@ -1,8 +1,9 @@
-fglrx-installer (2:15.200-0ubuntu5) UNRELEASED; urgency=medium
+fglrx-installer (2:15.200-0ubuntu6) UNRELEASED; urgency=medium
 
   * 
+  * 
 
- -- Alberto Milone <alberto.milone@canonical.com>  Wed, 22 Apr 2015 10:39:58 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Wed, 27 May 2015 16:19:26 +0200
 
 fglrx-installer (2:15.200-0ubuntu4) vivid; urgency=medium
 
