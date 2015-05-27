@@ -285,6 +285,7 @@ endif
 
 	if [ -f "arch/$(SRC_arch)/usr/X11R6/bin/amd-console-helper" ]; then \
 		dh_install -p$(PKG_driver_core) "arch/$(SRC_arch)/usr/X11R6/bin/amd-console-helper" $(bindir); \
+		chmod ug+s debian/$(PKG_driver_core)/$(bindir)/amd-console-helper; \
 	fi;
 
 	# Blacklist any other driver that udev may want to load instead of fglrx
@@ -469,6 +470,9 @@ ifeq ($(DEB_HOST_ARCH),amd64)
 else
 	dh_shlibdeps -l$(CURDIR)/debian/$(PKG_driver)/$(PKG_libdir):$(CURDIR)/debian/$(PKG_driver)/$(PKG_libdir)/bin:$(CURDIR)/debian/$(PKG_driver)/$(PKG_libdir)/sbin:$(CURDIR)/debian/$(PKG_driver_core)/$(PKG_libdir):$(CURDIR)/debian/$(PKG_driver_core)/$(PKG_libdir)/bin:$(CURDIR)/debian/$(PKG_driver_core)/$(PKG_libdir)/sbin
 endif
+
+override_dh_fixperms:
+	dh_fixperms -Xamd-console-helper
 
 %:
 	dh $@
