@@ -1,8 +1,12 @@
-fglrx-installer-updates (2:15.200-0ubuntu5) UNRELEASED; urgency=medium
+fglrx-installer-updates (2:15.200-0ubuntu5) wily; urgency=medium
 
-  * 
+  *  debian/dkms.conf.in,
+     debian/dkms/patches/buildfix_kernel_4.0.patch:
+     - Add support for Linux 4.0.
+  *  debian/rules:
+     - Apply the setgid bit and the execute bit to amd-console-helper.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Fri, 05 Jun 2015 17:37:31 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Fri, 05 Jun 2015 17:39:36 +0200
 
 fglrx-installer-updates (2:15.200-0ubuntu4) vivid; urgency=medium
 
