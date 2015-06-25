@@ -439,17 +439,17 @@ endif
 
 	# Disable the stack markings on all binaries in PKG_driver_core
 	for i in $$(find debian/$(PKG_driver_core)/ -exec file {} \; | grep -e "ELF" | cut -d: -f1); do \
-		execstack -q $$i && execstack -c $$i || true; done; \
+		execstack -q $$i && execstack -c $$i || true; \
 	done
 
 	# Disable the stack markings on all binaries in PKG_driver
 	for i in $$(find debian/$(PKG_driver)/ -exec file {} \; | grep -e "ELF" | cut -d: -f1); do \
-		execstack -q $$i && execstack -c $$i; done; \
+		execstack -q $$i && execstack -c $$i || true; \
 	done
 
 	# Disable the stack markings on all binaries in PKG_control
 	for i in $$(find debian/$(PKG_control)/ -exec file {} \; | grep -e "ELF" | cut -d: -f1); do \
-		execstack -q $$i && execstack -c $$i; done; \
+		execstack -q $$i && execstack -c $$i || true; \
 	done
 
 binary-arch: pre-binary-arch
