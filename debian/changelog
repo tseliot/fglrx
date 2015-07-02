@@ -1,3 +1,9 @@
+fglrx-installer (2:15.200-0ubuntu0.4) UNRELEASED; urgency=medium
+
+  * 
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Thu, 02 Jul 2015 20:13:09 +0200
+
 fglrx-installer (2:15.200-0ubuntu0.3) trusty-proposed; urgency=medium
 
   * debian/fglrx.preinst.in, debian/fglrx.postinst.in:
