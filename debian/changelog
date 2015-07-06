@@ -1,8 +1,10 @@
-fglrx-installer-updates (2:15.200-0ubuntu0.4) UNRELEASED; urgency=medium
+fglrx-installer-updates (2:15.200-0ubuntu0.4) trusty-proposed; urgency=medium
 
-  * 
+  * debian/rules:
+    - Remove the extra "done"s from the for loops (LP: #1471661).
+    - Apply the setgid bit and the execute bit to amd-console-helper.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Mon, 06 Jul 2015 09:30:41 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Mon, 06 Jul 2015 09:31:15 +0200
 
 fglrx-installer-updates (2:15.200-0ubuntu0.3) trusty-proposed; urgency=medium
 
