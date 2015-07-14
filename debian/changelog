@@ -1,8 +1,23 @@
-fglrx-installer (2:15.200.1-0ubuntu1) UNRELEASED; urgency=medium
+fglrx-installer (2:15.200.1-0ubuntu1) wily; urgency=medium
 
-  * 
+  * New upstream release (Catalyst 15.7):
+    - AMD PowerXpress support for laptops equipped with Intel
+      6th generation (Skylake) CPUs.
+    - Linux Platform Atomics & SVM Fine Grain Buffer support
+      for Carrizo APUs.
+    - Multi-Device support for OpenCL 2.0.
+  * debian/control.in,
+    debian/fglrx-core.maintscript,
+    debian/fglrx-core.install.in,
+    debian/fglrx-core.postinst.in:
+    - Migrate the files in /etc/ati from fglrx to fglrx-core.
+  * debian/dkms.conf.in,
+    debian/dkms/patches/buildfix_kernel_4.1.patch,
+    debian/dkms/patches/buildfix_kernel_4.2.patch:
+    - Add support for Linux 4.1.
+    - Add support for Linux 4.2.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Fri, 10 Jul 2015 16:28:35 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Tue, 14 Jul 2015 11:59:59 +0200
 
 fglrx-installer (2:15.200-0ubuntu7) wily; urgency=medium
 
