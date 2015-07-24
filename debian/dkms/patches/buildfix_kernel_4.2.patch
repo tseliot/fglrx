@@ -1,13 +1,12 @@
-From 84258868f741a451b1b34fcbacfad64c9c370229 Mon Sep 17 00:00:00 2001
+From d64db7a525ce02df328287f7a536f34edc3752cf Mon Sep 17 00:00:00 2001
 From: Alberto Milone <alberto.milone@canonical.com>
 Date: Tue, 14 Jul 2015 12:56:37 +0200
-Subject: [PATCH 1/1] Add support for Linux 4.2
+Subject: [PATCH 2/2] Add support for Linux 4.2
 
 Deal with the FPU code renaming
 ---
  firegl_public.c | 35 +++++++++++++++++++++++++++++++++++
- kcl_acpi.c      |  4 ++++
- 2 files changed, 39 insertions(+)
+ 1 file changed, 35 insertions(+)
 
 diff --git a/firegl_public.c b/firegl_public.c
 index 1a39fb7..ed85dce 100755
@@ -105,22 +104,6 @@ index 1a39fb7..ed85dce 100755
  }
  
  /** Create new directory entry under "/proc/...."
-diff --git a/kcl_acpi.c b/kcl_acpi.c
-index 3a80984..a976b16 100755
---- a/kcl_acpi.c
-+++ b/kcl_acpi.c
-@@ -861,7 +861,11 @@ void ATI_API_CALL KCL_ACPI_No_Hotplug(void* dev)
- #elif LINUX_VERSION_CODE >= KERNEL_VERSION(3,17,0)
-     if(pdev)
-     {
-+#if LINUX_VERSION_CODE < KERNEL_VERSION(4,2,0)
-        pci_ignore_hotplug(pdev);
-+#else
-+       pdev->ignore_hotplug = 1;
-+#endif
-     }
- #endif
- }
 -- 
 1.9.1
 
