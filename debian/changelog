@@ -1,3 +1,9 @@
+fglrx-installer-updates (2:15.200.1-0ubuntu2) UNRELEASED; urgency=medium
+
+  * 
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Fri, 24 Jul 2015 17:38:27 +0200
+
 fglrx-installer-updates (2:15.200.1-0ubuntu1) wily; urgency=medium
 
   * New upstream release (Catalyst 15.7):
