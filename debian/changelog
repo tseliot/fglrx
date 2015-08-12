@@ -1,8 +1,12 @@
-fglrx-installer (2:15.200.1-0ubuntu3) UNRELEASED; urgency=medium
+fglrx-installer (2:15.200.1-0ubuntu3) wily; urgency=medium
 
-  * 
+  * debian/dkms/patches/buildfix_kernel_4.2.patch:
+    - Refresh to fix a build failure on i386.
+  * debian/dkms.conf.in,
+    debian/dkms/patches/ignore-GCC-mismatch.patch:
+    - Ignore GCC mismatch (LP: #1483695).
 
- -- Alberto Milone <alberto.milone@canonical.com>  Wed, 12 Aug 2015 17:28:42 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Wed, 12 Aug 2015 17:29:38 +0200
 
 fglrx-installer (2:15.200.1-0ubuntu2) wily; urgency=medium
 
