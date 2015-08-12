@@ -1,0 +1,26 @@
+From 543fdf36273775eefbc496037dc51ea704a82f4a Mon Sep 17 00:00:00 2001
+From: Alberto Milone <alberto.milone@canonical.com>
+Date: Wed, 12 Aug 2015 12:27:36 +0200
+Subject: [PATCH 1/1] Ignore GCC mismatch
+
+It's ok if the kernel was built using a different gcc version
+---
+ make.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/make.sh b/make.sh
+index 859dc3d..1607d2e 100755
+--- a/make.sh
++++ b/make.sh
+@@ -57,7 +57,7 @@ set_GCC_version () {
+ 
+ if [ -z "${CC}" ]; then 
+ 	CC=gcc
+-	set_GCC_version
++	#set_GCC_version
+ fi
+ 
+ # ==============================================================
+-- 
+1.9.1
+
