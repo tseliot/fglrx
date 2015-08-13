@@ -1,23 +1,21 @@
-From d1c82026d4d2c677fa22e157d973417f0c35b79d Mon Sep 17 00:00:00 2001
+From d5cf55ba203f5709bdc29d980b054bf9971c5e59 Mon Sep 17 00:00:00 2001
 From: Alberto Milone <alberto.milone@canonical.com>
-Date: Fri, 10 Jul 2015 16:52:29 +0200
-Subject: [PATCH 1/2] Add support for Linux 4.1
+Date: Thu, 13 Aug 2015 16:15:47 +0200
+Subject: [PATCH 1/1] Add support for Linux 4.1
 
 Drop the IRQF_DISABLED flag, as it was removed in Linux 4.1
 
 Note: this was also backported to 3.19.0-26 in Ubuntu
-
-Signed-off-by: Alberto Milone <alberto.milone@canonical.com>
 ---
- firegl_public.c | 4 +++-
- kcl_acpi.c      | 7 +++++++
- 2 files changed, 10 insertions(+), 1 deletion(-)
+ firegl_public.c |  4 +++-
+ kcl_acpi.c      | 11 +++++++++++
+ 2 files changed, 14 insertions(+), 1 deletion(-)
 
 diff --git a/firegl_public.c b/firegl_public.c
-index a8961ad..1a39fb7 100755
+index f218b3d..b687c4d 100755
 --- a/firegl_public.c
 +++ b/firegl_public.c
-@@ -3495,10 +3495,12 @@ int ATI_API_CALL KCL_InstallInterruptHandler(
+@@ -3498,10 +3498,12 @@ int ATI_API_CALL KCL_InstallInterruptHandler(
          KCL_PUB_InterruptHandlerWrap,
  #if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,22)
          ((useMSI) ? (SA_INTERRUPT) : (SA_SHIRQ)),
@@ -25,24 +23,35 @@ index a8961ad..1a39fb7 100755
 +#elif LINUX_VERSION_CODE < KERNEL_VERSION(4,1,0)
          //when MSI enabled. keep irq disabled when calling the action handler,
          //exclude this IRQ from irq balancing (only on one CPU) 
-         ((useMSI) ? (IRQF_DISABLED) : (IRQF_SHARED)),    
+         ((useMSI) ? (IRQF_DISABLED | IRQF_NOBALANCING) : (IRQF_SHARED)),    
 +#else
 +        ((useMSI) ? (0x0) : (IRQF_SHARED)),
  #endif
          dev_name,
          context);
 diff --git a/kcl_acpi.c b/kcl_acpi.c
-index 3a80984..aed08d8 100755
+index 3a80984..48f8d64 100755
 --- a/kcl_acpi.c
 +++ b/kcl_acpi.c
-@@ -861,7 +861,14 @@ void ATI_API_CALL KCL_ACPI_No_Hotplug(void* dev)
+@@ -34,6 +34,10 @@
+ 
+ #include <linux/vt_kern.h>
+ 
++#ifndef UTS_RELEASE
++#include <generated/utsrelease.h>
++#endif
++
+ #if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,14)
+ 
+ #if defined(CONFIG_ACPI_INTERPRETER) && defined(CONFIG_ACPI_BOOT) && defined(CONFIG_ACPI_BUS)
+@@ -861,7 +865,14 @@ void ATI_API_CALL KCL_ACPI_No_Hotplug(void* dev)
  #elif LINUX_VERSION_CODE >= KERNEL_VERSION(3,17,0)
      if(pdev)
      {
 +#ifndef UTS_UBUNTU_RELEASE_ABI
-+#define UTS_UBUNTU_RELEASE_ABI 0
++#define UTS_UBUNTU_RELEASE_ABI -1
 +#endif
-+#if LINUX_VERSION_CODE < KERNEL_VERSION(4,1,3) || (UTS_UBUNTU_RELEASE_ABI < 26 && LINUX_VERSION_CODE <= KERNEL_VERSION(3,19,8))
++#if (UTS_UBUNTU_RELEASE_ABI < 0 && LINUX_VERSION_CODE < KERNEL_VERSION(4,1,3)) || (UTS_UBUNTU_RELEASE_ABI >= 0 && UTS_UBUNTU_RELEASE_ABI < 26 && LINUX_VERSION_CODE <= KERNEL_VERSION(3,19,8))
         pci_ignore_hotplug(pdev);
 +#else
 +       pdev->ignore_hotplug = 1;
