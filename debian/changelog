@@ -1,8 +1,14 @@
-fglrx-installer-updates (2:15.200-0ubuntu0.5) UNRELEASED; urgency=medium
+fglrx-installer-updates (2:15.200-0ubuntu0.5) trusty-proposed; urgency=medium
 
-  * 
+  * debian/dkms.conf.in,
+    debian/dkms/patches/buildfix_kernel_4.0.patch,
+    debian/dkms/patches/buildfix_kernel_4.1.patch,
+    debian/dkms/patches/buildfix_kernel_4.2.patch:
+    - Add support for Linux 4.0, 4.1, 4.2.
+    - Work around the GPL only pci_ignore_hotplug() in
+      Linux 3.19.0-26 (LP: #1479913).
 
- -- Alberto Milone <alberto.milone@canonical.com>  Mon, 17 Aug 2015 17:00:18 +0200
+ -- Alberto Milone <alberto.milone@canonical.com>  Mon, 17 Aug 2015 17:02:32 +0200
 
 fglrx-installer-updates (2:15.200-0ubuntu0.4) trusty-proposed; urgency=medium
 
