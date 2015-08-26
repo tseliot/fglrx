@@ -1,3 +1,9 @@
+fglrx-installer-updates (2:15.200.1-0ubuntu4) UNRELEASED; urgency=medium
+
+  * 
+
+ -- Alberto Milone <alberto.milone@canonical.com>  Wed, 26 Aug 2015 11:34:04 +0200
+
 fglrx-installer-updates (2:15.200.1-0ubuntu3) wily; urgency=medium
 
   * debian/dkms/patches/buildfix_kernel_4.2.patch:
