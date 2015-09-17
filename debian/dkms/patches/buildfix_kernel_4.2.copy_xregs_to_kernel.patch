@@ -1,8 +1,20 @@
+From 65b7e35708d786bcdedc075a4aafb655206f524e Mon Sep 17 00:00:00 2001
+From: Alberto Milone <alberto.milone@canonical.com>
+Date: Thu, 17 Sep 2015 15:49:46 +0200
+Subject: [PATCH 5/5] Use a local copy of copy_xregs_to_kernel
+
+This is needed for Linux 4.2.
+
+Thanks to Tim Gardner for the patch.
+---
+ firegl_public.c | 44 +++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 43 insertions(+), 1 deletion(-)
+
 diff --git a/firegl_public.c b/firegl_public.c
-index 2fcbc10..9e4e588 100755
+index 4c1f9a5..bb67bba 100755
 --- a/firegl_public.c
 +++ b/firegl_public.c
-@@ -6435,6 +6435,48 @@ int ATI_API_CALL kcl_sscanf(const char * buf, const char * fmt, ...)
+@@ -6443,6 +6443,48 @@ int ATI_API_CALL kcl_sscanf(const char * buf, const char * fmt, ...)
      return i;
  }
  
@@ -51,7 +63,7 @@ index 2fcbc10..9e4e588 100755
  /** \brief Generate UUID
   *  \param buf pointer to the generated UUID
   *  \return None
-@@ -6454,7 +6496,7 @@ static int KCL_fpu_save_init(struct task_struct *tsk)
+@@ -6462,7 +6504,7 @@ static int KCL_fpu_save_init(struct task_struct *tsk)
        fpu_xsave(fpu);
        if (!(fpu->state->xsave.xsave_hdr.xstate_bv & XSTATE_FP))
  #else
@@ -60,3 +72,6 @@ index 2fcbc10..9e4e588 100755
        if (!(fpu->state.xsave.header.xfeatures & XSTATE_FP))
  #endif
  	 return 1;
+-- 
+1.9.1
+
