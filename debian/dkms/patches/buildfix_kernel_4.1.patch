@@ -1,21 +1,17 @@
-From 94631bfd9b813d9d2f1af0ea744e7121d72d25c5 Mon Sep 17 00:00:00 2001
+From ef1d23b8234164c273faf4c709b58dae2ce5593b Mon Sep 17 00:00:00 2001
 From: Alberto Milone <alberto.milone@canonical.com>
-Date: Fri, 10 Jul 2015 16:52:29 +0200
-Subject: [PATCH 1/2] Add support for Linux 4.1
+Date: Thu, 17 Sep 2015 15:44:59 +0200
+Subject: [PATCH 2/5] Add support for Linux 4.1
 
-Drop the IRQF_DISABLED flag, as it was removed in Linux 4.1
-
-Signed-off-by: Alberto Milone <alberto.milone@canonical.com>
 ---
  firegl_public.c | 4 +++-
- kcl_acpi.c      | 4 ++++
- 2 files changed, 7 insertions(+), 1 deletion(-)
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/firegl_public.c b/firegl_public.c
-index a8961ad..1a39fb7 100755
+index 6017e89..94778f1 100755
 --- a/firegl_public.c
 +++ b/firegl_public.c
-@@ -3495,10 +3495,12 @@ int ATI_API_CALL KCL_InstallInterruptHandler(
+@@ -3508,10 +3508,12 @@ int ATI_API_CALL KCL_InstallInterruptHandler(
          KCL_PUB_InterruptHandlerWrap,
  #if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,22)
          ((useMSI) ? (SA_INTERRUPT) : (SA_SHIRQ)),
@@ -29,22 +25,6 @@ index a8961ad..1a39fb7 100755
  #endif
          dev_name,
          context);
-diff --git a/kcl_acpi.c b/kcl_acpi.c
-index 3a80984..7df1cb5 100755
---- a/kcl_acpi.c
-+++ b/kcl_acpi.c
-@@ -861,7 +861,11 @@ void ATI_API_CALL KCL_ACPI_No_Hotplug(void* dev)
- #elif LINUX_VERSION_CODE >= KERNEL_VERSION(3,17,0)
-     if(pdev)
-     {
-+#if LINUX_VERSION_CODE < KERNEL_VERSION(4,1,3)
-        pci_ignore_hotplug(pdev);
-+#else
-+       pdev->ignore_hotplug = 1;
-+#endif
-     }
- #endif
- }
 -- 
 1.9.1
 
