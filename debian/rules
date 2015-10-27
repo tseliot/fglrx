@@ -128,6 +128,10 @@ blacklist radeon
 alias fglrx $(PKG_module)
 alias radeon off
 alias lbm-radeon off
+
+blacklist amdgpu
+alias amdgpu off
+alias lbm-amdgpu off
 endef
 
 # DEB_DH_SHLIBDEPS_ARGS_ALL="-Xlib32"
