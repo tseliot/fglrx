@@ -1,8 +1,10 @@
-fglrx-installer-updates (2:15.201-0ubuntu3) UNRELEASED; urgency=medium
+fglrx-installer-updates (2:15.201-0ubuntu3) xenial; urgency=medium
 
-  * 
+  * debian/rules:
+    - Blacklist the amdgpu driver, so that fglrx can be loaded
+      on the systems where the GPU is supported by amdgpu (LP: #1510573).
 
- -- Alberto Milone <alberto.milone@canonical.com>  Tue, 27 Oct 2015 16:22:35 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Tue, 27 Oct 2015 16:49:58 +0100
 
 fglrx-installer-updates (2:15.201-0ubuntu2) xenial; urgency=medium
 
