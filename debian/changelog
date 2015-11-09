@@ -1,8 +1,11 @@
-fglrx-installer (2:15.200-0ubuntu0.6) UNRELEASED; urgency=medium
+fglrx-installer (2:15.200-0ubuntu0.6) trusty-proposed; urgency=medium
 
-  * 
+  * debian/fglrx.preinst.in:
+    - Remove /etc/ati in the migration from the non -core packages
+      even when the directory is not a symlink (LP: #1511301).
+      Thanks to Kai-Heng Feng for the patch.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Mon, 09 Nov 2015 13:12:19 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Mon, 09 Nov 2015 13:17:02 +0100
 
 fglrx-installer (2:15.200-0ubuntu0.5) trusty-proposed; urgency=medium
 
