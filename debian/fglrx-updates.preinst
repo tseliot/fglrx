@@ -90,8 +90,9 @@ case "$1" in
             # now that we no longer use alternatives for the directory
             echo "Moving ati dir to /etc for the fglrx-core transition"
             cp -RL /etc/ati /etc/ati.dpkg-bak 2>/dev/null || true
-            # Remove the link
-            rm -f /etc/ati 2>/dev/null
+            # Remove the link (or the actual directory from the upstream
+            # driver packages)
+            rm -Rf /etc/ati 2>/dev/null
             # Finally move ati into /etc
             mv /etc/ati.dpkg-bak /etc/ati 2>/dev/null || true
 
