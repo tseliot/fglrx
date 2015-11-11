@@ -41,7 +41,7 @@ Architecture: amd64 i386
 Recommends: fglrx-amdcccle-updates
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, fglrx-updates-core,
- ${xviddriver:Depends}, ${misc:Depends}
+ xserver-xorg-legacy, ${xviddriver:Depends}, ${misc:Depends}
 Provides: fglrx-driver, xorg-driver-binary, ${xviddriver:Provides}
 Conflicts: fglrx-driver, xorg-driver-binary
 Replaces: fglrx-driver, xorg-driver-binary
