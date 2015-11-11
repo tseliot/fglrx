@@ -1,8 +1,9 @@
-fglrx-installer-updates (2:15.201-0ubuntu4) UNRELEASED; urgency=medium
+fglrx-installer-updates (2:15.201-0ubuntu4) xenial; urgency=medium
 
-  * 
+  * debian/templates/control.in:
+    - Add dependency on xserver-xorg-legacy.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Wed, 11 Nov 2015 17:28:16 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Wed, 11 Nov 2015 17:28:55 +0100
 
 fglrx-installer-updates (2:15.201-0ubuntu3) xenial; urgency=medium
 
