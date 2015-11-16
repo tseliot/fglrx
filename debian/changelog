@@ -1,8 +1,10 @@
-fglrx-installer-updates (2:15.201-0ubuntu5) UNRELEASED; urgency=medium
+fglrx-installer-updates (2:15.201-0ubuntu5) xenial; urgency=medium
 
-  * 
+  * debian/dkms.conf.in,
+    dkms/patches/buildfix_kernel_4.3.patch:
+    - Add support for Linux 4.3.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Mon, 16 Nov 2015 16:46:47 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Mon, 16 Nov 2015 16:47:40 +0100
 
 fglrx-installer-updates (2:15.201-0ubuntu4) xenial; urgency=medium
 
