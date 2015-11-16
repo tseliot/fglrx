@@ -1,0 +1,53 @@
+From 62071ebe1c86ff439ed0bc4b6bdd4f6f9f2737fa Mon Sep 17 00:00:00 2001
+From: Alberto Milone <alberto.milone@canonical.com>
+Date: Mon, 16 Nov 2015 11:34:16 +0100
+Subject: [PATCH 1/1] Add support for Linux 4.3
+
+---
+ firegl_public.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/firegl_public.c b/firegl_public.c
+index bb67bba..3e963ab 100755
+--- a/firegl_public.c
++++ b/firegl_public.c
+@@ -636,7 +636,11 @@ static int firegl_major_proc_read(struct seq_file *m, void* data)
+ 
+     len = snprintf(buf, request, "%d\n", major);
+ #else
++#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 3, 0)
+     len = seq_printf(m, "%d\n", major);
++#else
++    seq_printf(m, "%d\n", major);
++#endif
+ #endif
+ 
+     KCL_DEBUG1(FN_FIREGL_PROC, "return len=%i\n",len);
+@@ -3432,7 +3436,11 @@ int ATI_API_CALL KCL_MEM_MTRR_Support(void)
+ int ATI_API_CALL KCL_MEM_MTRR_AddRegionWc(unsigned long base, unsigned long size)
+ {
+ #ifdef CONFIG_MTRR
++#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 3, 0)
+     return mtrr_add(base, size, MTRR_TYPE_WRCOMB, 1);
++#else
++    return arch_phys_wc_add(base, size);
++#endif
+ #else /* !CONFIG_MTRR */
+     return -EPERM;
+ #endif /* !CONFIG_MTRR */
+@@ -3441,7 +3449,12 @@ int ATI_API_CALL KCL_MEM_MTRR_AddRegionWc(unsigned long base, unsigned long size
+ int ATI_API_CALL KCL_MEM_MTRR_DeleteRegion(int reg, unsigned long base, unsigned long size)
+ {
+ #ifdef CONFIG_MTRR
++#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 3, 0)
+     return mtrr_del(reg, base, size);
++#else
++    arch_phys_wc_del(reg);
++    return reg;
++#endif
+ #else /* !CONFIG_MTRR */
+     return -EPERM;
+ #endif /* !CONFIG_MTRR */
+-- 
+1.9.1
+
