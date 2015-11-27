@@ -27,7 +27,7 @@ Package: fglrx-updates-core
 Architecture: amd64 i386
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, lib32gcc1 [amd64], libc6-i386 [amd64], dkms, make, linux-libc-dev,
- ${misc:Depends}, gcc-4.9
+ ${misc:Depends}
 Provides: fglrx-driver-core, opencl-icd
 Conflicts: fglrx-driver-core
 Replaces: fglrx-driver-core, fglrx-updates
