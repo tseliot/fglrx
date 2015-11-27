@@ -128,6 +128,10 @@ blacklist radeon
 alias fglrx $(PKG_module)
 alias radeon off
 alias lbm-radeon off
+
+blacklist amdgpu
+alias amdgpu off
+alias lbm-amdgpu off
 endef
 
 # DEB_DH_SHLIBDEPS_ARGS_ALL="-Xlib32"
@@ -166,6 +170,7 @@ regen-from-templates:
 			 $(PKG_driver).prerm \
 			 $(PKG_control).install \
 			 $(PKG_control).dirs \
+			 $(PKG_control).preinst.in \
 			 $(PKG_driver_core).install \
 			 $(PKG_driver_core).links \
 			 $(PKG_driver_core).dirs \

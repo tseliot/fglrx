@@ -18,8 +18,8 @@ arch/#SRCARCH#/usr/X11R6/#SRCLIBDIR#/libatiadlxx.so     #LIBDIR#
 debian/acpi/fglrx-*-aticonfig                   #SYSCONFDIR#/acpi/events
 debian/acpi/fglrx-powermode.sh                  #SYSCONFDIR#/acpi
 
-#etc/ati/*                                       #SYSCONFDIR#/ati
-#debian/replacements/authatieventsd.sh           #SYSCONFDIR#/ati
+etc/ati/*                                       #SYSCONFDIR#/ati
+debian/replacements/authatieventsd.sh           #SYSCONFDIR#/ati
 arch/#SRCARCH#/etc/OpenCL/vendors/*.icd         #SYSCONFDIR#/OpenCL/vendors
 
 #binaries
