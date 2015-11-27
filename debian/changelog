@@ -1,8 +1,34 @@
-fglrx-installer-updates (2:15.201-0ubuntu0.14.04.1) UNRELEASED; urgency=medium
+fglrx-installer-updates (2:15.201-0ubuntu0.14.04.1) trusty-proposed; urgency=medium
 
-  * 
+  * New upstream release (Catalyst 15.9):
+    - Fixed issues:
+      + [424450] Company of Heroes® 2 - Game crashes while running
+        the performance test.
+      + [424794] Middle-earth™: Shadow of Mordor - Corruption
+        observed in game.
+      + [424882] DIRT® Showdown - Corruption observed in game.
+      + [425234] DIRT® Showdown - Game crashes after the loading
+        screen.
+      + [424802] DOTA™ 2 – Application hang observed while exiting
+        the game.
+      + [423471] Unable to switch desktop mode after installing AMD
+        Catalyst™ driver.
+      + [423735] Renaming Counter-Strike: GO and other Steam game
+        binary improves performance.
+  * debian/dkms/patches/buildfix_kernel_4.0.patch,
+    debian/dkms/patches/buildfix_kernel_4.1.patch,
+    debian/dkms/patches/buildfix_kernel_4.2.patch,
+    debian/dkms/patches/buildfix_kernel_4.2.fpregs_active.patch,
+    debian/dkms/patches/buildfix_kernel_4.2.copy_xregs_to_kernel.patch:
+    - Refresh patches for the new release.
+    - Add support for Linux 4.2 (LP: #1518958)
+  * debian/rules:
+    - Blacklist the amdgpu driver, so that fglrx can be loaded
+      on the systems where the GPU is supported by amdgpu.
+  * debian/substvars:
+    - Add support for X ABI 19.
 
- -- Alberto Milone <alberto.milone@canonical.com>  Fri, 27 Nov 2015 16:23:12 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Fri, 27 Nov 2015 16:33:30 +0100
 
 fglrx-installer-updates (2:15.200-0ubuntu0.6) trusty-proposed; urgency=medium
 
