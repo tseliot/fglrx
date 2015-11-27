@@ -1,15 +1,15 @@
-From d64db7a525ce02df328287f7a536f34edc3752cf Mon Sep 17 00:00:00 2001
+From 67530953d6cce56fa6dbc971b12dc206bf534030 Mon Sep 17 00:00:00 2001
 From: Alberto Milone <alberto.milone@canonical.com>
 Date: Tue, 14 Jul 2015 12:56:37 +0200
-Subject: [PATCH 2/2] Add support for Linux 4.2
+Subject: [PATCH 3/5] Add support for Linux 4.2
 
 Deal with the FPU code renaming
 ---
- firegl_public.c | 35 +++++++++++++++++++++++++++++++++++
- 1 file changed, 35 insertions(+)
+ firegl_public.c | 38 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
 
 diff --git a/firegl_public.c b/firegl_public.c
-index 1a39fb7..ed85dce 100755
+index 94778f1..749ea51 100755
 --- a/firegl_public.c
 +++ b/firegl_public.c
 @@ -191,9 +191,17 @@
@@ -30,7 +30,17 @@ index 1a39fb7..ed85dce 100755
  #endif
  
  #include "firegl_public.h"
-@@ -1734,7 +1742,11 @@ unsigned long ATI_API_CALL kcl__cmpxchg(volatile void *ptr, unsigned long old,
+@@ -1711,6 +1719,9 @@ void ATI_API_CALL KCL_SetCurrentProcessState(KCL_ENUM_ProcessState state)
+ 
+ #if defined(__i386__) 
+ #ifndef __HAVE_ARCH_CMPXCHG
++#ifndef __xg
++#define __xg(x) ((volatile long *)(x))
++#endif
+ static inline 
+ unsigned long __fgl_cmpxchg(volatile void *ptr, unsigned long old,            
+                         unsigned long new, int size)                      
+@@ -1747,7 +1758,11 @@ unsigned long ATI_API_CALL kcl__cmpxchg(volatile void *ptr, unsigned long old,
           unsigned long new, int size)
  {
  #ifndef __HAVE_ARCH_CMPXCHG
@@ -42,7 +52,7 @@ index 1a39fb7..ed85dce 100755
  #else
      /* On kernel version 2.6.34 passing a variable or unsupported size
       * argument to the __cmpxchg macro causes the default-clause of a
-@@ -6430,21 +6442,36 @@ static int KCL_fpu_save_init(struct task_struct *tsk)
+@@ -6443,21 +6458,36 @@ static int KCL_fpu_save_init(struct task_struct *tsk)
     struct fpu *fpu = &tsk->thread.fpu;
  
     if(static_cpu_has(X86_FEATURE_XSAVE)) {
@@ -79,7 +89,7 @@ index 1a39fb7..ed85dce 100755
     return 1;
  }
  #endif
-@@ -6456,8 +6483,12 @@ static int KCL_fpu_save_init(struct task_struct *tsk)
+@@ -6469,8 +6499,12 @@ static int KCL_fpu_save_init(struct task_struct *tsk)
  void ATI_API_CALL KCL_fpu_begin(void)
  {
  #ifdef CONFIG_X86_64
@@ -92,7 +102,7 @@ index 1a39fb7..ed85dce 100755
  #ifdef TS_USEDFPU
      struct thread_info *cur_thread = current_thread_info();
      struct task_struct *cur_task = get_current();
-@@ -6502,7 +6533,11 @@ void ATI_API_CALL KCL_fpu_begin(void)
+@@ -6515,7 +6549,11 @@ void ATI_API_CALL KCL_fpu_begin(void)
   */
  void ATI_API_CALL KCL_fpu_end(void)
  {

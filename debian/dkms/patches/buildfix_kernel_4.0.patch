@@ -1,7 +1,7 @@
-From 9029e189f8431a39146ac3477c7e4491e06c6f4b Mon Sep 17 00:00:00 2001
+From 4e2805414197a2e2579270c4de64ebaef6aff17d Mon Sep 17 00:00:00 2001
 From: Alberto Milone <alberto.milone@canonical.com>
-Date: Thu, 4 Jun 2015 18:03:39 +0200
-Subject: [PATCH 1/1] Add support for Linux 4.0
+Date: Thu, 17 Sep 2015 15:41:46 +0200
+Subject: [PATCH 1/5] Add support for Linux 4.0
 
 ---
  firegl_public.c | 5 +++++
@@ -9,12 +9,12 @@ Subject: [PATCH 1/1] Add support for Linux 4.0
  2 files changed, 9 insertions(+)
 
 diff --git a/firegl_public.c b/firegl_public.c
-index eccbc1c..f218b3d 100755
+index 677565d..6017e89 100755
 --- a/firegl_public.c
 +++ b/firegl_public.c
-@@ -275,6 +275,11 @@ MODULE_LICENSE("Proprietary. (C) 2002 - ATI Technologies, Starnberg, GERMANY");
- MODULE_DEVICE_TABLE(pci, fglrx_pci_table);
- #endif
+@@ -285,6 +285,11 @@ MODULE_DEVICE_TABLE(pci, fglrx_pci_table);
+ 
+ MODULE_INFO(supported, "external");
  
 +#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 20, 0)
 +#define read_cr4()       __read_cr4()

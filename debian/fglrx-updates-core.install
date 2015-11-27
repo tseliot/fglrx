@@ -5,10 +5,10 @@ debian/overrides/fglrx-updates-core                  usr/share/lintian/overrides
 debian/71-fglrx.rules                           lib/udev/rules.d
 
 #Actual kernel modules
-lib/modules/fglrx/build_mod/*                   usr/src/fglrx-updates-core-15.200
-debian/dkms/*                                   usr/src/fglrx-updates-core-15.200
-arch/x86_64/lib/modules/fglrx/build_mod/lib* usr/src/fglrx-updates-core-15.200
-debian/dkms.conf                                usr/src/fglrx-updates-core-15.200
+lib/modules/fglrx/build_mod/*                   usr/src/fglrx-updates-core-15.201
+debian/dkms/*                                   usr/src/fglrx-updates-core-15.201
+arch/x86_64/lib/modules/fglrx/build_mod/lib* usr/src/fglrx-updates-core-15.201
+debian/dkms.conf                                usr/src/fglrx-updates-core-15.201
 
 #DRI stuff
 arch/x86_64/usr/X11R6/lib64/libatiadlxx.so     usr/lib
@@ -18,8 +18,8 @@ arch/x86_64/usr/X11R6/lib64/libatiadlxx.so     usr/lib
 debian/acpi/fglrx-*-aticonfig                   etc/acpi/events
 debian/acpi/fglrx-powermode.sh                  etc/acpi
 
-#etc/ati/*                                       etc/ati
-#debian/replacements/authatieventsd.sh           etc/ati
+etc/ati/*                                       etc/ati
+debian/replacements/authatieventsd.sh           etc/ati
 arch/x86_64/etc/OpenCL/vendors/*.icd         etc/OpenCL/vendors
 
 #binaries

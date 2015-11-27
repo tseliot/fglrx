@@ -9,8 +9,6 @@ debian/overrides/fglrx-updates                   usr/share/lintian/overrides
 #debian/acpi/fglrx-*-aticonfig                   etc/acpi/events
 #debian/acpi/fglrx-powermode.sh                  etc/acpi
 debian/10fglrx                                  usr/lib/fglrx
-etc/ati/*                                       etc/ati
-debian/replacements/authatieventsd.sh           etc/ati
 
 #binaries
 arch/x86_64/usr/sbin/*                       usr/sbin

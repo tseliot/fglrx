@@ -3,7 +3,7 @@ Section: restricted/misc
 Priority: extra
 Maintainer: Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Uploaders: Mario Limonciello <superm1@ubuntu.com>, Alberto Milone <albertomilone@alice.it>
-Build-Depends: debhelper (>= 7),
+Build-Depends: debhelper (>= 8.1.0~),
                dh-modaliases,
                libxext6,
                libxrandr2,
@@ -25,8 +25,9 @@ Homepage: http://support.amd.com
 
 Package: fglrx-updates-core
 Architecture: amd64 i386
+Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, lib32gcc1 [amd64], libc6-i386 [amd64], dkms, make, linux-libc-dev,
- ${misc:Depends}
+ ${misc:Depends}, gcc-4.9
 Provides: fglrx-driver-core, opencl-icd
 Conflicts: fglrx-driver-core
 Replaces: fglrx-driver-core, fglrx-updates
@@ -38,6 +39,7 @@ Description: Minimal video driver for the AMD graphics accelerators
 Package: fglrx-updates
 Architecture: amd64 i386
 Recommends: fglrx-amdcccle-updates
+Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, fglrx-updates-core,
  ${xviddriver:Depends}, ${misc:Depends}
 Provides: fglrx-driver, xorg-driver-binary, ${xviddriver:Provides}
@@ -63,7 +65,7 @@ Description: Video driver for the AMD graphics accelerators (devel files)
 
 Package: fglrx-amdcccle-updates
 Architecture: amd64 i386
-Depends: fglrx-updates, policykit-1, ${shlibs:Depends}, ${misc:Depends}
+Depends: policykit-1, ${shlibs:Depends}, ${misc:Depends}
 Conflicts: fglrx-control-qt2, fglrx-control
 Replaces: fglrx-control, fglrx-amdcccle
 Provides: fglrx-control
