@@ -1,0 +1,27 @@
+From 484edae37cbd45a1be354fee5a5c7baef846be50 Mon Sep 17 00:00:00 2001
+From: Alberto Milone <alberto.milone@canonical.com>
+Date: Wed, 13 Jan 2016 12:31:04 +0100
+Subject: [PATCH 1/1] Add support for Linux 4.4
+
+---
+ firegl_public.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/firegl_public.c b/firegl_public.c
+index 3e963ab..53f2b62 100755
+--- a/firegl_public.c
++++ b/firegl_public.c
+@@ -209,6 +209,10 @@
+ #include "kcl_io.h"
+ #include "kcl_debug.h"
+ 
++#ifndef XSTATE_FP
++#define XSTATE_FP XFEATURE_MASK_FP
++#endif
++
+ // ============================================================
+ 
+ // VM_SHM is deleted in 2.6.18 or higher kernels.
+-- 
+1.9.1
+
