@@ -1,8 +1,10 @@
-fglrx-installer (2:15.201-0ubuntu0.14.04.2) UNRELEASED; urgency=medium
+fglrx-installer (2:15.201-0ubuntu0.14.04.2) trusty-proposed; urgency=medium
 
-  * 
+  * debian/fglrx.{pre|post}inst.in:
+    - Make sure to also migrate the real ati configuration dir, not
+      only the symlinks, or the upgrade will fail (LP: #1511301).
 
- -- Alberto Milone <alberto.milone@canonical.com>  Tue, 21 Feb 2017 12:03:12 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Tue, 21 Feb 2017 17:01:32 +0100
 
 fglrx-installer (2:15.201-0ubuntu0.14.04.1) trusty-proposed; urgency=medium
 
