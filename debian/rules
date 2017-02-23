@@ -90,6 +90,11 @@ CORE_ld_so_conf := $(CORE_dir)/$(ld_so_conf_file)
 CORE_libdir := $(CORE_dir)/lib
 CORE_libdir32 := $(CORE_dir32)/lib
 
+PKG_driver_core_bck_dir := usr/share/fglrx-core-backup
+PKG_driver_bck_dir := usr/share/fglrx-backup
+PKG_control_bck_dir := usr/share/fglrx-amdcccle-backup
+
+
 # This is remove fglrx from the blacklist
 UNBLKLST_CORE_ld_so_conf_file  := unblacklist_ld.so.conf
 UNBLKLST_CORE_ld_so_conf := $(CORE_dir)/$(UNBLKLST_CORE_ld_so_conf_file)
@@ -237,6 +242,9 @@ regen-from-templates:
 			-e "s|#SRCLIBDIR#|$(SRC_libdir)|g" \
 			-e "s|#DEB_HOST_MULTIARCH#|$(DEB_HOST_MULTIARCH)|g" \
 			-e "s|#OTHER_ARCH#|$(OTHER_ARCH)|g" \
+			-e "s|#CORERESTOREDIR#|$(PKG_driver_core_bck_dir)|g" \
+			-e "s|#RESTOREDIR#|$(PKG_driver_bck_dir)|g" \
+			-e "s|#AMDCCCLERESTOREDIR#|$(PKG_control_bck_dir)|g" \
 			debian/$$i.in > debian/$$i;      \
 	done
 
@@ -454,6 +462,35 @@ endif
 	for i in $$(find debian/$(PKG_control)/ -exec file {} \; | grep -e "ELF" | cut -d: -f1); do \
 		execstack -q $$i && execstack -c $$i || true; \
 	done
+
+	# Create a backup directory for fglrx
+	mkdir -p $(CURDIR)/debian/$(PKG_driver)/$(PKG_driver_bck_dir)/$(bindir) \
+	         $(CURDIR)/debian/$(PKG_driver)/$(PKG_driver_bck_dir)/$(libdir)/dri
+
+	cp -a debian/$(PKG_driver)/$(bindir)/amdconfig $(CURDIR)/debian/$(PKG_driver)/$(PKG_driver_bck_dir)/$(bindir)
+	cp -a debian/$(PKG_driver)/$(bindir)/aticonfig $(CURDIR)/debian/$(PKG_driver)/$(PKG_driver_bck_dir)/$(bindir)
+	cp -a debian/$(PKG_driver)/$(bindir)/atiode $(CURDIR)/debian/$(PKG_driver)/$(PKG_driver_bck_dir)/$(bindir)
+	cp -a debian/$(PKG_driver)/$(bindir)/fglrxinfo $(CURDIR)/debian/$(PKG_driver)/$(PKG_driver_bck_dir)/$(bindir)
+	cp -a debian/$(PKG_driver)/$(bindir)/fgl_glxgears $(CURDIR)/debian/$(PKG_driver)/$(PKG_driver_bck_dir)/$(bindir)
+
+	cp -a debian/$(PKG_driver)/$(libdir)/libAMDXvBA.cap $(CURDIR)/debian/$(PKG_driver)/$(PKG_driver_bck_dir)/$(libdir)
+ifeq ($(DEB_HOST_ARCH),amd64)
+	mkdir -p $(CURDIR)/debian/$(PKG_driver)/$(PKG_driver_bck_dir)/$(libdir32)/fglrx
+	cp -a debian/$(PKG_driver)/$(libdir32)/fglrx/libAMDXvBA.cap $(CURDIR)/debian/$(PKG_driver)/$(PKG_driver_bck_dir)/$(libdir32)/fglrx
+endif
+
+	cp -a debian/$(PKG_driver)/$(libdir)/dri/fglrx_dri.so $(CURDIR)/debian/$(PKG_driver)/$(PKG_driver_bck_dir)/$(libdir)/dri
+ifeq ($(DEB_HOST_ARCH),amd64)
+	mkdir -p $(CURDIR)/debian/$(PKG_driver)/$(PKG_driver_bck_dir)/$(libdir32)/fglrx/dri
+	cp -a debian/$(PKG_driver)/$(libdir32)/fglrx/dri/fglrx_dri.so $(CURDIR)/debian/$(PKG_driver)/$(PKG_driver_bck_dir)/$(libdir32)/fglrx/dri
+endif
+
+	# Create a backup directory for fglrx-amdcccle
+	mkdir -p $(CURDIR)/debian/$(PKG_control)/$(PKG_control_bck_dir)/$(bindir)
+
+	cp -a debian/$(PKG_control)/$(bindir)/amdupdaterandrconfig $(CURDIR)/debian/$(PKG_control)/$(PKG_control_bck_dir)/$(bindir)
+	cp -a debian/$(PKG_control)/$(bindir)/amdxdg-su $(CURDIR)/debian/$(PKG_control)/$(PKG_control_bck_dir)/$(bindir)
+	cp -a debian/$(PKG_control)/$(bindir)/amdcccle $(CURDIR)/debian/$(PKG_control)/$(PKG_control_bck_dir)/$(bindir)
 
 binary-arch: pre-binary-arch
 	#Run the normal stuff

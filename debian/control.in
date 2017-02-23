@@ -39,7 +39,7 @@ Description: Minimal video driver for the AMD graphics accelerators
 Package: #DRIVERNAME#
 Architecture: amd64 i386
 Recommends: fglrx-amdcccle#FLAVOUR#
-Pre-Depends: ${misc:Pre-Depends}
+Pre-Depends: #DRIVERCORENAME#,  ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, #DRIVERCORENAME#,
  ${xviddriver:Depends}, ${misc:Depends}
 Provides: fglrx-driver, xorg-driver-binary, ${xviddriver:Provides}

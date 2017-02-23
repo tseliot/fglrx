@@ -9,7 +9,86 @@ CVERSION=`dpkg-query -W -f='${Version}' $PACKAGE_NAME | awk -F "-" '{print $1}' 
 
 ARCH=`dpkg --print-architecture`
 
-CORE_SPLIT_RELEASE="2:15.201-0ubuntu0.14.04.1"
+restore_fglrx_core() {
+    BACKUP_DIR=#CORERESTOREDIR#
+    if [ -d $BACKUP_DIR ]; then
+        for elem in \
+            /usr/bin/atiode \
+            /usr/bin/clinfo \
+            /usr/bin/atieventsd \
+            /etc/OpenCL/vendors/amdocl32.icd \
+            /etc/OpenCL/vendors/amdocl64.icd \
+            /usr/lib/libaticalcl.so \
+            /usr/lib/libatiuki.so.1.0 \
+            /usr/lib/libaticalrt.so \
+            /usr/lib/libatiadlxx.so \
+            /usr/lib/libamdocl12cl64.so \
+            /usr/lib/libOpenCL.so.1 \
+            /usr/lib/libamdocl64.so \
+            /usr/lib/libaticaldd.so \
+            /usr/lib/libatiuki.so.1 \
+            /usr/lib32/libamdocl32.so \
+            /usr/lib32/libaticalcl.so \
+            /usr/lib32/libatiuki.so.1.0 \
+            /usr/lib32/libaticalrt.so \
+            /usr/lib32/libatiadlxx.so \
+            /usr/lib32/libamdocl12cl32.so \
+            /usr/lib32/libOpenCL.so.1 \
+            /usr/lib32/libaticaldd.so \
+            /usr/lib32/libatiuki.so.1; do
+        if [ -e "$BACKUP_DIR/$elem" ]; then
+            echo "Restoring $elem"
+            cp -aRf $BACKUP_DIR/$elem $elem 2>/dev/null || true
+        fi
+        done
+    fi
+}
+
+restore_ati_dir() {
+    BACKUP_DIR=#CORERESTOREDIR#
+    ATI_DIR=etc/ati
+    if [ -d "$BACKUP_DIR/$ATI_DIR" ]; then
+        echo "Restoring /$ATI_DIR"
+        cp -aRf $BACKUP_DIR/$ATI_DIR /$ATI_DIR 2>/dev/null || true
+    fi
+}
+
+restore_fglrx() {
+    BACKUP_DIR=#RESTOREDIR#
+    if [ -d $BACKUP_DIR ]; then
+        for elem in \
+            /usr/bin/amdconfig \
+            /usr/bin/atiode \
+            /usr/bin/aticonfig \
+            /usr/bin/fglrxinfo \
+            /usr/bin/fgl_glxgears \
+            /usr/lib/libAMDXvBA.cap \
+            /usr/lib32/fglrx/libAMDXvBA.cap \
+            /usr/lib/dri/fglrx_dri.so \
+            /usr/lib32/fglrx/dri/fglrx_dri.so; do
+        if [ -e "$BACKUP_DIR/$elem" ]; then
+            echo "Restoring $elem"
+            cp -aRf $BACKUP_DIR/$elem $elem 2>/dev/null || true
+        fi
+        done
+    fi
+}
+
+restore_fglrx_amdcccle() {
+    BACKUP_DIR=#AMDCCCLERESTOREDIR#
+    if [ -d $BACKUP_DIR ]; then
+        for elem in \
+            /usr/bin/amdupdaterandrconfig \
+            /usr/bin/amdxdg-su \
+            /usr/bin/amdcccle; do
+        if [ -e "$BACKUP_DIR/$elem" ]; then
+            echo "Restoring $elem"
+            cp -aRf $BACKUP_DIR/$elem $elem 2>/dev/null || true
+        fi
+        done
+    fi
+}
+
 
 if [ "$1" = "configure" ]; then
 
@@ -29,36 +108,13 @@ if [ "$1" = "configure" ]; then
         done
     fi
 
-    if [ -n "$2" ]; then
-        if dpkg --compare-versions "$2" le "$CORE_SPLIT_RELEASE"; then
-            # Extra check, as amdcccle used to be a link set by alternatives
-            if [ -e /usr/bin/amdcccle ] && [ ! -h /usr/bin/amdcccle ]; then
-                # We make a backup of the new files that
-                # update-alternatives will otherwise remove
-                echo "Creating backups for the fglrx-core transition"
-                mv -n /usr/bin/atiode /usr/bin/atiode.dpkg-bak 2>/dev/null || true
-                mv -n /usr/bin/aticonfig /usr/bin/aticonfig.dpkg-bak 2>/dev/null || true
-                mv -n /usr/bin/fglrxinfo /usr/bin/fglrxinfo.dpkg-bak 2>/dev/null || true
-                mv -n /usr/bin/fgl_glxgears /usr/bin/fgl_glxgears.dpkg-bak 2>/dev/null || true
-                mv -n /usr/bin/amdconfig /usr/bin/amdconfig.dpkg-bak 2>/dev/null || true
-                mv -n /usr/bin/amdxdg-su /usr/bin/amdxdg-su.dpkg-bak 2>/dev/null || true
-                mv -n /usr/bin/amdupdaterandrconfig /usr/bin/amdupdaterandrconfig.dpkg-bak 2>/dev/null || true
-                mv -n /usr/bin/amdcccle /usr/bin/amdcccle.dpkg-bak 2>/dev/null || true
-                mv -n /usr/bin/clinfo /usr/bin/clinfo.dpkg-bak 2>/dev/null || true
-                mv -n /usr/bin/atieventsd /usr/bin/atieventsd.dpkg-bak 2>/dev/null || true
-                mv -n /usr/lib/dri/fglrx_dri.so /usr/lib/dri/fglrx_dri.so.dpkg-bak 2>/dev/null || true
-                mv -n /usr/lib/libAMDXvBA.cap /usr/lib/libAMDXvBA.cap.dpkg-bak 2>/dev/null || true
-                mv -n /etc/OpenCL/vendors/amdocl32.icd /etc/OpenCL/vendors/amdocl32.icd.dpkg-bak 2>/dev/null || true
-                mv -n /etc/OpenCL/vendors/amdocl64.icd /etc/OpenCL/vendors/amdocl64.icd.dpkg-bak 2>/dev/null || true
-                mv -n /usr/lib/libOpenCL.so /usr/lib/libOpenCL.so.dpkg-bak 2>/dev/null || true
-                mv -n /usr/lib/libaticalcl.so /usr/lib/libaticalcl.so.dpkg-bak 2>/dev/null || true
-                mv -n /usr/lib32/libaticalcl.so /usr/lib32/libaticalcl.so.dpkg-bak 2>/dev/null || true
-                mv -n /usr/lib/libaticalrt.so /usr/lib/libaticalrt.so.dpkg-bak 2>/dev/null || true
-                mv -n /usr/lib32/libaticalrt.so /usr/lib32/libaticalrt.so.dpkg-bak 2>/dev/null || true
-                mv -n /etc/ati /etc/ati.dpkg-bak 2>/dev/null || true
-                mv -n /usr/lib/fglrx/etc.dpkg-bak /usr/lib/fglrx/etc 2>/dev/null || true
-            fi
-        fi
+    # Try to restore the files from fglrx-core (see LP: #1511301)
+    if [ -d #CORERESTOREDIR# ]; then
+        # Try to restore fglrx-core
+        restore_fglrx_core
+
+        # Remove ati before the alternatives are updated
+        rm -Rf /etc/ati
     fi
 
     update-alternatives --force \
@@ -86,35 +142,19 @@ if [ "$1" = "configure" ]; then
     update-alternatives --force \
         --install /#SYSCONFDIR#/ld.so.conf.d/#OTHER_ARCH#_GL.conf #OTHER_ARCH#_gl_conf /#ALTPXLDSOCONF# #PXALTPRIORITY#
 
-    if [ -e /usr/bin/amdcccle.dpkg-bak ]; then
-        # Now that we are done transitioning the alternatives, let's restore
-        # the backups
-        echo "Restoring backups for the fglrx-core transition"
-        mv -n /usr/bin/atiode.dpkg-bak /usr/bin/atiode 2>/dev/null || true
-        mv -n /usr/bin/aticonfig.dpkg-bak /usr/bin/aticonfig 2>/dev/null || true
-        mv -n /usr/bin/fglrxinfo.dpkg-bak /usr/bin/fglrxinfo 2>/dev/null || true
-        mv -n /usr/bin/fgl_glxgears.dpkg-bak /usr/bin/fgl_glxgears 2>/dev/null || true
-        mv -n /usr/bin/amdconfig.dpkg-bak /usr/bin/amdconfig 2>/dev/null || true
-        mv -n /usr/bin/amdxdg-su.dpkg-bak /usr/bin/amdxdg-su 2>/dev/null || true
-        mv -n /usr/bin/amdupdaterandrconfig.dpkg-bak /usr/bin/amdupdaterandrconfig 2>/dev/null || true
-        mv -n /usr/bin/amdcccle.dpkg-bak /usr/bin/amdcccle 2>/dev/null || true
-        mv -n /usr/bin/clinfo.dpkg-bak /usr/bin/clinfo 2>/dev/null || true
-        mv -n /usr/bin/atieventsd.dpkg-bak /usr/bin/atieventsd 2>/dev/null || true
-        mv -n /usr/lib/dri/fglrx_dri.so.dpkg-bak /usr/lib/dri/fglrx_dri.so 2>/dev/null || true
-        mv -n /usr/lib/libAMDXvBA.cap.dpkg-bak /usr/lib/libAMDXvBA.cap 2>/dev/null || true
-        mv -n /etc/OpenCL/vendors/amdocl32.icd.dpkg-bak /etc/OpenCL/vendors/amdocl32.icd 2>/dev/null || true
-        mv -n /etc/OpenCL/vendors/amdocl64.icd.dpkg-bak /etc/OpenCL/vendors/amdocl64.icd 2>/dev/null || true
-        mv -n /usr/lib/libOpenCL.so.dpkg-bak /usr/lib/libOpenCL.so 2>/dev/null || true
-        mv -n /usr/lib/libaticalcl.so.dpkg-bak /usr/lib/libaticalcl.so 2>/dev/null || true
-        mv -n /usr/lib32/libaticalcl.so.dpkg-bak /usr/lib32/libaticalcl.so 2>/dev/null || true
-        mv -n /usr/lib/libaticalrt.so.dpkg-bak /usr/lib/libaticalrt.so 2>/dev/null || true
-        mv -n /usr/lib32/libaticalrt.so.dpkg-bak /usr/lib32/libaticalrt.so 2>/dev/null || true
-        mv -n /etc/ati.dpkg-bak /etc/ati 2>/dev/null || true
-    fi
-
     # ldconfig needs to be run immediately as we're changing /etc/ld.so.conf.d/ with
     # alternatives.
     LDCONFIG_NOTRIGGER=y ldconfig
+
+    # Try to restore the files from fglrx and fglrx-amdcccle (see LP: #1511301)
+    if [ -d #CORERESTOREDIR# ]; then
+        restore_fglrx
+        restore_fglrx_amdcccle
+        # Move /etc/ati back
+        restore_ati_dir
+
+        rm -Rf #CORERESTOREDIR#
+    fi
 fi
 
 #DEBHELPER#
