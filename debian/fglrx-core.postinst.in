@@ -90,7 +90,7 @@ get_newest_kernel() {
 }
 
 backup_files() {
-    BACKUP_DIR=/usr/fglrx-core/backup
+    BACKUP_DIR=#CORERESTOREDIR#
 
     [ ! -d $BACKUP_DIR ] && mkdir -p $BACKUP_DIR
     mkdir -p $BACKUP_DIR/etc $BACKUP_DIR/etc/OpenCL/ \

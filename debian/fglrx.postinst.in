@@ -12,14 +12,12 @@ ARCH=`dpkg --print-architecture`
 CORE_SPLIT_RELEASE="2:14.502-0ubuntu1"
 
 restore_fglrx_core() {
-    BACKUP_DIR=/usr/fglrx-core/backup
+    BACKUP_DIR=#CORERESTOREDIR#
     if [ -d $BACKUP_DIR ]; then
         for elem in \
             /usr/bin/atiode \
             /usr/bin/clinfo \
             /usr/bin/atieventsd \
-            /usr/lib/dri/fglrx_dri.so \
-            /usr/lib/libAMDXvBA.cap \
             /etc/OpenCL/vendors/amdocl32.icd \
             /etc/OpenCL/vendors/amdocl64.icd \
             /usr/lib/libaticalcl.so \
@@ -48,6 +46,43 @@ restore_fglrx_core() {
         done
     fi
 }
+
+restore_fglrx() {
+    BACKUP_DIR=#RESTOREDIR#
+    if [ -d $BACKUP_DIR ]; then
+        for elem in \
+            /usr/bin/amdconfig \
+            /usr/bin/atiode \
+            /usr/bin/aticonfig \
+            /usr/bin/fglrxinfo \
+            /usr/bin/fgl_glxgears \
+            /usr/lib/libAMDXvBA.cap \
+            /usr/lib32/fglrx/libAMDXvBA.cap \
+            /usr/lib/dri/fglrx_dri.so \
+            /usr/lib32/fglrx/dri/fglrx_dri.so; do
+        if [ -e "$BACKUP_DIR/$elem" ]; then
+            echo "Restoring $elem"
+            cp -aRf $BACKUP_DIR/$elem $elem 2>/dev/null || true
+        fi
+        done
+    fi
+}
+
+restore_fglrx_amdcccle() {
+    BACKUP_DIR=#AMDCCCLERESTOREDIR#
+    if [ -d $BACKUP_DIR ]; then
+        for elem in \
+            /usr/bin/amdupdaterandrconfig \
+            /usr/bin/amdxdg-su \
+            /usr/bin/amdcccle; do
+        if [ -e "$BACKUP_DIR/$elem" ]; then
+            echo "Restoring $elem"
+            cp -aRf $BACKUP_DIR/$elem $elem 2>/dev/null || true
+        fi
+        done
+    fi
+}
+
 
 if [ "$1" = "configure" ]; then
 
@@ -104,6 +139,9 @@ if [ "$1" = "configure" ]; then
 
     # Move ati back
     mv /etc/ati.dpkg-temp /etc/ati
+
+    restore_fglrx
+    restore_fglrx_amdcccle
 fi
 
 #DEBHELPER#
