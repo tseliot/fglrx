@@ -89,8 +89,58 @@ get_newest_kernel() {
     echo $NEWEST_KERNEL
 }
 
+backup_files() {
+    BACKUP_DIR=/usr/fglrx-core/backup
+
+    [ ! -d $BACKUP_DIR ] && mkdir -p $BACKUP_DIR
+    mkdir -p $BACKUP_DIR/etc $BACKUP_DIR/etc/OpenCL/ \
+          $BACKUP_DIR/etc/OpenCL/vendors/ $BACKUP_DIR/usr/ \
+          $BACKUP_DIR/usr/lib $BACKUP_DIR/usr/lib/dri \
+          $BACKUP_DIR/usr/lib32 $BACKUP_DIR/usr/bin 2>/dev/null || true
+
+    # Now that we are done transitioning the alternatives, let's restore
+    # the backups
+    echo "fglrx-core: making backups for the fglrx-core transition"
+    for elem in \
+        /usr/bin/atiode \
+        /usr/bin/clinfo \
+        /usr/bin/atieventsd \
+        /usr/lib/dri/fglrx_dri.so \
+        /usr/lib/libAMDXvBA.cap \
+        /etc/OpenCL/vendors/amdocl32.icd \
+        /etc/OpenCL/vendors/amdocl64.icd \
+        /usr/lib/libaticalcl.so \
+        /usr/lib/libatiuki.so.1.0 \
+        /usr/lib/libaticalrt.so \
+        /usr/lib/libatiadlxx.so \
+        /usr/lib/libamdocl12cl64.so \
+        /usr/lib/libOpenCL.so.1 \
+        /usr/lib/libamdocl64.so \
+        /usr/lib/libaticaldd.so \
+        /usr/lib/libatiuki.so.1 \
+        /usr/lib32/libamdocl32.so \
+        /usr/lib32/libaticalcl.so \
+        /usr/lib32/libatiuki.so.1.0 \
+        /usr/lib32/libaticalrt.so \
+        /usr/lib32/libatiadlxx.so \
+        /usr/lib32/libamdocl12cl32.so \
+        /usr/lib32/libOpenCL.so.1 \
+        /usr/lib32/libaticaldd.so \
+        /usr/lib32/libatiuki.so.1 \
+        /etc/ati; do
+    if [ -e "$elem" ]; then
+        echo "Backing up $elem"
+        cp -a $elem $BACKUP_DIR/$elem 2>/dev/null || true
+    fi
+    done
+}
 
 if [ "$1" = "configure" ]; then
+
+    if [ -f /tmp/fglrx-core-first-installation ]; then
+        rm -f /tmp/fglrx-core-first-installation
+        backup_files
+    fi
 
     update-alternatives --force \
         --install /#SYSCONFDIR#/ld.so.conf.d/#DEB_HOST_MULTIARCH#_GFXCORE.conf #DEB_HOST_MULTIARCH#_gfxcore_conf /#CORELDSOCONF# #COREPRIORITY# \
