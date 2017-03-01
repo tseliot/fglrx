@@ -24,6 +24,7 @@ case "$1" in
     ## Just in case users installed without debs before, finish a proper uninstall routine ##
     ## This will error out on any failure (which should be cleaned up anyway before installing debs) ##
     [ -x /usr/share/ati/fglrx-uninstall.sh ] && /usr/share/ati/fglrx-uninstall.sh
+
     ;;
 
     abort-upgrade)

@@ -98,7 +98,7 @@ backup_files() {
 
     # Now that we are done transitioning the alternatives, let's restore
     # the backups
-    echo "fglrx-core: making backups for the fglrx-core transition"
+    echo "fglrx-core: creating backups for the fglrx-core transition"
     for elem in \
         /usr/bin/atiode \
         /usr/bin/clinfo \
@@ -122,8 +122,7 @@ backup_files() {
         /usr/lib32/libamdocl12cl32.so \
         /usr/lib32/libOpenCL.so.1 \
         /usr/lib32/libaticaldd.so \
-        /usr/lib32/libatiuki.so.1 \
-        /etc/ati; do
+        /usr/lib32/libatiuki.so.1; do
     if [ -e "$elem" ]; then
         echo "Backing up $elem"
         cp -a $elem $BACKUP_DIR/$elem 2>/dev/null || true
@@ -131,12 +130,27 @@ backup_files() {
     done
 }
 
+backup_ati_dir() {
+    BACKUP_DIR=#CORERESTOREDIR#
+    ATI_DIR=etc/ati
+    ATI_PATH=/usr/lib/fglrx/$ATI_DIR
+    DEST_DIR=$BACKUP_DIR/etc
+
+    if [ -d $ATI_PATH ]; then
+        echo "Backing up /$ATI_DIR"
+        mkdir -p $DEST_DIR 2>/dev/null || true
+        cp -a $ATI_PATH $DEST_DIR/ 2>/dev/null || true
+    fi
+}
+
+
 if [ "$1" = "configure" ]; then
 
     # Make a backup of the files from fglrx-core (see LP: #1511301)
     # only if fglrx is already installed
     if [ -f /usr/lib/fglrx/libAMDXvBA.cap ]; then
         backup_files
+        backup_ati_dir
     fi
 
     update-alternatives --force \
