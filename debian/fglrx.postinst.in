@@ -37,13 +37,21 @@ restore_fglrx_core() {
             /usr/lib32/libamdocl12cl32.so \
             /usr/lib32/libOpenCL.so.1 \
             /usr/lib32/libaticaldd.so \
-            /usr/lib32/libatiuki.so.1 \
-            /etc/ati; do
+            /usr/lib32/libatiuki.so.1; do
         if [ -e "$BACKUP_DIR/$elem" ]; then
             echo "Restoring $elem"
             cp -aRf $BACKUP_DIR/$elem $elem 2>/dev/null || true
         fi
         done
+    fi
+}
+
+restore_ati_dir() {
+    BACKUP_DIR=#CORERESTOREDIR#
+    ATI_DIR=etc/ati
+    if [ -d "$BACKUP_DIR/$ATI_DIR" ]; then
+        echo "Restoring /$ATI_DIR"
+        cp -aRf $BACKUP_DIR/$ATI_DIR /$ATI_DIR 2>/dev/null || true
     fi
 }
 
@@ -107,8 +115,8 @@ if [ "$1" = "configure" ]; then
         # Try to restore fglrx-core
         restore_fglrx_core
 
-        # Move ati before the alternatives are updated
-        mv /etc/ati /etc/ati.dpkg-temp
+        # Remove ati before the alternatives are updated
+        rm -Rf /etc/ati
     fi
 
     update-alternatives --force \
@@ -142,11 +150,10 @@ if [ "$1" = "configure" ]; then
 
     # Try to restore the files from fglrx and fglrx-amdcccle (see LP: #1511301)
     if [ -d #CORERESTOREDIR# ]; then
-        # Move ati back
-        mv /etc/ati.dpkg-temp /etc/ati
-
         restore_fglrx
         restore_fglrx_amdcccle
+        # Move ati back
+        restore_ati_dir
 
         rm -Rf #CORERESTOREDIR#
     fi
