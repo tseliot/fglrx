@@ -19,17 +19,11 @@ PKGNAME=#DRIVERCORENAME#
 
 
 case "$1" in
-    install)
+    install|upgrade)
 
     ## Just in case users installed without debs before, finish a proper uninstall routine ##
     ## This will error out on any failure (which should be cleaned up anyway before installing debs) ##
     [ -x /usr/share/ati/fglrx-uninstall.sh ] && /usr/share/ati/fglrx-uninstall.sh
-
-    touch /tmp/fglrx-core-first-installation || true
-
-    ;;
-
-    upgrade)
     ;;
 
     abort-upgrade)

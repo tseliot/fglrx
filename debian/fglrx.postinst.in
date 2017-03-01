@@ -102,11 +102,14 @@ if [ "$1" = "configure" ]; then
         done
     fi
 
-    # Try to restore fglrx-core
-    restore_fglrx_core
+    # Try to restore the files from fglrx-core (see LP: #1511301)
+    if [ -d #CORERESTOREDIR# ]; then
+        # Try to restore fglrx-core
+        restore_fglrx_core
 
-    # Move ati before the alternatives are updated
-    mv /etc/ati /etc/ati.dpkg-temp
+        # Move ati before the alternatives are updated
+        mv /etc/ati /etc/ati.dpkg-temp
+    fi
 
     update-alternatives --force \
         --install /#SYSCONFDIR#/ld.so.conf.d/#DEB_HOST_MULTIARCH#_GL.conf #DEB_HOST_MULTIARCH#_gl_conf /#LDSOCONF# #ALTPRIORITY# \
@@ -137,11 +140,16 @@ if [ "$1" = "configure" ]; then
     # alternatives.
     LDCONFIG_NOTRIGGER=y ldconfig
 
-    # Move ati back
-    mv /etc/ati.dpkg-temp /etc/ati
+    # Try to restore the files from fglrx and fglrx-amdcccle (see LP: #1511301)
+    if [ -d #CORERESTOREDIR# ]; then
+        # Move ati back
+        mv /etc/ati.dpkg-temp /etc/ati
 
-    restore_fglrx
-    restore_fglrx_amdcccle
+        restore_fglrx
+        restore_fglrx_amdcccle
+
+        rm -Rf #CORERESTOREDIR#
+    fi
 fi
 
 #DEBHELPER#

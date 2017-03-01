@@ -93,9 +93,7 @@ backup_files() {
     BACKUP_DIR=#CORERESTOREDIR#
 
     [ ! -d $BACKUP_DIR ] && mkdir -p $BACKUP_DIR
-    mkdir -p $BACKUP_DIR/etc $BACKUP_DIR/etc/OpenCL/ \
-          $BACKUP_DIR/etc/OpenCL/vendors/ $BACKUP_DIR/usr/ \
-          $BACKUP_DIR/usr/lib $BACKUP_DIR/usr/lib/dri \
+    mkdir -p $BACKUP_DIR/etc/OpenCL/vendors/ $BACKUP_DIR/usr/lib \
           $BACKUP_DIR/usr/lib32 $BACKUP_DIR/usr/bin 2>/dev/null || true
 
     # Now that we are done transitioning the alternatives, let's restore
@@ -105,8 +103,6 @@ backup_files() {
         /usr/bin/atiode \
         /usr/bin/clinfo \
         /usr/bin/atieventsd \
-        /usr/lib/dri/fglrx_dri.so \
-        /usr/lib/libAMDXvBA.cap \
         /etc/OpenCL/vendors/amdocl32.icd \
         /etc/OpenCL/vendors/amdocl64.icd \
         /usr/lib/libaticalcl.so \
@@ -137,8 +133,9 @@ backup_files() {
 
 if [ "$1" = "configure" ]; then
 
-    if [ -f /tmp/fglrx-core-first-installation ]; then
-        rm -f /tmp/fglrx-core-first-installation
+    # Make a backup of the files from fglrx-core (see LP: #1511301)
+    # only if fglrx is already installed
+    if [ -f /usr/lib/fglrx/libAMDXvBA.cap ]; then
         backup_files
     fi
 
