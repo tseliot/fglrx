@@ -1,8 +1,16 @@
-fglrx-installer (2:15.201-0ubuntu0.14.04.3) UNRELEASED; urgency=medium
+fglrx-installer (2:15.201-0ubuntu0.14.04.3) trusty-proposed; urgency=medium
 
-  * 
+  * debian/control.in,
+    debian/fglrx-core.postinst.in,
+    debian/fglrx.preinst.in,
+    debian/fglrx.postinst.in,
+    debian/fglrx.dirs.in,
+    debian/rules:
+    - Make sure that fglrx pre-depends on fglrx-core.
+    - Back up and restore the files that the old fglrx
+      removes when upgrading (LP: #1511301).
 
- -- Alberto Milone <alberto.milone@canonical.com>  Thu, 23 Feb 2017 00:42:12 +0100
+ -- Alberto Milone <alberto.milone@canonical.com>  Thu, 02 Mar 2017 12:31:35 +0100
 
 fglrx-installer (2:15.201-0ubuntu0.14.04.2) trusty-proposed; urgency=medium
 
